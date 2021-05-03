@@ -1,0 +1,315 @@
+﻿@model Web_Cafe.Models.Entities.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm mới sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Trang chủ", "Index", "Admin")
+                    </li>
+                    <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <form action="Create" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <h4 class="">
+                            Thông tin chính
+                        </h4>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="nameProduct">Tên sản phẩm</label>
+                            <input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" value="@Model.ProName">
+                        </div>
+                        <div class="form-group">
+                            <label for="summernote">Thông tin nổi bật</label>
+                            <textarea id="proHighlight" name="proHighlight">
+                                @Model.Highlight
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="summernote">Mô tả sản phẩm</label>
+                            <textarea id="proDescription" name="proDescription">
+                                @Model.ProDescription
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="actions">Hình ảnh sản phẩm</label><br />
+                            <div>
+                                <div id="previews" class="dz-default dz-message box__input dropzone">
+                                    <div style="text-align:center">
+                                        <i class="fa fa-cloud-upload" style="font-size:23px;position:relative;top:4px;"></i> <span style="margin-left:20px">Chọn ảnh</span>
+                                    </div>
+                                </div>
+                                <div id="previewFiles"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-->
+            <div class="col-md-3">
+                <div class="card card-outline card-info">
+                    <div class="card-header">
+                        <h4 class="">
+                            Đăng bài
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" id="Submit" name="Submit" class="btn btn-block btn-success btn-lg">
+                                        <i class="ace-icon fa fa-check"></i>
+                                        Cập nhật
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-block btn-info btn-lg">
+                                        <i class="fas fa-sync"></i>
+                                        Nhập lại
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select class="form-control select2" name="proStatus" id="proStatus" style="width: 100%;">
+                                <option selected="selected">Mới</option>
+                                <option>Khuyến mãi</option>
+                                <option>Hết hàng</option>
+                                <option>Không hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Danh mục</label>
+                            <select class="form-control select2" name="categoryId" id="categoryId" style="width: 100%;">
+                                @foreach (var item in ViewBag.cate)
+                                {
+
+                                    var select = "";
+                                    if (item.CategoryID == Model.CategoryID)
+                                    {
+                                        select = "selected";
+                                    }
+                                    <option @select value="@item.CategoryID">@item.CateName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá bán:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-money-bill-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" name="price" id="price" value="@Model.Price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá khuyến mãi:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-gift"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" name="promoPrice" id="promoPrice" value="@Model.PromotionalPrice">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian khuyến mãi:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                </div>
+                                <input type="text" class="form-control float-right" name="timePromo" id="timePromo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ./row -->
+    </form>
+</section>
+
+@section linkCss{
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/summernote/summernote-bs4.min.css">
+}
+
+@section script{
+    <script>
+        $(function () {
+            // Summernote
+            $('#proHighlight').summernote()
+            $('#proDescription').summernote()
+            //Date range picker with time picker
+            $('#timePromo').daterangepicker({
+                startDate: '@Model.StartTime',
+                endDate: '@Model.EndTime',
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'DD/MM/YYYY hh:mm A'
+                }
+            })
+        })
+
+        
+        $(document).ready(function () {
+            Dropzone.autoDiscover = false;
+            $('#myDropzone').dropzone({
+                //parameter name value
+                paramName: "filesImg",
+                //clickable div id
+                clickable: '#previews',
+                //preview files container Id
+                previewsContainer: "#previewFiles",
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 100,
+                maxFiles: 100,
+                //  url:"/", // url here to save file
+                maxFilesize: 100,//max file size in MB,
+                addRemoveLinks: true,
+                dictResponseError: 'Server not Configured',
+                acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",// use this to restrict file type
+                init: function () {
+                    var self = this;
+                    // config
+                    self.options.addRemoveLinks = true;
+                    self.options.dictRemoveFile = "Delete";
+                    //New file added
+                    self.on("addedfile", function (file) {
+                        console.log('new file added ', file);
+                        $('.dz-success-mark').hide();
+                        $('.dz-error-mark').hide();
+                    });
+
+                    // Send file starts
+                    self.on("sending", function (file) {
+                        console.log('upload started', file);
+                        $('.meter').show();
+                    });
+
+                    // File upload Progress
+                    self.on("totaluploadprogress", function (progress) {
+                        console.log("progress ", progress);
+                        $('.roller').width(progress + '%');
+                    });
+
+                    self.on("queuecomplete", function (progress) {
+                        $('.meter').delay(999).slideUp(999);
+                    });
+
+                    // On removing file
+                    self.on("removedfile", function (file) {
+                        console.log(file);
+
+                        //Delete Image
+                        var formdata = new FormData();
+                        formdata.append("imgId", file.name);
+                        $.ajax({
+                            url: '/AdminHome/ActionDeleteImg',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: formdata,
+                            async: false,
+                            success: function (result) {
+                                //success
+                                console.log(result);
+                            },
+                            error: function (err) {
+                                console.log(err.statusText);
+                            }
+                        });
+
+                    });
+
+                    $('#Submit').on("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Validate form here if needed
+
+                        if (self.getQueuedFiles().length > 0) {
+                            self.processQueue();
+                        } else {
+                            self.uploadFiles([]);
+                            $('#myDropzone').submit();
+                        }
+
+                        window.location = "../Index";
+                    });
+                    self.on("successmultiple", function (files, response) {
+                        // Gets triggered when the files have successfully been sent.
+                        // Redirect user or notify of success.
+                    });
+
+
+                    //Call the action method to load the images from the server
+                    $.getJSON("/AdminHome/GetImage/").done(function (data) {
+                        if (data.Data != '') {
+
+                            $.each(data.Data, function (index, item) {
+                                //// Create the mock file:
+                                var mockFile = {
+                                    name: item.ImageID,
+                                    size: 12345
+                                };
+
+                                // Call the default addedfile event handler
+                                self.emit("addedfile", mockFile);
+
+                                // And optionally show the thumbnail of the file:
+                                self.emit("thumbnail", mockFile, item.ImageLink);
+
+                                // If you use the maxFiles option, make sure you adjust it to the
+                                // correct amount:
+                                //var existingFileCount = 1; // The number of files already uploaded
+                                //myDropzone.options.maxFiles = myDropzone.options.maxFiles - existingFileCount;
+
+                            });
+                        }
+                    });
+
+
+                }
+            });
+        })
+
+    </script>
+
+    <!-- daterangepicker -->
+    <script src="~/Areas/Admin/Content/plugins/moment/moment.min.js"></script>
+    <script src="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Summernote -->
+    <script src="~/Areas/Admin/Content/plugins/summernote/summernote-bs4.min.js"></script>
+
+}
+

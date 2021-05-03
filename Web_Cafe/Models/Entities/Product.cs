@@ -1,0 +1,55 @@
+namespace Web_Cafe.Models.Entities
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Product")]
+    public partial class Product
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            Images = new HashSet<Image>();
+            Items = new HashSet<Item>();
+        }
+
+        public int ProductID { get; set; }
+
+        [StringLength(50)]
+        public string ProName { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Highlight { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string ProDescription { get; set; }
+
+        public double? Price { get; set; }
+
+        public double? PromotionalPrice { get; set; }
+
+        public DateTime? StartTime { get; set; }
+
+        public DateTime? EndTime { get; set; }
+
+        [StringLength(50)]
+        public string ProStatus { get; set; }
+
+        public int? CategoryID { get; set; }
+
+        public int? AdminID { get; set; }
+
+        public virtual Admin Admin { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
+    }
+}

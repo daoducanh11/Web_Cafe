@@ -1,0 +1,51 @@
+﻿/*Trang chủ Admin*/
+#return-to-top {
+    position: fixed;
+    z-index: 999;
+    transition: all 0.3s ease-out 0s;
+    transform: translateY(0px);
+    opacity: 0;
+    visibility: visible;
+    right: 10px;
+    bottom: 60px;
+    height: 40px;
+    width: 40px;
+    background-color: #000;
+    border: 2px solid #fff;
+    line-height: 30px;
+    border-radius: 4px;
+    font-size: 20px;
+    text-align: center;
+}
+#return-to-top:hover {
+    color: #fff;
+    background-color: #ddac55;
+    border-color: #d69b33;
+}
+ 
+.create-new{
+    background-color: #41a741;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.note-editing-area {
+    min-height: 130px;
+}
+.btn-group-lg > .btn, .btn-lg {
+    padding: .5rem 0rem;
+}
+.btn-lg {
+    font-size: 1rem !important;
+}
+
+.dz-preview.dz-image-preview {
+    display: inline-block;
+    margin: 5px;
+}
+
+/*Trang chỉnh sửa sản phẩm*/
+.dz-image img {
+    max-width: 120px;
+    max-height: 120px;
+}

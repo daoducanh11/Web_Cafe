@@ -1,0 +1,222 @@
+.footer{
+    .f13;
+    .bg(#f7f7f7);
+    .c(#333);
+    .pad-b(20px);
+    .footer__box{
+        .dis(inline-block);
+        .fullw;
+        .relative;
+        .contact-ft{
+            .center;
+            .inf-contact{
+                .pad-b(20px);
+                .tex-a(left);
+            }
+            .footer__title{
+                letter-spacing: 2px;
+                .mar-b(20px);
+                .c(#333);
+            }
+            .contact{
+                .tex-a(left);
+                .dis(inline-block);
+                .fullw;
+            }
+            .icon{
+                .fl(left);
+                .mar-r(7px);
+                .mar-t(4px);
+            }
+            .txt{
+                .fl(left);
+                width:calc(100% - 20px);
+            }
+            .logo-ft{
+                .h(100px);
+                .tex-a(left);
+                .pad-t(30px);
+                img{
+                    max-height:50px;
+                }
+            }
+        }
+        .col-md-9, .col-md-3{
+            .pad(10px 0);
+        }
+        .box-line{
+            .pad(0 30px);
+            .dis(inline-block);
+            .mar-t(30px);
+            .fullw;
+            .list{
+                ul {
+                    .mar-t(20px);
+                    li{
+                        .fl(left);
+                        .mar-r(20px);
+                    }
+                }
+            }
+        }
+        .box-line-2{
+            .mar-b(0);
+        }
+    }
+    .copyright{
+        .tex-a(right);
+        .pad-r(10px);
+        a{
+            .dis(inline);
+        }
+    }
+    .regs-frm{
+        .fullw;
+        .dis(inline-block);
+        .tex-a(center);
+        .pad-t(30px);
+        .sub{
+            .w(80%);
+            input{
+                .bg(none);
+                .bor(1px solid #ccc);
+                .dis(inline-block);
+                .w(75%);
+                .mar-r(5px);
+            }
+            .btn-regs__frm{
+                .dis(inline-block);
+                .bg(@main);
+                .corner(0);
+                .c(#fff);
+                .f14;
+                .upper;
+                .thick;
+                .mar-t(-4px);
+                .pad-l(15px);
+                .pad-r(15px);
+            }
+        }
+    }
+    .icon{
+        
+        margin-right: 10px;
+    }
+    .footer__title{
+        .normal;
+        .upper;
+        margin-bottom: 10px;
+        .block;
+        .bold;
+        color: #555;
+        .fl(left);
+        .fullw;
+        .tex-a(left);
+    }
+    .contact{
+        .f13;
+        margin-bottom: 10px;
+    }
+    .url{
+        .block;
+        margin-bottom:10px;
+        .f13;
+        .c(#666);
+        &:hover{
+            color: @main;
+        }
+    }
+    .list-social{
+        .item{
+            .inline;
+            margin-right: 5px;
+            .mar-b(25px);
+            .mar-t(15px);
+        }
+        .btn{
+            .inline;
+            width: 35px;
+            height: 35px;
+            .bg(#eee);
+            .corner(50%);
+            padding:0px;
+            .center;
+            line-height: 35px;
+            .c(#333);
+            .relative;
+            .transition(0.4s);
+            .fa{
+                .f14;    
+            }
+            &:before{
+                top: 0px;
+                left: 0px;
+                content: "";
+                width: 100%;
+                .absolute;
+                height: 100%;
+                .corner(50%);
+                .transform(scale(1));
+                .transition(0.4s);
+                .opacity(0);
+                border:4px solid fade(@main, 30%);
+            }
+            &:hover{
+                .c(#fff);
+                background: @main;
+                .transition(0.4s);
+                &:before{
+                    .transform(scale(1.3));
+                    .transition(0.4s);
+                    .opacity(1);
+                }
+            }
+        }
+    }
+    .sub{
+        .form-control{
+            border:none;
+            .corner(3px);
+            .rgba(#000,0.5);
+            box-shadow: none;
+            padding: 2px 10px;
+            margin-bottom: 20px;
+
+        }
+    }
+    .cer{
+        img{
+            height: 50px;
+        }
+    }
+    .bottom{
+        background: #111111;
+        padding:10px 15px;
+        .f12;
+        color: #9e9e9e;
+        .url{
+            .inline;
+            margin:0px 5px;
+        }
+    }
+    .copyright{
+        padding: 10px ;
+        .absolute;
+        .b(0);
+        .r(10px);
+    }
+    .payment{
+        margin-top: 5px;
+        .img{
+            
+
+            img{
+                background: #fff;
+                padding: 5px;
+                .corner(3px);
+                height: 30px;
+
+            }
+        }
+    }
+}

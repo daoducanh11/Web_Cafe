@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>MyCafé</title>
+    <meta charset="utf-8" />
+    @*<meta name="keywords" content="It, it solution,solution, techonogy,internet" />
+        <link href="https://plus.google.com/114644939574462223089" rel="author">*@
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"></meta>
+    <meta content="width=device-width, initial-scale=1" name="viewport" id="viewport"></meta>
+    @*<meta content="siêu thị smax, smart" name="description">*@
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"></meta>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" id="viewport"></meta>
+    <meta content="index, follow" name="ROBOTS">
+    <!-- General style -->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/ap8.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="common-overlay"></div>
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="brand">
+                            <img src="./images/logo.png" alt="logo">
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-right-headtop">
+                        <div class="pull-left">
+                            <div class="box-search">
+                                <div class="form-input">
+                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                                    <button class="btn btn__search"><span class="fa fa-search"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-top pull-right">
+                            <div class="col-menu-top">
+                                <!-- <div class="hotline"><span class="-ap icon-phone-handset"></span> Hotline: 0966.63.3696</div> -->
+                                <div class="header-top__login">
+                                    <div class="">
+                                        <div class="title">Tài khoản</div>
+                                        <ul class="menu-icons__sub">
+                                            <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#login" class="menu"><span class="icon icon-lock_outline -ap"></span> Đăng nhập</a></li>
+                                            <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#register"><span class="icon icon-lock_open -ap"></span> Đăng ký</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="header-top__shopcart">
+                                    <div class="icon">
+                                        <span class="-ap icon-cart"></span>
+                                    </div>
+                                    <div class="headline">Giỏ hàng <span class="number-cart">0</span></div>
+                                    <div class="dropdown__shop__cart">
+                                        <div class="dropdown__head">
+                                            <span class="number">0</span>
+                                            <span class="txt">Sản phẩm trong giỏ hàng</span>
+                                        </div>
+                                        <div class="product__shopcart">
+                                            <div class="product__list">
+                                                <div class="product__list__item">
+                                                    <div class="product__img">
+                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                    </div>
+                                                    <div class="product__name">
+                                                        Son lì dạng kem L'oreal Color Riche .....
+                                                        <a class="product__delete">
+                                                            <span class="icon -ap icon-trash2"></span>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="product__price">
+                                                        <div class="product__price__old">790.000 <span class="unit">đ</span></div>
+                                                        <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
+                                                        <div class="product__quantity">
+                                                            <button class="btn-minus btn">
+                                                                -
+                                                            </button>
+                                                            <input type="text" class="input-number" value="1">
+                                                            <button class="btn-plus btn">
+                                                                +
+                                                            </button>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <div class="product__list__item">
+                                                    <div class="product__img">
+                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                    </div>
+                                                    <div class="product__name">
+                                                        Son lì dạng kem L'oreal Color Riche .....
+                                                        <a class="product__delete">
+                                                            <span class="icon -ap icon-trash2"></span>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="product__price">
+                                                        <div class="product__price__old">90.000 <span class="unit">đ</span></div>
+                                                        <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
+                                                        <div class="product__quantity">
+                                                            <button class="btn-minus btn">
+                                                                -
+                                                            </button>
+                                                            <input type="text" class="input-number" value="1">
+                                                            <button class="btn-plus btn">
+                                                                +
+                                                            </button>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown__bottom">
+                                            <div class="total">Tổng cộng: <span class="product__price number">9.990.000 <span class="unit"></span>đ</span></div>
+                                            <button href="#" class="btn__checkout">Tiến hành đặt hàng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---->
+                        </div>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="nav-toggle">
+                <span class="fa fa-bars"></span>
+            </div>
+            <div class="header-menu-catg">
+                <div class="menu-category">
+                    <div class="catalog__list">
+                        <ul class="catalog__wrap">
+                            <li class="catalog__item active">
+                                <a href="index.html" class="catalog__link">Trang chủ</a>
+                            </li>
+                            <li class="catalog__item -sub">
+                                <a href="category.html" class="catalog__link">Cà phê và Trà</a>
+                                <div class="catalog__sub">
+                                    <ul class="list-cat__sub">
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Phindi</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Espresso</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Phindi</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà hoa quả</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà sữa</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="catalog__item -sub">
+                                <a href="category.html" class="catalog__link">Bánh ngọt</a>
+                                <div class="catalog__sub">
+                                    <ul class="list-cat__sub">
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban đêm</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban ngày</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng trắng</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng chống lão hóa</a></li>
+                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Khác</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="catalog__item"><a href="news.html" class="catalog__link"> Hot và bán chạy</a></li>
+                            <li class="catalog__item"><a href="contact.html" class="catalog__link">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </header>
+    <!-- End menu -->
+
+    @RenderBody()
+
+
+    <!-- end footer -->
+    <script type="text/javascript" src="~/Content/vendor/js/jquery.2.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/slick.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/jquery.elevateZoom-3.0.8.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/nouislider.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+    <script src="~/Content/vendor/js/jquery-migrate-1.0.0.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
