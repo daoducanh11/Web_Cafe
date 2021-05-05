@@ -33,7 +33,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
-        public int InsertProduct(Product proTmp)
+        public int UpdatetProduct(Product proTmp)
         {
             Product pro = db.Products.Find(proTmp.ProductID);
             if (pro != null)
@@ -52,12 +52,21 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             }
             return pro.ProductID;
         }
-        public int UpdatetProduct(Product pro)
+        public int InsertProduct(Product pro)
         {
             db.Products.Add(pro);//luu tren RAM
             db.SaveChanges();//luu vao o dia
             return pro.ProductID;
         }
+        //public void DeleteProduct(int id)
+        //{
+        //    Product pro = db.Products.Find(id);
+        //    if(pro != null)
+        //    {
+        //        db.Products.Remove(pro);
+        //        db.SaveChanges();
+        //    }
+        //}
         public Product FindProductByID(int id)
         {
             return db.Products.Find(id);

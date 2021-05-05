@@ -12,6 +12,7 @@ namespace Web_Cafe.Controllers
         public ActionResult Index()
         {
             return RedirectToAction("", "Admin/AdminLogin/Index");
+            //return RedirectToAction("Index", "AdminLogin", "Admin");
         }
     }
 }

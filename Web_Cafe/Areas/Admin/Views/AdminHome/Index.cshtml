@@ -32,69 +32,58 @@
             @*@Html.ActionLink("Thêm mới", "Create", new { @class = "create-new" })*@
         </p>
         <table class="table">
-            <tr>
-                <th>
-                    Mã sản phẩm
-                </th>
-                <th>
-                    Tên sản phẩm
-                </th>
-                <th>
-                    Hình ảnh
-                </th>
-                <th>
-                    Giá
-                </th>
-                <th>
-                    Giá khuyến mãi
-                </th>
-                <th>
-                    Danh mục
-                </th>
-                <th>
-                    Trạng thái
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProName)
-                    </td>
-                    <td>
-                        hinh anh
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PromotionalPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CateName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProStatus)
-                    </td>
-                    <td>
-                        <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
-                            <i class="fas fa-edit" aria-hidden="true"></i>
-                        </a>
-                        <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
-                            <i class="fas fa-trash-alt" style="color:red;"></i>
-                        </a>
-
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
-                    </td>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Giá</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Danh mục</th>
+                    <th>Trạng thái</th>
+                    <th>Chức năng</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProName)
+                        </td>
+                        <td>
+                            hinh anh
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PromotionalPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProStatus)
+                        </td>
+                        <td>
+                            <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                            </a>
+                            <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                <i class="fas fa-trash-alt" style="color:red;"></i>
+                            </a>
+
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
     </div>

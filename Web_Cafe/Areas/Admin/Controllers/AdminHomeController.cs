@@ -16,7 +16,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
         // GET: Admin/AdminHome
         public ActionResult Index(int pageNum = 1, int pageSize = 4)
         {
-            ProductDAO dao = new ProductDAO();
+            ProductDAO dao = new ProductDAO();                                                                  
             return View(dao.lstJoin(pageNum, pageSize));
         }
         public ActionResult Create()
@@ -29,54 +29,29 @@ namespace Web_Cafe.Areas.Admin.Controllers
             string price, string promoPrice, string timePromo, string categoryId, string proStatus,
             IEnumerable<HttpPostedFileBase> filesImg)
         {
-            //Product pro = new Product();
-            //pro.ProName = proName;
-            //pro.Highlight = proHighlight;
-            //pro.ProDescription = proDescription;
-            //double pri;
-            //if (double.TryParse(price, out pri))
-            //    pro.Price = pri;
-            //else
-            //    pro.Price = 0;
-            //if (double.TryParse(promoPrice, out pri))
-            //    pro.PromotionalPrice = pri;
-            //else
-            //    pro.PromotionalPrice = 0;
-            //string[] arr = timePromo.Split('-');
-            //pro.StartTime = Convert.ToDateTime(arr[0]);
-            //pro.EndTime = Convert.ToDateTime(arr[1]);
-            //pro.ProStatus = proStatus;
-            //pro.CategoryID = Int32.Parse(categoryId);
-            //ProductDAO dao = new ProductDAO();
-            //Image img = new Image();
-            //img.ProductID = dao.InsertProduct(pro);
+            Product pro = new Product();
+            pro.ProName = proName;
+            pro.Highlight = proHighlight;
+            pro.ProDescription = proDescription;
+            double pri;
+            if (double.TryParse(price, out pri))
+                pro.Price = pri;
+            else
+                pro.Price = 0;
+            if (double.TryParse(promoPrice, out pri))
+                pro.PromotionalPrice = pri;
+            else
+                pro.PromotionalPrice = 0;
+            string[] arr = timePromo.Split('-');
+            pro.StartTime = Convert.ToDateTime(arr[0]);
+            pro.EndTime = Convert.ToDateTime(arr[1]);
+            pro.ProStatus = proStatus;
+            pro.CategoryID = Int32.Parse(categoryId);
+            ProductDAO dao = new ProductDAO();
+            Image img = new Image();
+            img.ProductID = dao.InsertProduct(pro);
 
-            //SaveImage(img, filesImg);
-            //image
-            //ImageDAO daoImage = new ImageDAO();
-            //string fName = "";
-            //try
-            //{
-            //    //loop through all the files
-            //    foreach (var file in filesImg)
-            //    {
-            //        //Save file content goes here
-            //        fName = file.FileName;
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-            //            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\", Server.MapPath(@"\")));
-            //            string pathString = System.IO.Path.Combine(originalDirectory.ToString());
-            //            var path = string.Format("{0}{1}", pathString, file.FileName);
-            //            file.SaveAs(path);
-            //            img.ImageLink = file.FileName;
-            //            daoImage.InsertImage(img);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
+            SaveImage(img, filesImg);            
             return RedirectToAction("Index", "AdminHome");
         }
         public void SaveImage(Image img, IEnumerable<HttpPostedFileBase> filesImg)
@@ -97,9 +72,9 @@ namespace Web_Cafe.Areas.Admin.Controllers
                             var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\", Server.MapPath(@"\")));
                             string pathString = System.IO.Path.Combine(originalDirectory.ToString());
                             var path = string.Format("{0}{1}", pathString, file.FileName);
-                            file.SaveAs(path);
+                            file.SaveAs(path);/*Lưu vào thư mục Images*/
                             img.ImageLink = file.FileName;
-                            daoImage.InsertImage(img);
+                            daoImage.InsertImage(img);/*Lưu vào db*/
                         }
                     }
                 }
@@ -158,7 +133,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             pro.CategoryID = Int32.Parse(categoryId);
             ProductDAO dao = new ProductDAO();
             Image img = new Image();
-            img.ProductID = dao.InsertProduct(pro);
+            img.ProductID = dao.UpdatetProduct(pro);
 
             SaveImage(img, filesImg);
             foreach (int item in arrImgDelete)
