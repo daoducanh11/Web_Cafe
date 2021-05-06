@@ -33,6 +33,38 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
+
+        public IEnumerable<ProductDTO> lstSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProById " +
+                proId + ", " + categoryId + ", " + minPrice + ", " + maxPrice
+                ).ToPagedList<ProductDTO>(pageNum, pageSize);
+            return lst;
+        }
+        public IEnumerable<ProductDTO> lstSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByName " +
+                "N'" + proName + "', " + categoryId + ", " + minPrice + ", " + maxPrice
+                ).ToPagedList<ProductDTO>(pageNum, pageSize);
+            return lst;
+        }
+        public IEnumerable<ProductDTO> lstSearchProByNameUnique(string proName, int categoryId, int pageNum, int pageSize)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByNameUnique " +
+                "N'" + proName + "', " + categoryId
+                ).ToPagedList<ProductDTO>(pageNum, pageSize);
+            return lst;
+        }
+        public IEnumerable<ProductDTO> lstSearchProByCateId(int categoryId, int pageNum, int pageSize)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>("SELECT ProductID, ProName, Price, " +
+                " PromotionalPrice, ProStatus, CateName " +
+                " FROM Product P, Category C " +
+                " WHERE P.CategoryID = " + categoryId +" AND P.CategoryID = C.CategoryID "
+                ).ToPagedList<ProductDTO>(pageNum, pageSize);
+            return lst;
+        }
+
         public int UpdatetProduct(Product proTmp)
         {
             Product pro = db.Products.Find(proTmp.ProductID);
@@ -70,6 +102,17 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         public Product FindProductByID(int id)
         {
             return db.Products.Find(id);
+        }
+        public int Delete(int id)
+        {
+            Product pro = db.Products.Find(id);
+            if (pro != null)
+            {
+                db.Products.Remove(pro);
+                return db.SaveChanges();
+            }
+            else
+                return -1;
         }
     }
 }

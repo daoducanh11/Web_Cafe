@@ -28,6 +28,8 @@
     color: white;
     padding: 10px;
     border-radius: 5px;
+    margin: 10px 0px;
+    display: inline-block;
 }
 
 a.create-new:hover {
@@ -58,39 +60,67 @@ i.fas fa-plus:hover {
     display: inline-block;
     margin: 5px;
 }
+
+.form-search{
+    background-color: #c0e6f8;
+    padding: 14px;
+}
+.btn-pro{
+    padding: .375rem 0.70rem;
+}
+.btn-pro i{
+    font-size: 17px; 
+    color: white;
+}
+
+
+a.create-new:hover {
+    color: #41a741;
+    background-color: white;
+    border: 1px solid
+}
+i.fas fa-plus:hover {
+    color: #41a741;
+    background-color: white;
+    border: 1px solid
+}
 .pagination-container {
     display: flow-root;
-    margin-right: 30px;
+    margin: 20px 0 0 0;
 }
+
 .pagination {
     float: right;
 }
+
 .pagination li {
-    padding-left:10px; 
+    padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px; 
+    padding-top: 5px;
     padding-bottom: 5px;
     background-color: aliceblue;
 }
+
 .pagination li:hover {
     background-color: gainsboro;
 }
+
 .pagination li.active {
     background-color: #337ab7;
     color: white;
     z-index: 3;
 }
-.table tbody tr:hover td, .table tbody tr:hover th{
+
+.table tbody tr:hover td, .table tbody tr:hover th {
     background-color: gainsboro;
 }
 
 
-
-
-
-
-
 /*Trang chỉnh sửa sản phẩm*/
+div#previews {
+    border: 1px dashed;
+}
+
 .dz-image img {
     max-width: 120px;
     max-height: 120px;
@@ -106,6 +136,7 @@ a.dz-remove {
     padding-right: 10px;
     padding-bottom: 4px;
 }
+
 a.dz-remove:hover {
     color: white;
     text-decoration: none;
@@ -116,3 +147,4 @@ a.dz-remove:hover {
     padding-left: 10px;
     padding-bottom: 4px;
 }
+

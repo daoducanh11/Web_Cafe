@@ -13,10 +13,35 @@ namespace Web_Cafe.Areas.Admin.Controllers
     public class AdminHomeController : Controller
     {
         static List<int> arrImgDelete = new List<int>();
+        
         // GET: Admin/AdminHome
-        public ActionResult Index(int pageNum = 1, int pageSize = 4)
+        public ActionResult Index(string keywords, string categoryId, string minPrice, string maxPrice, int pageNum = 1, int pageSize = 5)
         {
-            ProductDAO dao = new ProductDAO();                                                                  
+            int proId;
+            int cateId = Convert.ToInt32(categoryId);
+            ProductDAO dao = new ProductDAO();
+            CategoryDAO daoCate = new CategoryDAO();
+            ViewBag.keywords = keywords;
+            ViewBag.categoryId = cateId;
+            ViewBag.minPrice = minPrice;
+            ViewBag.maxPrice = maxPrice;
+            ViewBag.cate = daoCate.ListCate();
+            //if (string.IsNullOrEmpty(keywords) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
+                //return View(dao.lstSearchProByCateId(cateId, pageNum, pageSize));
+            if (!string.IsNullOrEmpty(keywords) && !int.TryParse(keywords, out proId) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
+                return View(dao.lstSearchProByNameUnique(keywords, cateId, pageNum, pageSize));
+            bool check = true;
+            double min, max;
+            if (!double.TryParse(minPrice, out min) || !double.TryParse(maxPrice, out max))
+                check = false;
+            if (check)
+            {
+                if (int.TryParse(keywords, out proId))
+                    return View(dao.lstSearchProById(proId, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
+                else if (!int.TryParse(keywords, out proId))
+                    return View(dao.lstSearchProByName(keywords, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
+            }
+            
             return View(dao.lstJoin(pageNum, pageSize));
         }
         public ActionResult Create()
@@ -51,7 +76,8 @@ namespace Web_Cafe.Areas.Admin.Controllers
             Image img = new Image();
             img.ProductID = dao.InsertProduct(pro);
 
-            SaveImage(img, filesImg);            
+            SaveImage(img, filesImg);
+
             return RedirectToAction("Index", "AdminHome");
         }
         public void SaveImage(Image img, IEnumerable<HttpPostedFileBase> filesImg)
@@ -92,7 +118,10 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ProductDAO dao = new ProductDAO();
             Product pro = new Product();
             pro = dao.FindProductByID(id);
-
+            if(pro.StartTime == null)
+                pro.StartTime = DateTime.Now;
+            if (pro.EndTime == null)
+                pro.EndTime = DateTime.Now;
             CategoryDAO daoCate = new CategoryDAO();
             ViewBag.cate = daoCate.ListCate();
 
@@ -136,6 +165,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             img.ProductID = dao.UpdatetProduct(pro);
 
             SaveImage(img, filesImg);
+
             foreach (int item in arrImgDelete)
             {
                 ImageDAO daoImg = new ImageDAO();
@@ -163,6 +193,13 @@ namespace Web_Cafe.Areas.Admin.Controllers
         {
             arrImgDelete.Add(Convert.ToInt32(Request.Form["imgId"]));
             return Json("Xử lý thành công", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            ProductDAO dao = new ProductDAO();
+            dao.Delete(id);
+            return Redirect("~/Admin/AdminHome/Index");
         }
     }
 }
