@@ -98,9 +98,9 @@ namespace Web_Cafe.Areas.Admin.Controllers
                             var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\", Server.MapPath(@"\")));
                             string pathString = System.IO.Path.Combine(originalDirectory.ToString());
                             var path = string.Format("{0}{1}", pathString, file.FileName);
-                            file.SaveAs(path);
+                            file.SaveAs(path);/*Lưu vào thư mục Images*/
                             img.ImageLink = file.FileName;
-                            daoImage.InsertImage(img);
+                            daoImage.InsertImage(img);/*Lưu vào db*/
                         }
                     }
                 }

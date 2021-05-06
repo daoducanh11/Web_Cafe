@@ -99,6 +99,7 @@
 
 
         <table class="table">
+          <thead>
             <tr>
                 <th>
                     ID
@@ -125,6 +126,7 @@
                     <i class="fas fa-cogs"></i>
                 </th>
             </tr>
+          </thead>
 
             @foreach (var item in Model)
             {
@@ -157,13 +159,10 @@
                         <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
                             <i class="fas fa-trash-alt" style="color:red;"></i>
                         </a>
-
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
-                    </td>
-                </tr>
-            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
     </div>
