@@ -13,10 +13,35 @@ namespace Web_Cafe.Areas.Admin.Controllers
     public class AdminHomeController : Controller
     {
         static List<int> arrImgDelete = new List<int>();
+        
         // GET: Admin/AdminHome
-        public ActionResult Index(int pageNum = 1, int pageSize = 4)
+        public ActionResult Index(string keywords, string categoryId, string minPrice, string maxPrice, int pageNum = 1, int pageSize = 5)
         {
+            int proId;
+            int cateId = Convert.ToInt32(categoryId);
             ProductDAO dao = new ProductDAO();
+            CategoryDAO daoCate = new CategoryDAO();
+            ViewBag.keywords = keywords;
+            ViewBag.categoryId = cateId;
+            ViewBag.minPrice = minPrice;
+            ViewBag.maxPrice = maxPrice;
+            ViewBag.cate = daoCate.ListCate();
+            //if (string.IsNullOrEmpty(keywords) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
+                //return View(dao.lstSearchProByCateId(cateId, pageNum, pageSize));
+            if (!string.IsNullOrEmpty(keywords) && !int.TryParse(keywords, out proId) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
+                return View(dao.lstSearchProByNameUnique(keywords, cateId, pageNum, pageSize));
+            bool check = true;
+            double min, max;
+            if (!double.TryParse(minPrice, out min) || !double.TryParse(maxPrice, out max))
+                check = false;
+            if (check)
+            {
+                if (int.TryParse(keywords, out proId))
+                    return View(dao.lstSearchProById(proId, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
+                else if (!int.TryParse(keywords, out proId))
+                    return View(dao.lstSearchProByName(keywords, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
+            }
+            
             return View(dao.lstJoin(pageNum, pageSize));
         }
         public ActionResult Create()
@@ -29,54 +54,30 @@ namespace Web_Cafe.Areas.Admin.Controllers
             string price, string promoPrice, string timePromo, string categoryId, string proStatus,
             IEnumerable<HttpPostedFileBase> filesImg)
         {
-            //Product pro = new Product();
-            //pro.ProName = proName;
-            //pro.Highlight = proHighlight;
-            //pro.ProDescription = proDescription;
-            //double pri;
-            //if (double.TryParse(price, out pri))
-            //    pro.Price = pri;
-            //else
-            //    pro.Price = 0;
-            //if (double.TryParse(promoPrice, out pri))
-            //    pro.PromotionalPrice = pri;
-            //else
-            //    pro.PromotionalPrice = 0;
-            //string[] arr = timePromo.Split('-');
-            //pro.StartTime = Convert.ToDateTime(arr[0]);
-            //pro.EndTime = Convert.ToDateTime(arr[1]);
-            //pro.ProStatus = proStatus;
-            //pro.CategoryID = Int32.Parse(categoryId);
-            //ProductDAO dao = new ProductDAO();
-            //Image img = new Image();
-            //img.ProductID = dao.InsertProduct(pro);
+            Product pro = new Product();
+            pro.ProName = proName;
+            pro.Highlight = proHighlight;
+            pro.ProDescription = proDescription;
+            double pri;
+            if (double.TryParse(price, out pri))
+                pro.Price = pri;
+            else
+                pro.Price = 0;
+            if (double.TryParse(promoPrice, out pri))
+                pro.PromotionalPrice = pri;
+            else
+                pro.PromotionalPrice = 0;
+            string[] arr = timePromo.Split('-');
+            pro.StartTime = Convert.ToDateTime(arr[0]);
+            pro.EndTime = Convert.ToDateTime(arr[1]);
+            pro.ProStatus = proStatus;
+            pro.CategoryID = Int32.Parse(categoryId);
+            ProductDAO dao = new ProductDAO();
+            Image img = new Image();
+            img.ProductID = dao.InsertProduct(pro);
 
-            //SaveImage(img, filesImg);
-            //image
-            //ImageDAO daoImage = new ImageDAO();
-            //string fName = "";
-            //try
-            //{
-            //    //loop through all the files
-            //    foreach (var file in filesImg)
-            //    {
-            //        //Save file content goes here
-            //        fName = file.FileName;
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-            //            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\", Server.MapPath(@"\")));
-            //            string pathString = System.IO.Path.Combine(originalDirectory.ToString());
-            //            var path = string.Format("{0}{1}", pathString, file.FileName);
-            //            file.SaveAs(path);
-            //            img.ImageLink = file.FileName;
-            //            daoImage.InsertImage(img);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
+            SaveImage(img, filesImg);
 
-            //}
             return RedirectToAction("Index", "AdminHome");
         }
         public void SaveImage(Image img, IEnumerable<HttpPostedFileBase> filesImg)
@@ -117,7 +118,10 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ProductDAO dao = new ProductDAO();
             Product pro = new Product();
             pro = dao.FindProductByID(id);
-
+            if(pro.StartTime == null)
+                pro.StartTime = DateTime.Now;
+            if (pro.EndTime == null)
+                pro.EndTime = DateTime.Now;
             CategoryDAO daoCate = new CategoryDAO();
             ViewBag.cate = daoCate.ListCate();
 
@@ -158,9 +162,10 @@ namespace Web_Cafe.Areas.Admin.Controllers
             pro.CategoryID = Int32.Parse(categoryId);
             ProductDAO dao = new ProductDAO();
             Image img = new Image();
-            img.ProductID = dao.InsertProduct(pro);
+            img.ProductID = dao.UpdatetProduct(pro);
 
             SaveImage(img, filesImg);
+
             foreach (int item in arrImgDelete)
             {
                 ImageDAO daoImg = new ImageDAO();
@@ -188,6 +193,13 @@ namespace Web_Cafe.Areas.Admin.Controllers
         {
             arrImgDelete.Add(Convert.ToInt32(Request.Form["imgId"]));
             return Json("Xử lý thành công", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            ProductDAO dao = new ProductDAO();
+            dao.Delete(id);
+            return Redirect("~/Admin/AdminHome/Index");
         }
     }
 }

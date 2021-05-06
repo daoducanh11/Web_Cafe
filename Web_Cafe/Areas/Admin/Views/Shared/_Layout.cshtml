@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@*@{
+    var username = Session["username"];
+    if (username == null)
+    {
+        Response.Redirect("../AdminLogin");
+    }
+
+}*@
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -15,12 +24,12 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
-    @*<link rel="stylesheet" href="~/Content/plugins/jqvmap/jqvmap.min.css">*@
+    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    
+
     <!-- css_custom -->
     <link href="~/Content/css/css_custom.css" rel="stylesheet" />
 
@@ -41,7 +50,7 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     @*<a href="~/Areas/Admin/Views/AdminHome/Index.cshtml" class="nav-link">Trang chủ</a>*@
-                    @Html.ActionLink("Trang chủ", "Index", "Home", new { area = "Admin" }, new { @class="nav-link" })
+                    @Html.ActionLink("Trang chủ", "Index", "AdminHome", new { area = "Admin" }, new { @class = "nav-link" })
                 </li>
             </ul>
             <!-- Right navbar links -->
@@ -273,30 +282,27 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
     <!-- Bootstrap 4 -->
-    <script src="~/Areas/Admin/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/Areas/Admin/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>*@
     <!-- ChartJS -->
     @*<script src="~/Content/plugins/chart.js/Chart.min.js"></script>*@
     <!-- Sparkline -->
-    @*<script src="~/Content/plugins/sparklines/sparkline.js"></script>*@
+    @*<script src="~/Areas/Admin/Content/plugins/sparklines/sparkline.js"></script>*@
     <!-- JQVMap -->
-    @*<script src="~/Content/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="~/Content/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>*@
+    @*<script src="~/Areas/Admin/Content/plugins/jqvmap/jquery.vmap.min.js"></script>
+        <script src="~/Areas/Admin/Content/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>*@
     <!-- jQuery Knob Chart -->
-    @*<script src="~/Content/plugins/jquery-knob/jquery.knob.min.js"></script>*@
+    @*<script src="~/Areas/Admin/Content/plugins/jquery-knob/jquery.knob.min.js"></script>*@
     <!-- Tempusdominus Bootstrap 4 -->
-    @*<script src="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="~/Areas/Admin/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
-    @*<script src="~/Content/dist/js/adminlte.js"></script>*@
+    <script src="~/Areas/Admin/Content/dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
-    @*<script src="~/Content/dist/js/demo.js"></script>*@
+    <script src="~/Areas/Admin/Content/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    @*<script src="~/Content/dist/js/pages/dashboard.js"></script>*@
-    <!-- dropzonejs -->
-    @*<script src="~/Content/plugins/dropzone/min/dropzone.min.js"></script>*@
+    @*<script src="~/Areas/Admin/Content/dist/js/pages/dashboard.js"></script>*@@*warning*@
     <!-- js_custom -->
-    
     <!--DropZone JS-->
     @Scripts.Render("~/bundles/dropzonejs")
 
