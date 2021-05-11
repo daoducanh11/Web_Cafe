@@ -5,6 +5,7 @@ namespace Web_Cafe.Models.Entities
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -19,11 +20,14 @@ namespace Web_Cafe.Models.Entities
         public int ProductID { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string ProName { get; set; }
 
+        [AllowHtml]
         [Column(TypeName = "ntext")]
         public string Highlight { get; set; }
 
+        [AllowHtml]
         [Column(TypeName = "ntext")]
         public string ProDescription { get; set; }
 

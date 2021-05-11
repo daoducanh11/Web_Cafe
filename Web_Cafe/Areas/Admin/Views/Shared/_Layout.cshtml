@@ -1,17 +1,17 @@
-﻿@*@{
+﻿@{
     var username = Session["username"];
     if (username == null)
     {
-        Response.Redirect("../AdminLogin");
+        Response.Redirect("../AdminLogin/");
     }
 
-}*@
+}
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tổng quan hệ thống</title>
 
@@ -24,7 +24,7 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/jqvmap/jqvmap.min.css">
+    @*<link rel="stylesheet" href="~/Areas/Admin/Content/plugins/jqvmap/jqvmap.min.css">*@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -44,7 +44,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                    <a class="nav-link" data-widget="pushmenu"  role="button">
                         <i class="fas fa-bars"></i>
                     </a>
                 </li>
@@ -57,12 +57,12 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <a class="nav-link" data-toggle="dropdown" >
                         <p style="display: inline-table; margin-right: 11px;">@Session["username"]</p>
                         <i class="far fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
+                        <a  class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
                                 <img src="~/Areas/Admin/Content/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
@@ -78,7 +78,7 @@
                             <!-- Message End -->
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a  class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
                                 <img src="~/Areas/Admin/Content/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
@@ -94,10 +94,10 @@
                             <!-- Message End -->
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a  class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="~/Areas/Admin/Contentdist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                @*<img src="~/Areas/Admin/Contentdist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">*@
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -110,17 +110,17 @@
                             <!-- Message End -->
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                        <a  class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
                 </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <a class="nav-link" data-widget="fullscreen"  role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true"  role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -130,9 +130,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
-                <img src="~/Areas/Admin/Content/dist/img/logo.jpg" alt="AdminMTA Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminMTA</span>
+            <a  class="brand-link">
+                <img src="~/Areas/Admin/Content/dist/img/logo.jpg" alt="AdminWebsite Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">AdminWebsite</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -142,7 +142,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon fas fa-file-invoice"></i>
                                 <p>
                                     Đơn hàng
@@ -152,13 +152,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="Order" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Đơn đặt hàng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm đơn hàng</p>
                                     </a>
@@ -166,13 +166,13 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="News" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon fas fa-newspaper"></i>
                                 <p>Tin tức</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon fas fa-chart-pie"></i>
                                 <p>
                                     Báo cáo
@@ -181,19 +181,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Icons</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/UI/buttons.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Buttons</p>
                                     </a>
@@ -201,31 +201,31 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="Users" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>Khách hàng</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>Thư viện ảnh<i class="fas fa-angle-left right"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/tables/simple.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Simple Tables</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DataTables</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                    <a  class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>jsGrid</p>
                                     </a>
@@ -233,13 +233,13 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="ProductCategory" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>Danh mục sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
+                            <a  class="nav-link">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>Cài đặt</p>
                             </a>
@@ -260,7 +260,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2021 AdminMTA</strong>
+            <strong>Copyright &copy; 2021 AdminWebsite</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0
@@ -282,7 +282,7 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
     <!-- Bootstrap 4 -->
-    @*<script src="~/Areas/Admin/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/Areas/Admin/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     @*<script src="~/Content/plugins/chart.js/Chart.min.js"></script>*@
     <!-- Sparkline -->
@@ -293,7 +293,7 @@
     <!-- jQuery Knob Chart -->
     @*<script src="~/Areas/Admin/Content/plugins/jquery-knob/jquery.knob.min.js"></script>*@
     <!-- Tempusdominus Bootstrap 4 -->
-    <script src="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    @*<script src="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>*@
     <!-- overlayScrollbars -->
     <script src="~/Areas/Admin/Content/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -304,6 +304,7 @@
     @*<script src="~/Areas/Admin/Content/dist/js/pages/dashboard.js"></script>*@@*warning*@
     <!-- js_custom -->
     <!--DropZone JS-->
+
     @Scripts.Render("~/bundles/dropzonejs")
 
     @RenderSection("script", required: false)

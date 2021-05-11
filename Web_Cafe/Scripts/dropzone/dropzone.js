@@ -436,9 +436,11 @@
       if (this.options.url == null) {
         this.options.url = this.element.getAttribute("action");
       }
+
       if (!this.options.url) {
         throw new Error("No URL provided.");
       }
+
       if (this.options.acceptedFiles && this.options.acceptedMimeTypes) {
         throw new Error("You can't provide both 'acceptedFiles' and 'acceptedMimeTypes'. 'acceptedMimeTypes' is deprecated.");
       }
@@ -1457,7 +1459,9 @@
     return element.dropzone;
   };
 
-  Dropzone.autoDiscover = true;
+  //Dropzone.autoDiscover = true;
+  // 11/5/2021
+  Dropzone.autoDiscover = false;
 
   Dropzone.discover = function() {
     var checkElements, dropzone, dropzones, _i, _len, _results;

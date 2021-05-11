@@ -26,7 +26,9 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="Create" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+    <form action="Edit" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="col-md-9">
                 <div class="card card-outline card-info">
@@ -39,19 +41,25 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nameProduct">Tên sản phẩm</label>
-                            <input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" value="@Model.ProName">
+                            @*<input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" value="@Model.ProName">*@
+                            @Html.EditorFor(model => model.ProName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên sản phẩm" } })
+                            @Html.ValidationMessageFor(model => model.ProName, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="summernote">Thông tin nổi bật</label>
-                            <textarea id="proHighlight" name="proHighlight">
-                                @Model.Highlight
-                            </textarea>
+                            <!--<textarea id="proHighlight" name="proHighlight">-->
+                            @*@Model.Highlight*@
+                            <!--</textarea>-->
+                            @Html.TextAreaFor(model => model.Highlight)
+
                         </div>
                         <div class="form-group">
                             <label for="summernote">Mô tả sản phẩm</label>
-                            <textarea id="proDescription" name="proDescription">
-                                @Model.ProDescription
-                            </textarea>
+                            <!--<textarea id="proDescription" name="proDescription">-->
+                            @*@Model.ProDescription*@
+                            <!--</textarea>-->
+                            @Html.TextAreaFor(model => model.ProDescription)
+
                         </div>
                         <div class="form-group">
                             <label for="actions">Hình ảnh sản phẩm</label><br />
@@ -106,7 +114,6 @@
                             <select class="form-control select2" name="categoryId" id="categoryId" style="width: 100%;">
                                 @foreach (var item in ViewBag.cate)
                                 {
-
                                     var select = "";
                                     if (item.CategoryID == Model.CategoryID)
                                     {
@@ -124,7 +131,9 @@
                                         <i class="fas fa-money-bill-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="price" id="price" value="@Model.Price">
+                                @*<input type="text" class="form-control" name="price" id="price" value="@Model.Price">*@
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,7 +144,9 @@
                                         <i class="fas fa-gift"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="promoPrice" id="promoPrice" value="@Model.PromotionalPrice">
+                                @*<input type="text" class="form-control" name="promoPrice" id="promoPrice" value="@Model.PromotionalPrice">*@
+                                @Html.EditorFor(model => model.PromotionalPrice, new { htmlAttributes = new { @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model.PromotionalPrice, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -166,8 +177,8 @@
     <script>
         $(function () {
             // Summernote
-            $('#proHighlight').summernote()
-            $('#proDescription').summernote()
+            $('#Highlight').summernote()
+            $('#ProDescription').summernote()
             //Date range picker with time picker
             $('#timePromo').daterangepicker({
                 startDate: '@Model.StartTime',
@@ -180,7 +191,11 @@
             })
         })
 
-        
+        @*var prode = @Model.ProDescription;*@
+        @*var prode = Buffer.from("@Model.ProDescription", 'utf-8');*@
+        @*$('#proHighlight').html('@Model.Highlight');*@
+        //$('#proDescription').html(prode);
+
         $(document).ready(function () {
             Dropzone.autoDiscover = false;
             $('#myDropzone').dropzone({
@@ -194,7 +209,7 @@
                 uploadMultiple: true,
                 parallelUploads: 100,
                 maxFiles: 100,
-                //  url:"/", // url here to save file
+                url:"/", // url here to save file
                 maxFilesize: 100,//max file size in MB,
                 addRemoveLinks: true,
                 dictResponseError: 'Server not Configured',
@@ -256,15 +271,15 @@
                         e.preventDefault();
                         e.stopPropagation();
                         // Validate form here if needed
-
                         if (self.getQueuedFiles().length > 0) {
                             self.processQueue();
                         } else {
                             self.uploadFiles([]);
                             $('#myDropzone').submit();
                         }
-
-                        window.location = "../Index";
+                        
+                        //$('#myDropzone').submit();
+                        //window.location = "../Index";
                     });
                     self.on("successmultiple", function (files, response) {
                         // Gets triggered when the files have successfully been sent.

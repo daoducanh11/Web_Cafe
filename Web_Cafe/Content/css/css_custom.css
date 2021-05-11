@@ -22,14 +22,15 @@
     background-color: #ddac55;
     border-color: #d69b33;
 }
- 
-.create-new{
+
+.create-new {
     background-color: #41a741;
     color: white;
     padding: 10px;
     border-radius: 5px;
     margin: 10px 0px;
     display: inline-block;
+    border: 1px solid;
 }
 .note-editing-area {
     min-height: 130px;
@@ -77,7 +78,7 @@ i.fas fa-plus:hover {
     float: right;
 }
 
-.pagination li {
+.pagination li a{
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
@@ -85,11 +86,11 @@ i.fas fa-plus:hover {
     background-color: aliceblue;
 }
 
-.pagination li:hover {
+.pagination li a:hover {
     background-color: gainsboro;
 }
 
-.pagination li.active {
+.pagination li.active a{
     background-color: #337ab7;
     color: white;
     z-index: 3;
@@ -99,6 +100,18 @@ i.fas fa-plus:hover {
     background-color: gainsboro;
 }
 
+.btn-search{
+    display: flex;
+}
+
+.modal-dialog {
+    max-width: 1000px;
+    margin: 1.75rem auto;
+}
+
+.modal-body img {
+    max-width: 150px;
+}
 
 
 /*Trang chỉnh sửa sản phẩm*/
