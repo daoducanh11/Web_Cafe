@@ -1,4 +1,4 @@
-﻿@model List<Web_Cafe.Models.Entities.Category>
+﻿@model Web_Cafe.Models.Entities.Product
 
 @{
     ViewBag.Title = "Create";
@@ -26,7 +26,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="Create" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+    <form method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
         <div class="row">
             <div class="col-md-9">
                 <div class="card card-outline card-info">
@@ -39,17 +39,21 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="nameProduct">Tên sản phẩm</label>
-                            <input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" required>
+                            @*<input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" required>*@
+                            @Html.EditorFor(model => model.ProName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên sản phẩm" } })
+                            @Html.ValidationMessageFor(model => model.ProName, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             <label for="summernote">Thông tin nổi bật</label>
-                            <textarea id="proHighlight" name="proHighlight">
-                            </textarea>
+                            @*<textarea id="proHighlight" name="proHighlight">
+                            </textarea>*@
+                            @Html.TextAreaFor(model => model.Highlight)
                         </div>
                         <div class="form-group">
                             <label for="summernote">Mô tả sản phẩm</label>
-                            <textarea id="proDescription" name="proDescription">
-                            </textarea>
+                            @*<textarea id="proDescription" name="proDescription">
+                            </textarea>*@
+                            @Html.TextAreaFor(model => model.ProDescription)
                         </div>
                         <div class="form-group">
                             <label for="actions">Hình ảnh sản phẩm</label><br />
@@ -102,7 +106,7 @@
                         <div class="form-group">
                             <label>Danh mục</label>
                             <select class="form-control select2" name="categoryId" id="categoryId" style="width: 100%;">
-                                @foreach (var item in Model)
+                                @foreach (var item in ViewBag.cate)
                                 {
                                     <option value="@item.CategoryID">@item.CateName</option>
                                 }
@@ -116,7 +120,9 @@
                                         <i class="fas fa-money-bill-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="price" id="price">
+                                @*<input type="text" class="form-control" name="price" id="price">*@
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -127,7 +133,9 @@
                                         <i class="fas fa-gift"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="promoPrice" id="promoPrice">
+                                @*<input type="text" class="form-control" name="promoPrice" id="promoPrice">*@
+                                @Html.EditorFor(model => model.PromotionalPrice, new { htmlAttributes = new { @class = "form-control"} })
+                                @Html.ValidationMessageFor(model => model.PromotionalPrice, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -158,8 +166,8 @@
     <script>
         $(function () {
             // Summernote
-            $('#proHighlight').summernote()
-            $('#proDescription').summernote()
+            $('#Highlight').summernote()
+            $('#ProDescription').summernote()
             //Date range picker with time picker
             $('#timePromo').daterangepicker({
                 timePicker: true,
@@ -183,7 +191,8 @@
                 uploadMultiple: true,
                 parallelUploads: 100,
                 maxFiles: 100,
-                //  url:"/", // url here to save file
+                url: '/AdminHome/Create',
+                //url:"/", // url here to save file
                 maxFilesize: 100,//max file size in MB,
                 addRemoveLinks: true,
                 dictResponseError: 'Server not Configured',
@@ -229,10 +238,11 @@
                             self.processQueue();
                         } else {
                             self.uploadFiles([]);
+                            
                             $('#myDropzone').submit();
                         }
-                        
-                        window.location = "./Index";
+
+                        //window.location = "./Index";
                     });
                     self.on("successmultiple", function (files, response) {
                         // Gets triggered when the files have successfully been sent.
@@ -241,6 +251,7 @@
                 }
             });
         })
+
     </script>
 
     <!-- daterangepicker -->
@@ -248,6 +259,7 @@
     <script src="~/Areas/Admin/Content/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Summernote -->
     <script src="~/Areas/Admin/Content/plugins/summernote/summernote-bs4.min.js"></script>
+
 
 }
 

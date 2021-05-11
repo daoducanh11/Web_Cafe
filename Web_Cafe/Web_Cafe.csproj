@@ -1010,6 +1010,7 @@
     <Content Include="Areas\Admin\Content\build\scss\_toasts.scss" />
     <Content Include="Areas\Admin\Content\build\scss\_users-list.scss" />
     <Content Include="Areas\Admin\Content\build\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\AdminHome\ShowImage.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />

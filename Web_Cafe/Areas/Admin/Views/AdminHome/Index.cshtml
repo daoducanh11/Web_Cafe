@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="">
-                                    <input type="text" class="form-control" id="" name="keywords" placeholder="Từ khóa" value="@ViewBag.keywords">
+                                    <input type="text" class="form-control" name="keywords" placeholder="Từ khóa" value="@ViewBag.keywords">
                                 </div>
                             </div>
                             <div class="col-2">
@@ -52,17 +52,17 @@
                             </div>
                             <div class="col-2">
                                 <div class="">
-                                    <input type="text" class="form-control" id="" name="minPrice" placeholder="Giá thấp nhất" value="@ViewBag.minPrice">
+                                    <input type="text" class="form-control" name="minPrice" placeholder="Giá thấp nhất" value="@ViewBag.minPrice">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="">
-                                    <input type="text" class="form-control" id="" name="maxPrice" placeholder="Giá cao nhất" value="@ViewBag.maxPrice">
+                                    <input type="text" class="form-control" name="maxPrice" placeholder="Giá cao nhất" value="@ViewBag.maxPrice">
                                 </div>
                             </div>
                             <div class="col-1">
-                                <div class="">
-                                    <button type="submit" class="btn btn-default btn-pro" title="Tìm kiếm" style="background-color: #2ea1f8; ">
+                                <div class="btn-search">
+                                    <button type="submit" class="btn btn-default btn-pro" title="Tìm kiếm" style="background-color: #2ea1f8; flex: auto; ">
                                         <i class="fa fa-search"></i>
                                     </button>
                                     <a href="~/Admin/AdminHome" class="btn btn-default btn-pro" title="Tải lại" style="background-color: #34a544">
@@ -77,7 +77,7 @@
             }
             @*<form action="Index" method="post" name="" id="">
 
-        </form>*@
+                </form>*@
         </div>
         <div>
             <div class="row">
@@ -93,78 +93,98 @@
             </div>
         </div>
         <!--<p>-->
-            
-            @*@Html.ActionLink("Thêm mới", "Create", new { @class = "create-new" })*@
+        @*@Html.ActionLink("Thêm mới", "Create", new { @class = "create-new" })*@
         <!--</p>-->
 
 
         <table class="table">
-          <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Tên sản phẩm
-                </th>
-                <th class="text-center">
-                    Hình ảnh
-                </th>
-                <th class="text-center">
-                    Giá
-                </th>
-                <th class="text-center">
-                    Giá khuyến mãi
-                </th>
-                <th>
-                    Danh mục
-                </th>
-                <th>
-                    Trạng thái
-                </th>
-                <th class="text-center">
-                    <i class="fas fa-cogs"></i>
-                </th>
-            </tr>
-          </thead>
-
-            @foreach (var item in Model)
-            {
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProName)
-                    </td>
-                    <td class="text-center">
-                        <i class="fas fa-images"></i>
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.PromotionalPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CateName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProStatus)
-                    </td>
-                    <td class="text-center">
-                        <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
-                            <i class="fas fa-edit" aria-hidden="true"></i>
-                        </a>
-                        <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
-                            <i class="fas fa-trash-alt" style="color:red;"></i>
-                        </a>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Tên sản phẩm
+                    </th>
+                    <th class="text-center">
+                        Hình ảnh
+                    </th>
+                    <th class="text-center">
+                        Giá
+                    </th>
+                    <th class="text-center">
+                        Giá khuyến mãi
+                    </th>
+                    <th>
+                        Danh mục
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th class="text-center">
+                        <i class="fas fa-cogs"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProName)
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn-primary" onclick="myFunction(@item.ProductID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                <i class="fas fa-images"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.PromotionalPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProStatus)
+                        </td>
+                        <td class="text-center">
+                            <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                            </a>
+                            <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                <i class="fas fa-trash-alt" style="color:red;"></i>
+                            </a>
                         </td>
                     </tr>
                 }
             </tbody>
-
         </table>
     </div>
 </section>
 
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+
+</div>
+
+@section script{
+    <script>
+        function myFunction(proId) {
+            var url = "/Admin/AdminHome/ShowImage?id=" + proId;
+            $("#myModal").load(url, function (data) {
+                $("#myModal").html(data);
+                $("#myModal").modal("show");
+            });
+
+        }
+        //$('#myModal').on('shown.bs.modal', function () {
+        //    $('#myInput').trigger('focus')
+        //})
+
+    </script>
+}
