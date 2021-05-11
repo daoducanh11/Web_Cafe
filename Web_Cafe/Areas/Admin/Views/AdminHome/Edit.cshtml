@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Thêm mới sản phẩm</h1>
+                <h1>Thông tin sản phẩm</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="Edit" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+    <form method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
@@ -209,7 +209,8 @@
                 uploadMultiple: true,
                 parallelUploads: 100,
                 maxFiles: 100,
-                url:"/", // url here to save file
+                url: '/AdminHome/Edit',
+                //url:"/", // url here to save file
                 maxFilesize: 100,//max file size in MB,
                 addRemoveLinks: true,
                 dictResponseError: 'Server not Configured',

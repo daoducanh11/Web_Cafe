@@ -26,7 +26,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <form action="Create" method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
+    <form method="post" enctype="multipart/form-data" name="myDropzone" id="myDropzone">
         <div class="row">
             <div class="col-md-9">
                 <div class="card card-outline card-info">
@@ -191,7 +191,8 @@
                 uploadMultiple: true,
                 parallelUploads: 100,
                 maxFiles: 100,
-                url:"/", // url here to save file
+                url: '/AdminHome/Create',
+                //url:"/", // url here to save file
                 maxFilesize: 100,//max file size in MB,
                 addRemoveLinks: true,
                 dictResponseError: 'Server not Configured',
@@ -237,7 +238,7 @@
                             self.processQueue();
                         } else {
                             self.uploadFiles([]);
-                            //url: '/AdminHome/Create',
+                            
                             $('#myDropzone').submit();
                         }
 

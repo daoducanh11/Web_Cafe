@@ -15,6 +15,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
         // GET: Admin/AdminLogin
         public ActionResult Index()
         {
+            Session["proName"] = "";
             return View();
         }
         [HttpPost]

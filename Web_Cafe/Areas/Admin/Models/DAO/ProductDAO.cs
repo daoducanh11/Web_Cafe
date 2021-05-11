@@ -33,6 +33,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
+
         public IEnumerable<ProductDTO> lstSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
             var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProById " +
@@ -63,6 +64,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
+
         public int UpdatetProduct(Product proTmp)
         {
             Product pro = db.Products.Find(proTmp.ProductID);
@@ -88,6 +90,15 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             db.SaveChanges();//luu vao o dia
             return pro.ProductID;
         }
+        //public void DeleteProduct(int id)
+        //{
+        //    Product pro = db.Products.Find(id);
+        //    if(pro != null)
+        //    {
+        //        db.Products.Remove(pro);
+        //        db.SaveChanges();
+        //    }
+        //}
         public Product FindProductByID(int id)
         {
             return db.Products.Find(id);

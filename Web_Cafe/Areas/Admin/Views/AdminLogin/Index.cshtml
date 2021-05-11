@@ -41,6 +41,7 @@
                     </span>
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                    @* hien thi loi khi dang nhap sai *@
                     <div class="wrap-input100 validate-input" data-validate="UserName is required">
                         @Html.TextBoxFor(model => model.Username, new { @class = "input100", @type = "text", @placeholder = "UserName" })
                         <span class="focus-input100"></span>

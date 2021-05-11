@@ -17,7 +17,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
         public ActionResult Index(string keywords, string categoryId, string minPrice, string maxPrice, int pageNum = 1, int pageSize = 9)
         {
             //if(Session["username"] == null)
-                //return RedirectToAction("Index", "AdminLogin");
+            //return RedirectToAction("Index", "AdminLogin");
             int proId;
             int cateId = Convert.ToInt32(categoryId);
             ProductDAO dao = new ProductDAO();
@@ -71,7 +71,8 @@ namespace Web_Cafe.Areas.Admin.Controllers
             //}
             if (ModelState.IsValid)
             {
-                Session["create"] = null;
+                if (Session["proName"].ToString() == proTmp.ProName)
+                    return RedirectToAction("Index", "AdminHome");
                 Product pro = new Product();
                 pro.ProName = proTmp.ProName;
                 pro.Highlight = proTmp.Highlight;
@@ -83,6 +84,8 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 pro.EndTime = Convert.ToDateTime(arr[1]);
                 pro.ProStatus = proStatus;
                 pro.CategoryID = Int32.Parse(categoryId);
+                
+                Session["proName"] = pro.ProName;
 
                 ProductDAO dao = new ProductDAO();
                 Image img = new Image();
@@ -90,7 +93,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
 
                 SaveImage(img, filesImg);
 
-                return RedirectToAction("Index", "AdminHome");
+                return RedirectToAction("Index", "AdminHome");    
             }
             CategoryDAO daoCate = new CategoryDAO();
             ViewBag.cate = daoCate.ListCate();
@@ -137,6 +140,8 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ProductDAO dao = new ProductDAO();
             if (ModelState.IsValid)
             {
+                //if (Session["proName"].ToString() == proTmp.ProName)
+                    //return RedirectToAction("Index", "AdminHome");
                 Image img = new Image();
                 img.ProductID = dao.UpdatetProduct(pro);
 
