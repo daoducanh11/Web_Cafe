@@ -39,7 +39,6 @@ a.create-new:hover {
     border: 1px solid
 }
 
-
 i.fas fa-plus:hover {
     color: #41a741;
     background-color: white;
@@ -164,3 +163,4 @@ a.dz-remove:hover {
 .dz-error-message {
     display: none;
 }
+
