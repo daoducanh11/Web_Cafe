@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Cafe.Areas.Admin.Models.DAO;
 
 namespace Web_Cafe.Controllers
 {
@@ -10,6 +11,8 @@ namespace Web_Cafe.Controllers
     {
         public ActionResult Index()
         {
+            ProductDAO dao = new ProductDAO();
+            ViewBag.lstPro = dao.lstPro();
             return View();
         }
 

@@ -90,15 +90,6 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             db.SaveChanges();//luu vao o dia
             return pro.ProductID;
         }
-        //public void DeleteProduct(int id)
-        //{
-        //    Product pro = db.Products.Find(id);
-        //    if(pro != null)
-        //    {
-        //        db.Products.Remove(pro);
-        //        db.SaveChanges();
-        //    }
-        //}
         public Product FindProductByID(int id)
         {
             return db.Products.Find(id);
@@ -114,5 +105,26 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             else
                 return -1;
         }
+
+        #region UserCode
+        public IEnumerable<ProductDTO> lstPro()
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>("SELECT TOP 8 ProductID, ProName, Price, " +
+                " PromotionalPrice, ProStatus, CateName " +
+                " FROM Product P, Category C " +
+                " WHERE P.CategoryID = C.CategoryID "
+                ).ToList<ProductDTO>();
+            foreach (var item in lst)
+            {
+                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
+                " FROM Images " +
+                " WHERE ProductID = " + item.ProductID
+                ).ToList<ImageDTO>();
+                if(res.Count() > 0)
+                    item.ImageLink = res[0].ImageLink;
+            }
+            return lst;
+        }
+        #endregion
     }
 }
