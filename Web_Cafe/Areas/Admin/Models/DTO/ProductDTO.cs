@@ -18,5 +18,6 @@ namespace Web_Cafe.Areas.Admin.Models.DTO
         public string ProStatus { get; set; }
         public int? IdCate { get; set; }
         public string CateName { get; set; }
+        public string ImageLink { get; set; }
     }
 }
