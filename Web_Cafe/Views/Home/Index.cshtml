@@ -1,14 +1,12 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
 
 <div class="nav-anchor"></div>
 <div class="slider-main hidden-xs">
     <div class="slider-wrapper theme-default">
         <div class="slider apollo_slides nivoSlider">
-            <a href="#"><img src="./images/carousel1.jpg" alt="" /></a>
-            <a href="#"><img src="./images/carousel2.jpg" alt="" /></a>
-            <a href="#"><img src="./images/carousel3.jpg" alt="" /></a>
+            <a href="#"><img src="~/Content/images/carousel1.jpg" alt="" /></a>
+            <a href="#"><img src="~/Content/images/carousel2.jpg" alt="" /></a>
+            <a href="#"><img src="~/Content/images/carousel3.jpg" alt="" /></a>
         </div>
     </div>
 </div>
@@ -25,156 +23,31 @@
         <!-- Tab panes -->
         <div class="tab-content product-list__wrap">
             <div role="tabpanel" class="tab-pane active" id="new">
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/latte1.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+                @{
+                    foreach (var item in ViewBag.ListProductExtend)
+                    {
+                        <div class="product__item">
+                            <div class="w">
+                                <div class="product__image">
+
+                                    <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
+                                    <div class="product-item__actions">
+                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                        <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
+                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+                                    </div>
+                                    <div class="product__overlay"></div>
+                                    <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                </div>
+                                <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
+                                <div class="product__price">
+                                    <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
+                                    <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                </div>
                             </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__sale">-20%</div>
                         </div>
-                        <h3 class="product__name"><a href="#">Latte</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">79.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/latte2.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__status -new">New</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Latte</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/latte3.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__status -new">New</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Espresso</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/expresso1.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Espresso</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <!--/-->
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/expresso2.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__sale">-20%</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Espresso</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/trachanh.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Trà chanh</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/tradaocamsa.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Trà đào cam sả</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="./images/tranhai.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Trà nhài</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <!--/-->
+                    }
+                }
             </div>
             <div role="tabpanel" class="tab-pane" id="hot">
                 <div class="product__item">
@@ -259,7 +132,7 @@
 <!---->
 <section class="sec-adv sec">
     <div class="container">
-        <img src="./images/bg1.jpg" alt="">
+        <img src="~/Content/images/bg1.jpg" alt="">
     </div>
 </section>
 <!--/-->
@@ -328,7 +201,7 @@
                 <div class="col-md-9 col-sm-9 col-xs-12 ">
                     <div class="product-list-catg__head">
                         <h2 class="product-list__title">
-                            Sản phẩm nổi bật
+                            Sản phẩm đang giảm giá
                         </h2>
                         <ul class="nav nav-tabs pull-right">
                             <li class="active"><a href="#">Chanel</a></li>
@@ -340,147 +213,31 @@
                         </ul>
                     </div>
                     <div class="product-list__wrap">
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/thachvai.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+                        @{
+                            foreach (var item in ViewBag.ListProductSales)
+                            {
+                                <div class="product__item">
+                                    <div class="w">
+                                        <div class="product__image">
+
+                                            <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
+                                            <div class="product-item__actions">
+                                                <button class="btn btn-cart">Thêm vào giỏ</button>
+                                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
+                                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+                                            </div>
+                                            <div class="product__overlay"></div>
+                                            <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                        </div>
+                                        <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
+                                        <div class="product__price">
+                                            <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
+                                            <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                        </div>
                                     </div>
-                                    <div class="product__overlay"></div>
                                 </div>
-                                <h3 class="product__name"><a href="#">Thạch vải</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/tradaocamsa.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__sale">-20%</div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Trà đào cam sả</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/expresso2.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__status -new">New</div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Espresso</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/latte3.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__status -new">New</div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Latte</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/bonglantrungmuoi2.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Bông lan trứng muối</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/-->
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/bonglantranchau2.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__sale">-20%</div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Bông lan trân châu đường đen</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/latte1.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Latte</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="./images/expresso1.jpg" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Esspresso</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>
+                            }
+                        }
                         <!--/-->
                     </div>
                 </div>
@@ -532,7 +289,7 @@
                 <div class="col-md-3  col-sm-3 col-xs-12 contact-ft">
                     <div class="ct">
                         <div class="logo-ft">
-                            <img src="./images/logo.png" alt="logo">
+                            <img src="~/Content/images/logo.png" alt="logo">
                         </div>
                         <h3 class="footer__title ">HẠT CÀ PHÊ TỰ NHIÊN</h3>
                         <div class="inf-contact">

@@ -61,6 +61,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -149,6 +150,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DAO\ProductDAOExtent.cs" />
+    <Compile Include="Models\DTO\ProductExtend.cs" />
     <Compile Include="Models\Entities\Admin.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Image.cs" />
@@ -621,6 +624,35 @@
     <Content Include="Content\css\css_custom.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\vars.css" />
+    <Content Include="Content\images\bg1.jpg" />
+    <Content Include="Content\images\bg2.jpg" />
+    <Content Include="Content\images\bg3.jpg" />
+    <Content Include="Content\images\bg4.jpg" />
+    <Content Include="Content\images\bg5.jpg" />
+    <Content Include="Content\images\bg6.jpg" />
+    <Content Include="Content\images\bg7.jpg" />
+    <Content Include="Content\images\bg8.jpg" />
+    <Content Include="Content\images\bonglantranchau1.jpg" />
+    <Content Include="Content\images\bonglantranchau2.jpg" />
+    <Content Include="Content\images\bonglantrungmuoi1.jpg" />
+    <Content Include="Content\images\bonglantrungmuoi2.jpg" />
+    <Content Include="Content\images\cafe.jpg" />
+    <Content Include="Content\images\cafebean.jpg" />
+    <Content Include="Content\images\carousel1.jpg" />
+    <Content Include="Content\images\carousel2.jpg" />
+    <Content Include="Content\images\carousel3.jpg" />
+    <Content Include="Content\images\espresso3.jpg" />
+    <Content Include="Content\images\expresso1.jpg" />
+    <Content Include="Content\images\expresso2.jpg" />
+    <Content Include="Content\images\latte1.jpg" />
+    <Content Include="Content\images\latte2.jpg" />
+    <Content Include="Content\images\latte3.jpg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logocf.png" />
+    <Content Include="Content\images\thachvai.jpg" />
+    <Content Include="Content\images\trachanh.jpg" />
+    <Content Include="Content\images\tradaocamsa.jpg" />
+    <Content Include="Content\images\tranhai.jpg" />
     <Content Include="Content\js\custom.js" />
     <Content Include="Content\js\js_custom.js" />
     <Content Include="Content\PagedList.css" />
@@ -1049,8 +1081,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\DAO\" />
-    <Folder Include="Models\DTO\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
