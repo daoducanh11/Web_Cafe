@@ -16,13 +16,18 @@
         <div class="product-list__head__home product-list__head">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active product-list__title"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">Mới nhất</a></li>
-                <li role="presentation" class="product-list__title"><a href="#hot" aria-controls="hot" role="tab" data-toggle="tab">Bán chạy</a></li>
+                <li role="presentation" class="active product-list__title">
+                    <a href="#new" aria-controls="new" role="tab" data-toggle="tab">Mới nhất</a>
+                </li>
+                <li role="presentation" class="product-list__title">
+                    <a href="#hot" aria-controls="hot" role="tab" data-toggle="tab">Bán chạy</a>
+                </li>
             </ul>
         </div>
         <!-- Tab panes -->
         <div class="tab-content product-list__wrap">
             <div role="tabpanel" class="tab-pane active" id="new">
+
                 @{
                     foreach (var item in ViewBag.ListProductExtend)
                     {
