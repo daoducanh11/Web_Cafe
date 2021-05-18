@@ -38,6 +38,7 @@
                             <div class="col-2">
                                 <div class="">
                                     <select class="form-control" name="categoryId">
+                                        <option value="0">Loại sản phẩm</option>
                                         @foreach (var item in ViewBag.cate)
                                         {
                                             var select = "";
@@ -109,10 +110,10 @@
                     <th class="text-center">
                         Hình ảnh
                     </th>
-                    <th class="text-center">
-                        Giá
+                    <th class="text-right">
+                        Giá bán
                     </th>
-                    <th class="text-center">
+                    <th class="text-right">
                         Giá khuyến mãi
                     </th>
                     <th>
@@ -141,11 +142,13 @@
                                 <i class="fas fa-images"></i>
                             </button>
                         </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Price)
+                        <td class="text-right">
+                            @*@Html.DisplayFor(modelItem => item.Price)*@
+                            @(item.Price.HasValue? item.Price.Value.ToString("N0") : "0")
                         </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.PromotionalPrice)
+                        <td class="text-right" style="padding-right:3%">
+                            @*@Html.DisplayFor(modelItem => item.PromotionalPrice)*@
+                            @(item.PromotionalPrice.HasValue? item.PromotionalPrice.Value.ToString("N0") : "0")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.CateName)

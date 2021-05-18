@@ -1,6 +1,7 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Web_Cafe.Areas.Admin.Models.DTO;
@@ -34,17 +35,22 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             return lst;
         }
 
-        public IEnumerable<ProductDTO> lstSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProById " +
-                proId + ", " + categoryId + ", " + minPrice + ", " + maxPrice
+            //var ProId = new SqlParameter("@ProId", proId);
+            //var CateId = new SqlParameter("@CateId", categoryId);
+            //var min = new SqlParameter("@min", minPrice);
+            //var max = new SqlParameter("@max", maxPrice);
+            var lst = db.Database.SqlQuery<ProductDTO>("listSearchProById @ProId, @CateId, @min, @max",
+                new SqlParameter("@ProId", proId), new SqlParameter("@CateId", categoryId),
+                new SqlParameter("@min", minPrice), new SqlParameter("@max", maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
-        public IEnumerable<ProductDTO> lstSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByName " +
-                "N'" + proName + "', " + categoryId + ", " + minPrice + ", " + maxPrice
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProByName N'{0}', {1}, {2}, {3}",
+                proName, categoryId, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
