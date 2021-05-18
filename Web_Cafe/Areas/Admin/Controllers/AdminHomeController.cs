@@ -27,23 +27,18 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ViewBag.minPrice = minPrice;
             ViewBag.maxPrice = maxPrice;
             ViewBag.cate = daoCate.ListCate();
-            //if (string.IsNullOrEmpty(keywords) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
-                //return View(dao.lstSearchProByCateId(cateId, pageNum, pageSize));
-            if (!string.IsNullOrEmpty(keywords) && !int.TryParse(keywords, out proId) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
-                return View(dao.lstSearchProByNameUnique(keywords, cateId, pageNum, pageSize));
-            bool check = true;
             double min, max;
-            if (!double.TryParse(minPrice, out min) || !double.TryParse(maxPrice, out max))
-                check = false;
-            if (check)
-            {
-                if (int.TryParse(keywords, out proId))
-                    return View(dao.lstSearchProById(proId, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
-                else if (!int.TryParse(keywords, out proId))
-                    return View(dao.lstSearchProByName(keywords, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
-            }
-            
-            return View(dao.lstJoin(pageNum, pageSize));
+            if (!double.TryParse(minPrice, out min))
+                min = 0;
+            if (!double.TryParse(maxPrice, out max))
+                max = 10000000;
+            if (keywords == null)
+                keywords = "";
+            if (keywords == "" && cateId == 0 && min == 0 && max == 10000000)
+                return View(dao.lstJoin(pageNum, pageSize));
+            if (int.TryParse(keywords, out proId))
+                return View(dao.listSearchProById(proId, cateId, min, max, pageNum, pageSize));
+            return View(dao.listSearchProByName(keywords, cateId, min, max, pageNum, pageSize));
         }
         public ActionResult ShowImage(int id)
         {

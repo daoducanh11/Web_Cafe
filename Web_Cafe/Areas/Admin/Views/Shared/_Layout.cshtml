@@ -50,7 +50,11 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     @*<a href="~/Areas/Admin/Views/AdminHome/Index.cshtml" class="nav-link">Trang chủ</a>*@
-                    @Html.ActionLink("Trang chủ", "Index", "AdminHome", new { area = "Admin" }, new { @class = "nav-link" })
+                    @*@Html.ActionLink("Trang chủ", "Index", "AdminHome", new { area = "Admin" }, new { @class = "nav-link" })*@
+                    <a href="/Home" class="nav-link">
+                        <img src="~/Content/images/logo.png" alt="My Café" class="" style="width: 50px; margin-top: -10px; margin-right: 5px;">
+                        <span class="">My Café</span>
+                    </a>
                 </li>
             </ul>
             <!-- Right navbar links -->
@@ -130,7 +134,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a  class="brand-link">
+            <a href="/Admin/AdminHome" class="brand-link">
                 <img src="~/Areas/Admin/Content/dist/img/logo.jpg" alt="AdminWebsite Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminWebsite</span>
             </a>
