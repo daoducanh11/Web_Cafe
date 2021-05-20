@@ -40,6 +40,22 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 return View(dao.listSearchProById(proId, cateId, min, max, pageNum, pageSize));
             return View(dao.listSearchProByName(keywords, cateId, min, max, pageNum, pageSize));
         }
+        [HttpPost]
+        public ActionResult Index(FormCollection data, int pageNum = 1, int pageSize = 9)
+        {
+            ProductDAO dao = new ProductDAO();
+            if (data.Count > 0)
+            {
+                string[] ids = data["checkBoxId"].Split(new char[] { ',' });
+                foreach (string id in ids)
+                {
+                    dao.Delete(int.Parse(id));
+                }
+            }
+            CategoryDAO daoCate = new CategoryDAO();
+            ViewBag.cate = daoCate.ListCate();
+            return View(dao.lstJoin(pageNum, pageSize));
+        }
         public ActionResult ShowImage(int id)
         {
             ImageDAO dao = new ImageDAO();

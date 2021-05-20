@@ -30,20 +30,15 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             var lst = db.Database.SqlQuery<ProductDTO>("SELECT ProductID, ProName, Price, " +
                 " PromotionalPrice, ProStatus, CateName " +
                 " FROM Product P, Category C " +
-                " WHERE P.CategoryID = C.CategoryID "
+                " WHERE P.CategoryID = C.CategoryID ORDER BY P.ProductID DESC"
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
 
         public IEnumerable<ProductDTO> listSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            //var ProId = new SqlParameter("@ProId", proId);
-            //var CateId = new SqlParameter("@CateId", categoryId);
-            //var min = new SqlParameter("@min", minPrice);
-            //var max = new SqlParameter("@max", maxPrice);
-            var lst = db.Database.SqlQuery<ProductDTO>("listSearchProById @ProId, @CateId, @min, @max",
-                new SqlParameter("@ProId", proId), new SqlParameter("@CateId", categoryId),
-                new SqlParameter("@min", minPrice), new SqlParameter("@max", maxPrice)
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProById {0}, {1}, {2}, {3}",
+                proId, categoryId, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
@@ -51,22 +46,6 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         {
             var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProByName N'{0}', {1}, {2}, {3}",
                 proName, categoryId, minPrice, maxPrice)
-                ).ToPagedList<ProductDTO>(pageNum, pageSize);
-            return lst;
-        }
-        public IEnumerable<ProductDTO> lstSearchProByNameUnique(string proName, int categoryId, int pageNum, int pageSize)
-        {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByNameUnique " +
-                "N'" + proName + "', " + categoryId
-                ).ToPagedList<ProductDTO>(pageNum, pageSize);
-            return lst;
-        }
-        public IEnumerable<ProductDTO> lstSearchProByCateId(int categoryId, int pageNum, int pageSize)
-        {
-            var lst = db.Database.SqlQuery<ProductDTO>("SELECT ProductID, ProName, Price, " +
-                " PromotionalPrice, ProStatus, CateName " +
-                " FROM Product P, Category C " +
-                " WHERE P.CategoryID = " + categoryId +" AND P.CategoryID = C.CategoryID "
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }

@@ -38,7 +38,10 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="nameProduct">Tên sản phẩm</label>
+                            <label for="nameProduct">
+                                Tên sản phẩm
+                                <i class="fas fa-asterisk"></i>
+                            </label>
                             @*<input type="text" class="form-control" name="proName" id="proName" placeholder="Tên sản phẩm" required>*@
                             @Html.EditorFor(model => model.ProName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên sản phẩm" } })
                             @Html.ValidationMessageFor(model => model.ProName, "", new { @class = "text-danger" })

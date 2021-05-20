@@ -136,8 +136,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
     <Compile Include="Areas\Admin\Models\DAO\CategoryDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ImageDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\LoginDAO.cs" />
@@ -1043,6 +1045,11 @@
     <Content Include="Areas\Admin\Content\build\scss\_users-list.scss" />
     <Content Include="Areas\Admin\Content\build\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\AdminHome\ShowImage.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminCategory\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminCategory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminOrder\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
