@@ -9,22 +9,9 @@ namespace Web_Cafe.Models.DTO
 {
     public class ProductExtend
     {
-
         public string img_path { get; private set; }
         public Product Product { get; private set; }
         public List<string> List_img_path { get; set; }
-
-        private void GetListImgPath()
-        {
-            List_img_path = new List<string>();
-            foreach (var item in new ImageDAO().GetListImageByProId(Product.ProductID).ToList())
-            {
-                if (item.ImageLink != null)
-                    this.List_img_path.Add(item.ImageLink.ToString());
-                else List_img_path.Add("cafe.jpg");
-
-            }
-        }
 
         public ProductExtend(Product pr)
         {
@@ -39,5 +26,18 @@ namespace Web_Cafe.Models.DTO
                 this.img_path = "cafe.jpg";
             }
         }
+        private void GetListImgPath()
+        {
+            List_img_path = new List<string>();
+            foreach (var item in new ImageDAO().GetListImageByProId(Product.ProductID).ToList())
+            {
+                if (item.ImageLink != null)
+                    this.List_img_path.Add(item.ImageLink.ToString());
+                else List_img_path.Add("cafe.jpg");
+
+            }
+        }
+
+        
     }
 }
