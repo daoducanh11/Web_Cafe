@@ -9,6 +9,8 @@ namespace Web_Cafe.Models.DAO
 {
     public class ProductDAOExtent : ProductDAO
     {
+        public List<ProductExtend> ListProductExtend { get; private set; }
+        public List<ProductExtend> ListProductSales { get; }
         public ProductDAOExtent() : base()
         {
             this.ListProductExtend = new List<ProductExtend>();
@@ -38,7 +40,6 @@ namespace Web_Cafe.Models.DAO
 
 
 
-        public List<ProductExtend> ListProductExtend { get; private set; }
-        public List<ProductExtend> ListProductSales { get; }
+        
     }
 }
