@@ -49,6 +49,28 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
+        public List<ProductDTO> lstSearchProByNameInOrder(string proName)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("lstSearchProByNameInOrder N'{0}'", proName)
+                ).ToList<ProductDTO>();
+            foreach (var item in lst)
+            {
+                if(item.ProStatus == "Khuyến mãi")
+                {
+                    if (item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                        item.Price = item.PromotionalPrice;
+                }
+                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
+                " FROM Images " +
+                " WHERE ProductID = " + item.ProductID
+                ).ToList<ImageDTO>();
+                if (res.Count() > 0)
+                    item.ImageLink = res[0].ImageLink;
+                else
+                    item.ImageLink = "noimage.jpg";
+            }
+            return lst;
+        }
 
         public int UpdatetProduct(Product proTmp)
         {

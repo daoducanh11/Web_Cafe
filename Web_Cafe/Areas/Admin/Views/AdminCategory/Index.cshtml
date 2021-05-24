@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Web_Cafe.Models.Entities.Category>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh mục sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -24,20 +24,17 @@
 </section>
 
 <section class="content">
-    <div class="container-fluid">
+    <div class="container-fluid card card-outline card-info">
         <div>
             <a class="create-new" onclick="funcCreate()" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fas fa-plus"></i>
                 Thêm mới
             </a>
         </div>
-        @*<p>
-                @Html.ActionLink("Create New", "Create")
-            </p>*@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
+                    <th class="text-center">
                         ID
                     </th>
                     <th>
@@ -56,7 +53,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.CategoryID)
                         </td>
                         <td>
