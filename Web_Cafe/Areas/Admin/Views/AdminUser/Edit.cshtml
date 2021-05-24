@@ -1,0 +1,71 @@
+﻿@model Web_Cafe.Models.Entities.User
+
+<!-- Modal -->
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Chỉnh sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label for="nameProduct">
+                            Họ tên
+                            <i class="fas fa-asterisk"></i>
+                        </label>
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nameProduct">
+                            Tên đăng nhập
+                            <i class="fas fa-asterisk"></i>
+                        </label>
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="nameProduct">
+                            Email
+                        </label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="nameProduct">
+                            Số điện thoại
+                            <i class="fas fa-asterisk"></i>
+                        </label>
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", @onkeypress = "return event.charCode >= 48 && event.charCode <= 57", required = true } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="nameProduct">
+                            Địa chỉ
+                            <i class="fas fa-asterisk"></i>
+                        </label>
+                        @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.ValidationMessageFor(model => model.UserAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="Submit" name="Submit" class="btn btn-block-modal btn-success">
+                    <i class="ace-icon fa fa-check"></i>
+                    Cập nhật
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        }
+    </div>
+</div>
+
+

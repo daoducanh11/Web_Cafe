@@ -61,12 +61,14 @@ i.fas fa-plus:hover {
     margin: 5px;
 }
 
-.form-search{
+.form-search {
     background-color: #c0e6f8;
     padding: 14px;
+    margin-top: 9px;
 }
-.btn-pro{
+.btn-pro {
     padding: .375rem 0.70rem;
+    color: white;
 }
 .btn-pro i{
     font-size: 17px; 
@@ -188,4 +190,63 @@ body {
 i.fas.fa-asterisk {
     color: red;
     font-size: 9px;
+}
+
+/*Trang đơn hàng*/
+.page-order .table tbody tr:hover td, .page-order .table tbody tr:hover th {
+    background-color: #f0f8ff00 !important;
+}
+
+ul#ui-id-1 {
+    height: 300px;
+    overflow: scroll;
+}
+
+.table {
+    border: 1px solid #ddd;
+}
+
+.table th {
+    border: 1px solid #ddd;
+    background-color: #e9ecef;
+    vertical-align: middle !important;
+}
+
+.table td {
+    border: 1px solid #ddd;
+    vertical-align: middle !important;
+}
+
+.table-order img {
+    height: 30px;
+}
+
+.table-order input {
+    width: 50px;
+    border: inherit;
+}
+
+.header-edit-order h4{
+    display: inline-block;
+}
+
+.header-edit-order select {
+    width: 25%;
+    display: inline-block;
+    margin-left: 11px;
+}
+
+
+/*Trang kách hàng*/
+.history-order .pagination-container {
+    margin: 0;
+}
+
+.form-search-history-order {
+    margin-bottom: 11px;
+}
+
+.form-search-history-order input {
+    width: 90%;
+    display: initial;
 }

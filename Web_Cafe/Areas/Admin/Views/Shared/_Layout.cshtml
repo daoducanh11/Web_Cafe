@@ -4,7 +4,7 @@
     {
         Response.Redirect("../AdminLogin/");
     }
-
+    //ViewBag.Title = "Tổng quan hệ thống";
 }
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tổng quan hệ thống</title>
+    <title>@ViewBag.Title</title>
 
     @*<link rel="icon" type="image/png" href="~/Content/dist/img/mta_icon.ico" />*@
 
@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/fontawesome-free/css/all.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- jquery-ui -->
+    <link href="~/Areas/Admin/Content/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
@@ -62,12 +64,12 @@
                                 <p>
                                     Đơn hàng
                                     <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
+                                    <span class="badge badge-info right">@Session["oderCount"]</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a class="nav-link">
+                                    <a href="/Admin/AdminOrder/Index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Đơn đặt hàng</p>
                                     </a>
@@ -116,7 +118,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a href="/Admin/AdminUser" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>Khách hàng</p>
                             </a>
@@ -124,28 +126,8 @@
                         <li class="nav-item">
                             <a class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
-                                <p>Thư viện ảnh<i class="fas fa-angle-left right"></i></p>
+                                <p>Thư viện ảnh</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Tables</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>DataTables</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/Admin/AdminCategory" class="nav-link">
@@ -218,10 +200,8 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     @*<script src="~/Areas/Admin/Content/dist/js/pages/dashboard.js"></script>*@@*warning*@
     <!-- js_custom -->
-
-    @*<script src="~/Content/js/js_custom.js" defer></script>*@
+    @*<script src="~/Content/js/js_custom.js"></script>*@
     <!--DropZone JS-->
-
     @Scripts.Render("~/bundles/dropzonejs")
 
     <script>
@@ -239,8 +219,11 @@
                 $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-is-opening');
                 $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-open');
                 var urlChild = "/" + arr[1] + "/" + arr[2] + "/" + arr[3];
-                $('.sidebar').find('[href="' + urlChild + '"]')[0].parentElement.parentElement.style.display = "block";
-                $('.sidebar').find('[href="' + urlChild + '"]').addClass('active');
+                try {
+                    $('.sidebar').find('[href="' + urlChild + '"]')[0].parentElement.parentElement.style.display = "block";
+                    $('.sidebar').find('[href="' + urlChild + '"]').addClass('active');
+                }
+                catch {}
             }
         });
 
