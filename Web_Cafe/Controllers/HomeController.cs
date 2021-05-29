@@ -21,7 +21,7 @@ namespace Web_Cafe.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult News()
         {
             ViewBag.Message = "Your application description page.";
 

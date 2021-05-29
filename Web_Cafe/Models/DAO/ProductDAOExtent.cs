@@ -27,19 +27,54 @@ namespace Web_Cafe.Models.DAO
                     var time = (DateTime)item.EndTime;
                     if (time != null)
                         if (DateTime.Compare(time, DateTime.Now) > 0)
-                            if (ListProductSales.Count < 9)
+                            if (ListProductSales.Count < 8)
                                 ListProductSales.Add(new ProductExtend(item));
                 }
                 catch
                 {
 
                 }
-                
+
             }
+        }
+        public ProductExtend GetProductExtendById(int id)
+        {
+            foreach (var item in ListProductExtend)
+            {
+                if (item.Product.ProductID == id)
+                {
+                    return item;
+                }
+            }
+            foreach (var item in ListProductSales)
+            {
+                if (item.Product.ProductID == id)
+                {
+                    return item;
+                }
+
+            }
+            return null;
+        }
+        public List<ProductExtend> GetListProductByIDCategory(int categoryID, int productID)
+        {
+            var listResult = new List<ProductExtend>();
+            foreach (var item in this.ListProduct().ToList())
+            {
+                if (item.ProductID != productID)
+                    if (item.CategoryID == categoryID)
+                    {
+                        if (listResult.Count < 4)
+                        {
+                            listResult.Add(new ProductExtend(item));
+                            if (listResult.Count == 4) break;
+                        }
+                    }
+            }
+            return listResult;
+
         }
 
 
-
-        
     }
 }

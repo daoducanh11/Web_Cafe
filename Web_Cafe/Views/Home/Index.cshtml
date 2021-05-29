@@ -1,6 +1,4 @@
-﻿
-
-<div class="nav-anchor"></div>
+﻿<div class="nav-anchor"></div>
 <div class="slider-main hidden-xs">
     <div class="slider-wrapper theme-default">
         <div class="slider apollo_slides nivoSlider">
@@ -26,109 +24,30 @@
         </div>
         <!-- Tab panes -->
         <div class="tab-content product-list__wrap">
-            <div role="tabpanel" class="tab-pane active" id="new">
-
-                @{
-                    foreach (var item in ViewBag.ListProductExtend)
-                    {
-                        <div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-
-                                    <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__sale">@item.Product.PromotionalPrice</div>
+            <div role="tabpanel" class="tab-pane active" id="new" style="min-width: 1146px">
+                @{ foreach (var item in ViewBag.ListProductExtend)
+                                {
+                    <div class="product__item" style="width: 25%">
+                        <div class="w">
+                            <div class="product__image">
+                                <a href="#" class="product__link">
+                                    <img src="~/Images/@item.img_path" alt="@item.Product.ProName">
+                                </a>
+                                <div class="product-item__actions">
+                                    <button class="btn btn-cart">Thêm vào giỏ</button>
                                 </div>
-                                <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                    <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
-                                </div>
+                                <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay"></a>
+                                <div class="product__sale">@item.Product.PromotionalPrice</div>
+                            </div>
+                            <h3 class="product__name">
+                                <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                            </h3>
+                            <div class="product__price">
+                                <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
+                                <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
                             </div>
                         </div>
-                    }
-                }
-            </div>
-            <div role="tabpanel" class="tab-pane" id="hot">
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr4.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__sale">-20%</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr5.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__status -hot">Hot!</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr6.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip .. </a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr7.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
+                    </div> } }
             </div>
         </div>
 
@@ -145,104 +64,36 @@
     <div class="container">
         <div class="row">
             <div class="product-list__wrap product-list-catg__wrap">
-                <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
-                    <div class="list-news__home">
-                        <div class="product-list-catg__head">
-                            <h2 class="product-list__title">
-                                Tin Tức
-                            </h2>
-                        </div>
-                        <div class="list-news__home__wrap">
-                            <div class="top">
-                                <img src="uploads/adv.jpg" alt="">
-                                <a href="" class="btn btn-view__now">Xem ngay</a>
-                            </div>
-                            <div class="list">
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">Công thức chống lão hóa ưu việt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""> <img src="uploads/news-2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news-3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news-2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href=""> 2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12 ">
+                <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="product-list-catg__head">
                         <h2 class="product-list__title">
                             Sản phẩm đang giảm giá
                         </h2>
-                        <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#">Chanel</a></li>
-                            <li><a href="#">Loreal</a></li>
-                            <li><a href="#">Gucci</a></li>
-                            <li><a href="#">Dior</a></li>
-                            <li><a href="#">Vichy</a></li>
-                            <li><a href="#">Luxury</a></li>
-                        </ul>
                     </div>
                     <div class="product-list__wrap">
-                        @{
-                            foreach (var item in ViewBag.ListProductSales)
-                            {
-                                <div class="product__item">
-                                    <div class="w">
-                                        <div class="product__image">
+                        @{ foreach (var item in ViewBag.ListProductSales)
+                                        {
+                            <div class="product__item" style="width: 25%">
+                                <div class="w">
+                                    <div class="product__image">
 
-                                            <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
-                                            <div class="product-item__actions">
-                                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                            </div>
-                                            <div class="product__overlay"></div>
-                                            <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                        <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
+                                        <div class="product-item__actions">
+                                            <button class="btn btn-cart">Thêm vào giỏ</button>
+                                            <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
+                                            <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
                                         </div>
-                                        <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
-                                        <div class="product__price">
-                                            <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                            <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
-                                        </div>
+                                        <div class="product__overlay"></div>
+                                        <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                    </div>
+                                    <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
+                                    <div class="product__price">
+                                        <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
+                                        <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
                                     </div>
                                 </div>
-                            }
-                        }
+                            </div> } }
                         <!--/-->
                     </div>
                 </div>
