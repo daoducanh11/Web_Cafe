@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web_Cafe.Areas.Admin.Models.DAO;
 using Web_Cafe.Models.DAO;
 
 namespace Web_Cafe.Controllers
@@ -15,7 +16,7 @@ namespace Web_Cafe.Controllers
             return View();
         }
 
-        public ActionResult Details(int id = 1)
+        public ActionResult Details(int id)
         {
             var proExtend = new ProductDAOExtent();
             var item = proExtend.GetProductExtendById(id);

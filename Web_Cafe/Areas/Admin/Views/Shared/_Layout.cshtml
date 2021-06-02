@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
     <!-- css_custom -->
-    <link href="~/Content/css/css_custom.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/css_custom_admin.css" rel="stylesheet" />
 
     @RenderSection("linkCss", required: false)
     <!--DropZone CSS-->
@@ -64,7 +64,7 @@
                                 <p>
                                     Đơn hàng
                                     <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">@Session["oderCount"]</span>
+                                    <span class="badge badge-info right">@Html.Action("CountOrder", "AdminLogin")</span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Web_Cafe.Models.Entities.Category>
+
+@foreach (var item in Model)
+{
+    <li class="catalog-sub__item">
+        <a href="~/Home/Category/@item.CategoryID" class="catalog-sub__link">
+            <span class="fa fa-caret-right icon"></span>
+            @item.CateName
+        </a>
+    </li>
+}

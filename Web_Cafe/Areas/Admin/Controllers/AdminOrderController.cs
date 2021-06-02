@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -60,7 +61,6 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 o.UserID = Convert.ToInt32(idUs);
                 CreateOrder(o);
             }
-            Session["oderCount"] = new OrderDAO().OrderCount();
             return RedirectToAction("Index", "AdminOrder");
         }
         public void CreateOrder(Order o)
@@ -207,7 +207,6 @@ namespace Web_Cafe.Areas.Admin.Controllers
                     daoItem.UpdatetItem(i);
                 }
             }
-            Session["oderCount"] = new OrderDAO().OrderCount();
             return RedirectToAction("Index", "AdminOrder");
         }
 
@@ -215,8 +214,17 @@ namespace Web_Cafe.Areas.Admin.Controllers
         {
             OrderDAO dao = new OrderDAO();
             dao.Delete(id);
-            Session["oderCount"] = dao.OrderCount();
             return Redirect("~/Admin/AdminOrder/Index");
+        }
+
+        public ActionResult Print(int id)
+        {
+            return new ActionAsPdf("Invoice", new { id = id });
+        }
+        public ActionResult Invoice(int id)
+        {
+            OrderDTO o = new OrderDTO().FindOrderByID(id);
+            return View(o);
         }
     }
     public class ResultSum

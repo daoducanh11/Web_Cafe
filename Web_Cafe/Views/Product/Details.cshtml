@@ -1,254 +1,188 @@
-﻿
-@model Web_Cafe.Models.DTO.ProductExtend
+﻿@model Web_Cafe.Models.DTO.ProductExtend
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Product.ProName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-
-    <section class="sec sec__product__detail">
-        <div class="container">
-            <div class="row">
-                @*IMAGE*@
-                <div class="product__view__image col-md-6 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <div class="col-sm-9 col-xs-9">
-                            <div class="product__view__image--list">
-                                <a href="~/Images/@Model.img_path" data-fancybox="gallery" class="fancybox">
-                                    <img src="~/Images/@Model.img_path" class="elevate__zoom" data-zoom-image="~/Images/@Model.img_path" id="elevate__zoom" title="@Model.Product.ProName">
-                                </a>
-                                <div class="hidden">
-                                    @{
-                                        foreach (var item in Model.List_img_path)
-                                        {
-                                            <a href="~/Images/@item" data-fancybox="gallery" class="fancybox">
-                                                <img src="~/Images/@item" alt="">
-                                            </a>
-                                        }
+<div class="breadcrumb">
+    <div class="container">
+        <a href="~/Home/Index" class="li">Trang chủ </a>
+        <a href="~/Home/Category/@Model.Product.CategoryID" class="li">@Model.Product.Category.CateName </a>
+        <span class="li active">@Model.Product.ProName</span>
+    </div>
+</div>
+<!---->
+<section class="sec sec__product__detail">
+    <div class="container">
+        <div class="row">
+            <div class="product__view__image col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="col-sm-9 col-xs-9">
+                        <div class="product__view__image--list">
+                            <a href="~/Images/@Model.img_path" data-fancybox="gallery" class="fancybox">
+                                <img src="~/Images/@Model.img_path" class="elevate__zoom" data-zoom-image="/Images/@Model.img_path" id="elevate__zoom" title="@Model.Product.ProName">
+                            </a>
+                            <div class="hidden">
+                                @{
+                                    foreach (var item in Model.List_img_path)
+                                    {
+                                        <a href="~/Images/@item" data-fancybox="gallery" class="fancybox">
+                                            <img src="~/Images/@item">
+                                        </a>
                                     }
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-3">
-                            <div class="product__view__image--thumb" id="image-additional-carousel">
-                                <div class="item">
-                                    @{
-                                        foreach (var item in Model.List_img_path)
-                                        {
-                                            <a href="~/Images/@item" data-image="~/Images/@item" class="elevate__zoom">
-                                                <img src="~/Images/@item" data-zoom-image="~/Images/@item" title="@Model.Product.ProName" alt="Lan">
-                                            </a>
-                                        }
-                                    }
-
-
-                                </div>
-                                <div class="item">
-                                    @{
-                                        foreach (var item in Model.List_img_path)
-                                        {
-                                            <a href="~/Images/@item" data-image="~/Images/@item" class="elevate__zoom">
-                                                <img src="~/Images/@item" data-zoom-image="~/Images/@item" title="@Model.Product.ProName" alt="Lan">
-                                            </a>
-                                        }
-                                    }
-
-
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-
-                @*THÔNG TIN*@
-                <div class="product__view__content col-md-6 col-sm-6 col-xs-12">
-                    <h2 class="product__view__name">@Model.Product.ProName</h2>
-                    <div class="product__price product__price__view">
-                        @{
-                            if (Model.Product.PromotionalPrice > 0)
-                            {
-                                <span class="product__price--txt">Giá bán</span>
-                                <div class="product__price__regular">
-                                    @Model.Product.Price - @Model.Product.PromotionalPrice<span class="unit">đ</span>
-                                </div> <div class="product__price__old">@Model.Product.Price<span class="unit">đ</span></div>
-                            }
-                            else
-                            {
-                                <span class="product__price--txt">Giá bán</span>
-                                <div class="product__price__regular">@Model.Product.Price<span class="unit">đ</span></div>
-
-                            }
-                        }
-                    </div>
-                    <div class="product__view__info">
-                        <p class="info">Thương hiệu : <a href="#">MAYBELLINE</a></p>
-                        <p class="info">Tình trạng: <span class="name">@Model.Product.ProStatus</span></p>
-                        <p class="info">Xuất xứ: <span class="name">Mỹ</span></p>
-                    </div>
-                    <div class="product__view__desc">
-                        <div class="product__desc__title bold">Mô tả:</div>
-                        <div class="product__shortdesc__txt">@Model.Product.Highlight</div>
-                    </div>
-                    @*<div class="product__view__color">
-                            <span class="name">Màu sắc</span>
-                            <div class="item item-disabled" style="background: #faebc7;">
-
-                            </div>
-                            <div class="item active">
-
-                            </div>
-                        </div>*@
-                    @*<div class="product__view__color">
-                            <span class="name">Color</span>
-                            <div class="item item-disabled">
-                                <img src="~/Images/@Model.img_path" alt="">
-                            </div>
-                            <div class="item ">
-                                <img src="~/Images/@Model.img_path" alt="">
-                            </div>
-                        </div>*@
-                    @*<div class="product__view__color">
-                            <span class="name">Size</span>
-                            <div class="item ">
-                                S
-                            </div>
-                            <div class="item active">
-                                M
-                            </div>
-                            <div class="item item-disabled">
-                                L
+                    <div class="col-sm-3 col-xs-3">
+                        <div class="product__view__image--thumb" id="image-additional-carousel">
+                            <div class="item">
+                                @{
+                                    foreach (var item in Model.List_img_path)
+                                    {
+                                        <a href="~/Images/@item" data-image="/Images/@item" class="elevate__zoom">
+                                            <img src="~/Images/@item" data-zoom-image="/Images/@item" title="@Model.Product.ProName">
+                                        </a>
+                                    }
+                                }
                             </div>
                             <div class="item">
-                                XL
+                                @{
+                                    foreach (var item in Model.List_img_path)
+                                    {
+                                        <a href="~/Images/@item" data-image="/Images/@item" class="elevate__zoom">
+                                            <img src="~/Images/@item" data-zoom-image="/Images/@item" title="@Model.Product.ProName">
+                                        </a>
+                                    }
+                                }
                             </div>
-                            <div class="item">
-                                XXL
-                            </div>
-                        </div>*@
-                    @*<div class="product__view__color">
-                            <span class="name">Bao bì</span>
-                            <div class="item ">
-                                Nhôm
-                            </div>
-                            <div class="item">
-                                Giấy bạc
-                            </div>
-                            <div class="item active">
-                                Nhựa
-                            </div>
-                        </div>*@
-                    <div class="product__quantity product__view__quantity">
-                        <div class="name">Số lượng:</div>
-                        <button class="btn-minus btn">
-                            -
-                        </button>
-                        <input type="text" class="input-number" value="1">
-                        <button class="btn-plus btn">
-                            +
-                        </button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <a class="product__view__button__cart"><span class="icon fa fa-shopping-bag"></span>Mua ngay</a>
-                </div>
-            </div>
-
-            @*thông tin chi tiết sản phẩm*@
-            <div class="product__detail__content">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">THÔNG TIN SẢN PHẨM</a></li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="home" class="tab-pane fade in active">
-                        <article class="article">
-                            <div class="std">
-                                <p style="text-align: justify;"><strong>@Model.Product.ProName</strong></p>
-
-                                <p style="text-align: justify;">@Model.Product.ProDescription</p>
-
-                                @*<p style="text-align: justify;"><strong>Thiết kế đột phá</strong></p>
-
-                                    <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus assumenda blanditiis, deleniti eius explicabo hic in incidunt iure nihil odio porro voluptate! A animi culpa cum fugit, nam nihil nulla?.</p>*@
-
-                                <p><img src="~/Images/@Model.img_path"></p>
-                        </article>
-                    </div>
-                    <div id="menu1" class="tab-pane fade">
-                        <p>Show content</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-
-
-            @*SẢN PHẨM LIÊN QUAN*@
-            <div class="sec product-list product-list__prsame">
-                <div class="product-list__head">
-                    <h2 class="product-list__title">
-                        SẢN PHẨM LIÊN QUAN
-                    </h2>
-                    <div class="nav__slider nav-slider__product">
-                        <div class="nav prev">
-                            <span class="icon fa fa-angle-left"></span>
-                        </div>
-                        <div class="nav next">
-                            <span class="icon fa fa-angle-right"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-list__wrap slider__product">
+            <div class="product__view__content col-md-6 col-sm-6 col-xs-12">
+                <h2 class="product__view__name">@Model.Product.ProName</h2>
+                <div class="product__price product__price__view">
+                    <span class="product__price--txt">Giá bán</span>
                     @{
-                        foreach (var item in ViewBag.ListProducExtendCategory)
+                        if (Model.Product.ProStatus == "Khuyến mãi" && Model.Product.StartTime <= DateTime.Now && Model.Product.EndTime > DateTime.Now)
                         {
-                            <div class="product__item">
-                                <div class="w">
-                                    <div class="product__image">
-                                        <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
-                                        <div class="product-item__actions">
-                                            <button class="btn btn-cart">Thêm vào giỏ</button>
-                                            <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                        </div>
-                                        <div class="product__overlay"></div>
-                                    </div>
-                                    <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
-                                    <div class="product__price">
-                                        <div class="product__price__regular">@(@item.Product.Price - @item.Product.PromotionalPrice)<span class="unit">đ</span></div>
-                                        <div class="product__price__old">@item.Product.Price<span class="unit">đ</span></div>
-                                    </div>
-                                </div>
+                            <div class="product__price__regular">
+                                @Model.Product.PromotionalPrice<span class="unit">đ</span>
                             </div>
+                            <div class="product__price__old">@Model.Product.Price<span class="unit">đ</span></div>
+                        }
+                        else
+                        {
+                            <div class="product__price__regular">@Model.Product.Price<span class="unit">đ</span></div>
+
                         }
                     }
-                    @*<div class="product__item">
-                            <div class="w">
-                                <div class="product__image">
-                                    <a href="#" class="product__link"><img src="~/Images/@Model.img_path" alt="name your product"></a>
-                                    <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                                    </div>
-                                    <div class="product__overlay"></div>
-                                </div>
-                                <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip .. </a></h3>
-                                <div class="product__price">
-                                    <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                    <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                                </div>
-                            </div>
-                        </div>*@
+                </div>
 
+                <div class="product__view__info">
+                    <p class="info">Tình trạng: <span class="name">@Model.Product.ProStatus</span></p>
+                </div>
 
+                <div class="product__view__desc">
+                    <div class="product__desc__title bold">Mô tả:</div>
+                    <div class="product__shortdesc__txt">
+                        @Html.Raw(Model.Product.Highlight)
+                    </div>
+                </div>
+
+                <div class="product__quantity product__view__quantity">
+                    <div class="name">Số lượng:</div>
+                    <button class="btn-minus btn">
+                        -
+                    </button>
+                    <input type="text" class="input-number" value="1">
+                    <button class="btn-plus btn">
+                        +
+                    </button>
+                    <div class="clearfix"></div>
+                </div>
+
+                <a class="product__view__button__cart"><span class="icon fa fa-shopping-bag"></span>Mua ngay</a>
+            </div>
+        </div>
+
+        <div class="product__detail__content">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">THÔNG TIN SẢN PHẨM</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <article class="article">
+                        <div class="std">
+                            @Html.Raw(Model.Product.ProDescription)
+                        </div>
+                    </article>
                 </div>
             </div>
-    </section>
+        </div>
 
+        <div class="sec product-list product-list__prsame">
+            <div class="product-list__head">
+                <h2 class="product-list__title">
+                    SẢN PHẨM LIÊN QUAN
+                </h2>
+                <div class="nav__slider nav-slider__product">
+                    <div class="nav prev">
+                        <span class="icon fa fa-angle-left"></span>
+                    </div>
+                    <div class="nav next">
+                        <span class="icon fa fa-angle-right"></span>
+                    </div>
+                </div>
+            </div>
 
-</div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <div class="product-list__wrap slider__product">
+                @{
+                    foreach (var item in ViewBag.ListProducExtendCategory)
+                    {
+                        <div class="product__item">
+                            <div class="w">
+                                <div class="product__image">
+                                    <a href="#" class="product__link">
+                                        <img src="~/Images/@item.img_path">
+                                    </a>
+                                    <div class="product-item__actions">
+                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                    </div>
+                                    <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
+                                    <div class="product__sale">@item.Product.ProStatus</div>
+                                </div>
+                                <h3 class="product__name">
+                                    <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                                </h3>
+                                <div class="product__price">
+                                    <div class="product__price__regular">
+                                        @item.Product.Price.ToString("N0")
+                                        <span class="unit">đ</span>
+                                    </div>
+                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now && item.Product.EndTime > DateTime.Now)
+                                        {
+                                            <div class="product__price__old">
+                                                @item.Product.PromotionalPrice.ToString("N0")
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+</section>
+
+@section scripts{
+    <script>
+        
+    </script>    
+}

@@ -104,7 +104,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="text-center">
                             <input type="checkbox" id="checkBoxAll" />
                         </th>
                         <th>
@@ -122,10 +122,10 @@
                         <th class="text-center">
                             Giá khuyến mãi
                         </th>
-                        <th>
+                        <th class="text-center">
                             Danh mục
                         </th>
-                        <th>
+                        <th class="text-center">
                             Trạng thái
                         </th>
                         <th class="text-center">
@@ -137,7 +137,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 <input type="checkbox" class="checkBoxId" value="@item.ProductID" name="checkBoxId" />
                             </td>
                             <td>
@@ -159,10 +159,10 @@
                                 @*@Html.DisplayFor(modelItem => item.PromotionalPrice)*@
                                 @(item.PromotionalPrice.HasValue? item.PromotionalPrice.Value.ToString("N0") : "0")
                             </td>
-                            <td>
+                            <td class="text-center">
                                 @Html.DisplayFor(modelItem => item.CateName)
                             </td>
-                            <td>
+                            <td class="text-center">
                                 @Html.DisplayFor(modelItem => item.ProStatus)
                             </td>
                             <td class="text-center">

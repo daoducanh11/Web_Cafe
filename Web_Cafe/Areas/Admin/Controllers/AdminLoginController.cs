@@ -15,7 +15,6 @@ namespace Web_Cafe.Areas.Admin.Controllers
         // GET: Admin/AdminLogin
         public ActionResult Index()
         {
-            Session["oderCount"] = new OrderDAO().OrderCount();
             Session["proName"] = "";
             return View();
         }
@@ -39,6 +38,11 @@ namespace Web_Cafe.Areas.Admin.Controllers
             }
             ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng!");
             return View(model);
+        }
+
+        public ActionResult CountOrder()
+        {
+            return PartialView(new OrderDAO().OrderCount());
         }
     }
 }

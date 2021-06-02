@@ -14,9 +14,10 @@ namespace Web_Cafe.Controllers
     {
         public ActionResult Index()
         {
-
-            ViewBag.ListProductExtend = new ProductDAOExtent().ListProductExtend;
-            ViewBag.ListProductSales = new ProductDAOExtent().ListProductSales;
+            ProductDAOExtent dao = new ProductDAOExtent();
+            ViewBag.ListProductExtend = dao.ListProductExtend;
+            ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
+            ViewBag.ListProductSales = dao.ListProductSales;
 
             return View();
         }
@@ -33,6 +34,11 @@ namespace Web_Cafe.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult MenuChild()
+        {
+            return PartialView(new CategoryDAO().ListCate());
         }
     }
 }

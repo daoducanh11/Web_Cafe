@@ -1,4 +1,8 @@
-﻿<div class="nav-anchor"></div>
+﻿@{
+    ViewBag.Title = "My Café";
+}
+
+<div class="nav-anchor"></div>
 <div class="slider-main hidden-xs">
     <div class="slider-wrapper theme-default">
         <div class="slider apollo_slides nivoSlider">
@@ -26,29 +30,79 @@
         <div class="tab-content product-list__wrap">
             <div role="tabpanel" class="tab-pane active" id="new" style="min-width: 1146px">
                 @{ foreach (var item in ViewBag.ListProductExtend)
-                                {
-                    <div class="product__item" style="width: 25%">
-                        <div class="w">
-                            <div class="product__image">
-                                <a href="#" class="product__link">
-                                    <img src="~/Images/@item.img_path" alt="@item.Product.ProName">
-                                </a>
-                                <div class="product-item__actions">
-                                    <button class="btn btn-cart">Thêm vào giỏ</button>
+                    {
+                        <div class="product__item" style="width: 25%">
+                            <div class="w">
+                                <div class="product__image">
+                                    <a href="#" class="product__link">
+                                        <img src="~/Images/@item.img_path">
+                                    </a>
+                                    <div class="product-item__actions">
+                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                    </div>
+                                    <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
+                                    <div class="product__sale">@item.Product.ProStatus</div>
                                 </div>
-                                <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay"></a>
-                                <div class="product__sale">@item.Product.PromotionalPrice</div>
-                            </div>
-                            <h3 class="product__name">
-                                <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
-                            </h3>
-                            <div class="product__price">
-                                <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                <h3 class="product__name">
+                                    <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                                </h3>
+                                <div class="product__price">
+                                    <div class="product__price__regular">
+                                        @item.Product.Price.ToString("N0")
+                                        <span class="unit">đ</span>
+                                    </div>
+                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now && item.Product.EndTime > DateTime.Now)
+                                        {
+                                            <div class="product__price__old">
+                                                @item.Product.PromotionalPrice.ToString("N0")
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div> } }
+                    }
+                }
             </div>
+            <div role="tabpanel" class="tab-pane" id="hot" style="min-width: 1146px">
+                @{ foreach (var item in ViewBag.ListProductHotExtend)
+                    {
+                        <div class="product__item" style="width: 25%">
+                            <div class="w">
+                                <div class="product__image">
+                                    <a href="#" class="product__link">
+                                        <img src="~/Images/@item.ImageLink">
+                                    </a>
+                                    <div class="product-item__actions">
+                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                    </div>
+                                    <a href="~/Product/Details/@item.ProductID" class="product__overlay" title="@item.ProName"></a>
+                                    <div class="product__sale">@item.ProStatus</div>
+                                </div>
+                                <h3 class="product__name">
+                                    <a href="~/Product/Details/@item.ProductID" title="Chi tiết">@item.ProName</a>
+                                </h3>
+                                <div class="product__price">
+                                    <div class="product__price__regular">
+                                        @item.Price.ToString("N0")
+                                        <span class="unit">đ</span>
+                                    </div>
+                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                                        {
+                                            <div class="product__price__old">
+                                                @item.PromotionalPrice.ToString("N0")
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
         </div>
 
     </div>
@@ -56,7 +110,7 @@
 <!---->
 <section class="sec-adv sec">
     <div class="container">
-        <img src="~/Content/images/bg1.jpg" alt="">
+        <img src="~/Content/images/bg1.jpg">
     </div>
 </section>
 <!--/-->
@@ -73,27 +127,36 @@
                     </div>
                     <div class="product-list__wrap">
                         @{ foreach (var item in ViewBag.ListProductSales)
-                                        {
-                            <div class="product__item" style="width: 25%">
-                                <div class="w">
-                                    <div class="product__image">
-
-                                        <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
-                                        <div class="product-item__actions">
-                                            <button class="btn btn-cart">Thêm vào giỏ</button>
-                                            <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                            <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+                            {
+                                <div class="product__item" style="width: 25%">
+                                    <div class="w">
+                                        <div class="product__image">
+                                            <a href="#" class="product__link">
+                                                <img src="~/Images/@item.img_path">
+                                            </a>
+                                            <div class="product-item__actions">
+                                                <button class="btn btn-cart">Thêm vào giỏ</button>
+                                            </div>
+                                            <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
+                                            <div class="product__sale">HOT</div>
                                         </div>
-                                        <div class="product__overlay"></div>
-                                        <div class="product__sale">@item.Product.PromotionalPrice</div>
-                                    </div>
-                                    <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
-                                    <div class="product__price">
-                                        <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                        <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                        <h3 class="product__name">
+                                            <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                                        </h3>
+                                        <div class="product__price">
+                                            <div class="product__price__regular">
+                                                @item.Product.PromotionalPrice.ToString("N0")
+                                                <span class="unit">đ</span>
+                                            </div>
+                                            <div class="product__price__old">
+                                                @item.Product.Price.ToString("N0")
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div> } }
+                            }
+                        }
                         <!--/-->
                     </div>
                 </div>
@@ -170,7 +233,7 @@
                                 <a href="uploads/product.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
                                     <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
                                 </a>
-                                <a href="http://demo.templatetrip.com/Prestashop/PRS02/PRS032/340-large_default/printed-summer-dress.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
+                                <a href="" data-image="uploads/product.jpg" class="elevate__zoom">
                                     <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
                                 </a>
                             </div>

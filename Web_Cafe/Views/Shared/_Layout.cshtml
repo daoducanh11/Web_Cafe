@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>MyCafé</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8" />
     @*<meta name="keywords" content="It, it solution,solution, techonogy,internet" />
         <link href="https://plus.google.com/114644939574462223089" rel="author">*@
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="brand">
-                            <img src="~/Content/images/logo.png" alt="logo">
+                            <a href="~/Home/Index" title="Logo"><img src="~/Content/images/logo.png" alt="Logo"></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12 col-right-headtop">
@@ -52,7 +52,10 @@
                                 <!-- <div class="hotline"><span class="-ap icon-phone-handset"></span> Hotline: 0966.63.3696</div> -->
                                 <div class="header-top__login">
                                     <div class="">
-                                        <div class="title">Tài khoản</div>
+                                        <div class="title">
+                                            Tài khoản
+                                            <i class="fa fa-user-o" aria-hidden="true" style="font-size: 18px;"></i>
+                                        </div>
                                         <ul class="menu-icons__sub">
                                             <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#login" class="menu"><span class="icon icon-lock_outline -ap"></span> Đăng nhập</a></li>
                                             <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#register"><span class="icon icon-lock_open -ap"></span> Đăng ký</a></li>
@@ -60,10 +63,13 @@
                                     </div>
                                 </div>
                                 <div class="header-top__shopcart">
-                                    <div class="icon">
-                                        <span class="-ap icon-cart"></span>
+                                    <div class="headline">
+                                        Giỏ hàng 
+                                        <div class="icon">
+                                            <span class="-ap icon-cart" style="font-size: 19px;"></span>
+                                            <span class="number-cart">0</span>
+                                        </div>  
                                     </div>
-                                    <div class="headline">Giỏ hàng <span class="number-cart">0</span></div>
                                     <div class="dropdown__shop__cart">
                                         <div class="dropdown__head">
                                             <span class="number">0</span>
@@ -73,7 +79,7 @@
                                             <div class="product__list">
                                                 <div class="product__list__item">
                                                     <div class="product__img">
-                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                        <img src="" alt="Name your Product ">
                                                     </div>
                                                     <div class="product__name">
                                                         Son lì dạng kem L'oreal Color Riche .....
@@ -102,7 +108,7 @@
                                                 </div>
                                                 <div class="product__list__item">
                                                     <div class="product__img">
-                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                        <img src="" alt="Name your Product ">
                                                     </div>
                                                     <div class="product__name">
                                                         Son lì dạng kem L'oreal Color Riche .....
@@ -157,26 +163,19 @@
                                 <a href="~/Home/Index" class="catalog__link">Trang chủ</a>
                             </li>
                             <li class="catalog__item -sub">
-                                <a href="category.html" class="catalog__link">Cà phê và Trà</a>
-                                <div class="catalog__sub">
-                                    <ul class="list-cat__sub">
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Phindi</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Espresso</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Phindi</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà hoa quả</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà sữa</li>
-                                    </ul>
-                                </div>
+                                <a href="~/Home/Category/1" class="catalog__link">Cà phê</a>
                             </li>
                             <li class="catalog__item -sub">
-                                <a href="category.html" class="catalog__link">Bánh ngọt</a>
+                                <a href="~/Home/Category/2" class="catalog__link">Trà</a>
+                            </li>
+                            <li class="catalog__item -sub">
+                                <a href="~/Home/Product" class="catalog__link">
+                                    Sản phẩm
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
                                 <div class="catalog__sub">
                                     <ul class="list-cat__sub">
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban đêm</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban ngày</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng trắng</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng chống lão hóa</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Khác</a></li>
+                                        @Html.Action("MenuChild", "Home")
                                     </ul>
                                 </div>
                             </li>
@@ -242,7 +241,7 @@
                                     <li class="item"><a href="" class="btn"><span class="fa fa-twitter"></span></a></li>
                                 </ul>
                                 <div class="cer">
-                                    <img src="uploads/dathongbao.png" alt="">
+                                    <img src="~/Content/images/dathongbao.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -286,10 +285,10 @@
                                 <h3 class="footer__title ">Hình thức thanh toán</h3>
                                 <div class="list">
                                     <ul>
-                                        <li><a href=""><img src="img/pp.png" alt=""></a></li>
-                                        <li><a href=""><img src="img/msc.png" alt=""></a></li>
-                                        <li><a href=""><img src="img/visa.png" alt=""></a></li>
-                                        <li><a href=""><img src="img/american.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/pp.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/msc.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/visa.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/american.png" alt=""></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -297,7 +296,7 @@
                                 <h3 class="footer__title ">Hình thức vận chuyển</h3>
                                 <div class="list">
                                     <ul>
-                                        <li><a href=""><img src="img/ship.jpg" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/ship.jpg" alt=""></a></li>
                                     </ul>
                                 </div>
                             </div>

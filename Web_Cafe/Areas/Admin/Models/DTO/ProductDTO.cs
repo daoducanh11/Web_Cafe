@@ -19,5 +19,6 @@ namespace Web_Cafe.Areas.Admin.Models.DTO
         public int? IdCate { get; set; }
         public string CateName { get; set; }
         public string ImageLink { get; set; }
+        public int Count { get; set; }
     }
 }

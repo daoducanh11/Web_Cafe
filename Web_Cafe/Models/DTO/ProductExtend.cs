@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Web_Cafe.Areas.Admin.Models.DAO;
+using Web_Cafe.Areas.Admin.Models.DTO;
 using Web_Cafe.Models.Entities;
 
 namespace Web_Cafe.Models.DTO
@@ -12,6 +13,7 @@ namespace Web_Cafe.Models.DTO
         public string img_path { get; private set; }
         public Product Product { get; private set; }
         public List<string> List_img_path { get; set; }
+        public int Count { get; set; }
 
         public ProductExtend(Product pr)
         {
@@ -33,11 +35,11 @@ namespace Web_Cafe.Models.DTO
             {
                 if (item.ImageLink != null)
                     this.List_img_path.Add(item.ImageLink.ToString());
-                else List_img_path.Add("cafe.jpg");
-
+                else 
+                    List_img_path.Add("cafe.jpg");
             }
         }
-
         
+
     }
 }
