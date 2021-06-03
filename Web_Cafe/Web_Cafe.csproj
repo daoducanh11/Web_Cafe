@@ -144,6 +144,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticsController.cs" />
     <Compile Include="Areas\Admin\Models\DAO\CategoryDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ImageDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ItemDAO.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Areas\Admin\Models\DTO\LoginDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\OrderDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\ProductDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\StatisticsDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\UserDTO.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -633,6 +635,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chart.css" />
+    <Content Include="Content\Chart.min.css" />
     <Content Include="Content\css\config.css" />
     <Content Include="Content\css\css_custom.css" />
     <Content Include="Content\css\style.css" />
@@ -1075,7 +1079,10 @@
     <Content Include="Areas\Admin\Views\AdminLogin\CountOrder.cshtml" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\AdminOrder\Invoice.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistics\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />

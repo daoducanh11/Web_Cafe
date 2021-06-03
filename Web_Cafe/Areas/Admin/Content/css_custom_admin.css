@@ -260,3 +260,14 @@ ul#ui-id-1 {
     width: 90%;
     display: initial;
 }
+
+/*Trang thống kê*/
+.form-input-infor{
+    margin-top: 9px;
+}
+
+.form-input-infor .form-control {
+    display: inline-block;
+    width: 70%;
+    margin-left: 5px;
+}

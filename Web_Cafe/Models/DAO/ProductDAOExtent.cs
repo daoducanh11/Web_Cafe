@@ -20,7 +20,7 @@ namespace Web_Cafe.Models.DAO
         {
             db = new Web_CafeModel();
             this.ListProductExtend = new List<ProductExtend>();
-            var listproduct = (from s in db.Products where s.ProStatus != "Không hoạt động" select s);
+            var listproduct = (from s in db.Products where s.ProStatus != "Không hoạt động" orderby s.ProductID descending select s);
             foreach (var item in listproduct.Take(8))
             {
                 ListProductExtend.Add(new ProductExtend(item));
@@ -31,7 +31,7 @@ namespace Web_Cafe.Models.DAO
             {
                 try
                 {
-                    if (ListProductSales.Count < 8 && item.ProStatus == "Khuyến mãi")
+                    if (ListProductSales.Count < 4 && item.ProStatus == "Khuyến mãi")
                     {
                         if (item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
                             ListProductSales.Add(new ProductExtend(item));
@@ -65,7 +65,7 @@ namespace Web_Cafe.Models.DAO
         public List<ProductExtend> GetListProductByIDCategory(int categoryID, int productID)
         {
             var listResult = new List<ProductExtend>();
-            var lst = (from s in db.Products where s.CategoryID == categoryID select s);
+            var lst = (from s in db.Products where s.CategoryID == categoryID orderby s.ProductID descending select s);
             foreach (var item in lst)
             {
                 if (item.ProductID != productID)

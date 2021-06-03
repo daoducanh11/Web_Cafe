@@ -15,6 +15,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         public ProductDAO()
         {
             db = new Web_CafeModel();
+            db.Database.ExecuteSqlCommand("UPDATE Product SET ProStatus = N'Mới' WHERE ProStatus = N'Khuyến mãi' AND EndTime <= GETDATE()");
         }
         public IQueryable<Product> Products
         {

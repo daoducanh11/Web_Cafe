@@ -41,7 +41,17 @@
                                         <button class="btn btn-cart">Thêm vào giỏ</button>
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
-                                    <div class="product__sale">@item.Product.ProStatus</div>
+                                    @{ var status = "";
+                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
+                                        {
+                                            status = "Khuyến mãi";
+                                        }
+                                        else
+                                        {
+                                            status = "Mới";
+                                        }
+                                        <div class="product__sale">@status</div>
+                                    }
                                 </div>
                                 <h3 class="product__name">
                                     <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
@@ -51,7 +61,7 @@
                                         @item.Product.Price.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now && item.Product.EndTime > DateTime.Now)
+                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
                                                 @item.Product.PromotionalPrice.ToString("N0")
@@ -78,7 +88,17 @@
                                         <button class="btn btn-cart">Thêm vào giỏ</button>
                                     </div>
                                     <a href="~/Product/Details/@item.ProductID" class="product__overlay" title="@item.ProName"></a>
-                                    <div class="product__sale">@item.ProStatus</div>
+                                    @{ var status = "";
+                                        if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now)
+                                        {
+                                            status = "Khuyến mãi";
+                                        }
+                                        else
+                                        {
+                                            status = "Mới";
+                                        }
+                                        <div class="product__sale">@status</div>
+                                    }
                                 </div>
                                 <h3 class="product__name">
                                     <a href="~/Product/Details/@item.ProductID" title="Chi tiết">@item.ProName</a>
@@ -88,7 +108,7 @@
                                         @item.Price.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime >= DateTime.Now)
                                         {
                                             <div class="product__price__old">
                                                 @item.PromotionalPrice.ToString("N0")

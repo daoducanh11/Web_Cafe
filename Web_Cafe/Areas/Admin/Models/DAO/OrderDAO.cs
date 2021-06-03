@@ -91,5 +91,24 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         {
             return db.Orders.Where(x => x.OrderStatus == "Mới").Count();
         }
+
+        public List<StatisticsDTO> StatisticsByMonth(int year, int month)
+        {
+            var lst = db.Database.SqlQuery<StatisticsDTO>(String.Format("SELECT * FROM Func_ThongKeDoanhThu({0}, {1})", year, month)
+                ).ToList();
+            return lst;
+        }
+        public List<int> GetYearOrder()
+        {
+            var lst = db.Database.SqlQuery<int>("SELECT DISTINCT YEAR(Daytime) FROM [dbo].[Order] ORDER BY YEAR(Daytime) DESC"
+                ).ToList();
+            return lst;
+        }
+        public double GetTotal(int year, int month)
+        {
+            var t = db.Database.SqlQuery<double>(String.Format("SELECT SUM(DoanhThu) FROM Func_ThongKeDoanhThu({0}, {1})", year, month)
+                ).ToList();
+            return t[0];
+        }
     }
 }
