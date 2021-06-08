@@ -15,6 +15,7 @@ namespace Web_Cafe.Controllers
         public ActionResult Index(int pageNum = 1, int pageSize = 8)
         {
             ProductDAOExtent dao = new ProductDAOExtent();
+
             ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
             ViewBag.ListProductSales = dao.GetListProductSales();
 

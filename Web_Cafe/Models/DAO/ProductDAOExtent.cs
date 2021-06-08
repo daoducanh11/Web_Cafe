@@ -13,6 +13,7 @@ namespace Web_Cafe.Models.DAO
     public class ProductDAOExtent : ProductDAO
     {
 
+
         Web_CafeModel db;
 
         public List<ProductExtend> ListProductExtend { get; private set; }
@@ -40,6 +41,7 @@ namespace Web_Cafe.Models.DAO
         public List<ProductExtend> GetListProductSales()
         {
             var listproduct = (from s in db.Products where s.ProStatus != "Không hoạt động" select s);
+
             this.ListProductSales = new List<ProductExtend>();
             foreach (var item in listproduct)
             {
@@ -58,6 +60,22 @@ namespace Web_Cafe.Models.DAO
             }
             return ListProductSales;
         }
+        public ProductExtend GetProductExtendById(int id)
+        {
+            foreach (var item in ListProductExtend)
+            {
+                if (item.Product.ProductID == id)
+                {
+                    return item;
+                }
+            }
+            foreach (var item in ListProductSales)
+            {
+                if (item.Product.ProductID == id)
+                {
+                    return item;
+                }
+
 
         public ProductExtend GetProductExtendById(int id)
         {
@@ -100,13 +118,16 @@ namespace Web_Cafe.Models.DAO
                         if (listResult.Count < 8)
                         {
                             listResult.Add(new ProductExtend(item));
+
                             if (listResult.Count == 8)
+
                                 break;
                         }
                     }
             }
             return listResult;
         }
+
 
         public List<ProductDTO> ListProductHotExtend()
         {
@@ -129,6 +150,27 @@ namespace Web_Cafe.Models.DAO
             return lst;
         }
 
+
+        public List<ProductDTO> ListProductHotExtend()
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>(" SELECT TOP 8 I.ProductID, P.ProName, P.Price, " +
+                " P.PromotionalPrice, P.ProStatus, P.StartTime, P.EndTime, COUNT(I.ProductID) [Count] " +
+                " FROM Item I, Product P " +
+                " WHERE I.ProductID = P.ProductID AND P.ProStatus != N'Không hoạt động' " +
+                " GROUP BY I.ProductID, P.ProName, P.Price, P.PromotionalPrice, P.ProStatus, P.StartTime, P.EndTime " +
+                " ORDER BY COUNT(I.ProductID) DESC "
+                ).ToList<ProductDTO>();
+            foreach (var item in lst)
+            {
+                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
+                    " FROM Images " +
+                    " WHERE ProductID = " + item.ProductID
+                    ).ToList<ImageDTO>();
+                if (res.Count() > 0)
+                    item.ImageLink = res[0].ImageLink;
+            }
+            return lst;
+        }
 
     }
 }

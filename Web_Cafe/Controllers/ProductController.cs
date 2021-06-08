@@ -23,5 +23,6 @@ namespace Web_Cafe.Controllers
             ViewBag.ListProducExtendCategory = proExtend.GetListProductByIDCategory(item.Product.CategoryID.HasValue ? item.Product.CategoryID.Value : 1, id);
             return View(item);
         }
+
     }
 }
