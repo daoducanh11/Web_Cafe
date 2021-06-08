@@ -42,8 +42,10 @@
                         <div class="pull-left">
                             <div class="box-search">
                                 <div class="form-input">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                                    <button class="btn btn__search"><span class="fa fa-search"></span></button>
+                                    <form action="~/Home/SearchProduct" method="post">
+                                        <input type="text" name="keywordProduct" class="form-control" placeholder="Tên sản phẩm ...">
+                                        <button class="btn btn__search"><span class="fa fa-search"></span></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

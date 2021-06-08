@@ -24,6 +24,5 @@ namespace Web_Cafe.Controllers
             return View(item);
         }
 
-
     }
 }

@@ -160,6 +160,7 @@
     <Compile Include="Areas\Admin\Models\DTO\StatisticsDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\UserDTO.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1118,12 +1119,16 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Home\MenuChild.cshtml" />
+
+    <Content Include="Views\Home\SearchProduct.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

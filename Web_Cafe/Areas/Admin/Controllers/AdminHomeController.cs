@@ -56,6 +56,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ViewBag.cate = daoCate.ListCate();
             return View(dao.lstJoin(pageNum, pageSize));
         }
+
         public ActionResult ShowImage(int id)
         {
             ImageDAO dao = new ImageDAO();
@@ -170,6 +171,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             return View(pro);
         }
 
+
         public ActionResult Delete(int id)
         {
             ProductDAO dao = new ProductDAO();
@@ -193,11 +195,13 @@ namespace Web_Cafe.Areas.Admin.Controllers
             var ImageList = dao.GetListImageDtoByProId(Convert.ToInt32(Session["id"].ToString()));
             return Json(new { Data = ImageList }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ActionDeleteImg()
         {
             arrImgDelete.Add(Convert.ToInt32(Request.Form["imgId"]));
             return Json("Xử lý thành công", JsonRequestBehavior.AllowGet);
         }
+
         public void SaveImage(Image img, IEnumerable<HttpPostedFileBase> filesImg)
         {
             if (filesImg != null)
