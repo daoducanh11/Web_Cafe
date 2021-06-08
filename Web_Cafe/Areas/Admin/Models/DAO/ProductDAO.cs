@@ -1,6 +1,7 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Web_Cafe.Areas.Admin.Models.DTO;
@@ -14,6 +15,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         public ProductDAO()
         {
             db = new Web_CafeModel();
+            db.Database.ExecuteSqlCommand("UPDATE Product SET ProStatus = N'Mới' WHERE ProStatus = N'Khuyến mãi' AND EndTime <= GETDATE()");
         }
         public IQueryable<Product> Products
         {
@@ -29,39 +31,45 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             var lst = db.Database.SqlQuery<ProductDTO>("SELECT ProductID, ProName, Price, " +
                 " PromotionalPrice, ProStatus, CateName " +
                 " FROM Product P, Category C " +
-                " WHERE P.CategoryID = C.CategoryID "
+                " WHERE P.CategoryID = C.CategoryID ORDER BY P.ProductID DESC"
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
 
-        public IEnumerable<ProductDTO> lstSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProById " +
-                proId + ", " + categoryId + ", " + minPrice + ", " + maxPrice
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProById {0}, {1}, {2}, {3}",
+                proId, categoryId, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
-        public IEnumerable<ProductDTO> lstSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByName " +
-                "N'" + proName + "', " + categoryId + ", " + minPrice + ", " + maxPrice
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProByName N'{0}', {1}, {2}, {3}",
+                proName, categoryId, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
-        public IEnumerable<ProductDTO> lstSearchProByNameUnique(string proName, int categoryId, int pageNum, int pageSize)
+        public List<ProductDTO> lstSearchProByNameInOrder(string proName)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>("lstSearchProByNameUnique " +
-                "N'" + proName + "', " + categoryId
-                ).ToPagedList<ProductDTO>(pageNum, pageSize);
-            return lst;
-        }
-        public IEnumerable<ProductDTO> lstSearchProByCateId(int categoryId, int pageNum, int pageSize)
-        {
-            var lst = db.Database.SqlQuery<ProductDTO>("SELECT ProductID, ProName, Price, " +
-                " PromotionalPrice, ProStatus, CateName " +
-                " FROM Product P, Category C " +
-                " WHERE P.CategoryID = " + categoryId +" AND P.CategoryID = C.CategoryID "
-                ).ToPagedList<ProductDTO>(pageNum, pageSize);
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("lstSearchProByNameInOrder N'{0}'", proName)
+                ).ToList<ProductDTO>();
+            foreach (var item in lst)
+            {
+                if(item.ProStatus == "Khuyến mãi")
+                {
+                    if (item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                        item.Price = item.PromotionalPrice;
+                }
+                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
+                " FROM Images " +
+                " WHERE ProductID = " + item.ProductID
+                ).ToList<ImageDTO>();
+                if (res.Count() > 0)
+                    item.ImageLink = res[0].ImageLink;
+                else
+                    item.ImageLink = "noimage.jpg";
+            }
             return lst;
         }
 

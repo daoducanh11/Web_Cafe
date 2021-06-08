@@ -31,8 +31,10 @@ namespace Web_Cafe.Models.Entities
         [Column(TypeName = "ntext")]
         public string ProDescription { get; set; }
 
+        [Range(0, 10000000)]
         public double? Price { get; set; }
 
+        [Range(0, 10000000)]
         public double? PromotionalPrice { get; set; }
 
         public DateTime? StartTime { get; set; }

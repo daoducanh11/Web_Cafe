@@ -157,9 +157,9 @@
         slidesToShow: 1,
         slidesToScroll: 2,
         verticalSwiping: true,
-        speed: 300,
+        speed: 900,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 5000,
         vertical: true,
         arrows: true
     });

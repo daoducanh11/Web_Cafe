@@ -17,7 +17,7 @@ namespace Web_Cafe.Models.Entities
 
         public int OrderID { get; set; }
 
-        public int? Amount { get; set; }
+        public double? Amount { get; set; }
 
         public DateTime? Daytime { get; set; }
 

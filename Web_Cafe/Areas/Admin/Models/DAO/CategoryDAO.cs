@@ -30,5 +30,32 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         {
             return db.Categories.Single(i => i.CategoryID == id);
         }
+        public int InsertCategory(Category cate)
+        {
+            db.Categories.Add(cate);//luu tren RAM
+            db.SaveChanges();//luu vao o dia
+            return cate.CategoryID;
+        }
+        public int UpdatetCategory(Category cateTmp)
+        {
+            Category cate = db.Categories.Find(cateTmp.CategoryID);
+            if (cate != null)
+            {
+                cate.CateName = cateTmp.CateName;
+                cate.CateStatus = cateTmp.CateStatus;
+                db.SaveChanges();//luu vao o dia
+            }
+            return cate.CategoryID;
+        }
+        public int Delete(int id)
+        {
+            Category cate = db.Categories.Find(id);
+            if (cate != null)
+            {
+                db.Categories.Remove(cate);
+                return db.SaveChanges();
+            }
+            return -1;
+        }
     }
 }

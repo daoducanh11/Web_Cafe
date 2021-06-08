@@ -27,24 +27,36 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ViewBag.minPrice = minPrice;
             ViewBag.maxPrice = maxPrice;
             ViewBag.cate = daoCate.ListCate();
-            //if (string.IsNullOrEmpty(keywords) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
-                //return View(dao.lstSearchProByCateId(cateId, pageNum, pageSize));
-            if (!string.IsNullOrEmpty(keywords) && !int.TryParse(keywords, out proId) && string.IsNullOrEmpty(minPrice) && string.IsNullOrEmpty(maxPrice))
-                return View(dao.lstSearchProByNameUnique(keywords, cateId, pageNum, pageSize));
-            bool check = true;
             double min, max;
-            if (!double.TryParse(minPrice, out min) || !double.TryParse(maxPrice, out max))
-                check = false;
-            if (check)
+            if (!double.TryParse(minPrice, out min))
+                min = 0;
+            if (!double.TryParse(maxPrice, out max))
+                max = 10000000;
+            if (keywords == null)
+                keywords = "";
+            if (keywords == "" && cateId == 0 && min == 0 && max == 10000000)
+                return View(dao.lstJoin(pageNum, pageSize));
+            if (int.TryParse(keywords, out proId))
+                return View(dao.listSearchProById(proId, cateId, min, max, pageNum, pageSize));
+            return View(dao.listSearchProByName(keywords, cateId, min, max, pageNum, pageSize));
+        }
+        [HttpPost]
+        public ActionResult Index(FormCollection data, int pageNum = 1, int pageSize = 9)
+        {
+            ProductDAO dao = new ProductDAO();
+            if (data.Count > 0)
             {
-                if (int.TryParse(keywords, out proId))
-                    return View(dao.lstSearchProById(proId, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
-                else if (!int.TryParse(keywords, out proId))
-                    return View(dao.lstSearchProByName(keywords, cateId, min, Convert.ToDouble(maxPrice), pageNum, pageSize));
+                string[] ids = data["checkBoxId"].Split(new char[] { ',' });
+                foreach (string id in ids)
+                {
+                    dao.Delete(int.Parse(id));
+                }
             }
-            
+            CategoryDAO daoCate = new CategoryDAO();
+            ViewBag.cate = daoCate.ListCate();
             return View(dao.lstJoin(pageNum, pageSize));
         }
+
         public ActionResult ShowImage(int id)
         {
             ImageDAO dao = new ImageDAO();
@@ -159,6 +171,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             return View(pro);
         }
 
+
         public ActionResult Delete(int id)
         {
             ProductDAO dao = new ProductDAO();
@@ -182,11 +195,13 @@ namespace Web_Cafe.Areas.Admin.Controllers
             var ImageList = dao.GetListImageDtoByProId(Convert.ToInt32(Session["id"].ToString()));
             return Json(new { Data = ImageList }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ActionDeleteImg()
         {
             arrImgDelete.Add(Convert.ToInt32(Request.Form["imgId"]));
             return Json("Xử lý thành công", JsonRequestBehavior.AllowGet);
         }
+
         public void SaveImage(Image img, IEnumerable<HttpPostedFileBase> filesImg)
         {
             if (filesImg != null)

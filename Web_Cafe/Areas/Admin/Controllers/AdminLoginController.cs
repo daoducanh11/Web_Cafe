@@ -33,10 +33,16 @@ namespace Web_Cafe.Areas.Admin.Controllers
             {
                 Session["username"] = model.Username;
                 return RedirectToAction("Index", "AdminHome");
+                //return RedirectToAction("Index", "AdminHome", new { area = "Admin" });
                 //return Redirect("~/Admin/AdminHome/Index");
             }
             ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng!");
             return View(model);
+        }
+
+        public ActionResult CountOrder()
+        {
+            return PartialView(new OrderDAO().OrderCount());
         }
     }
 }

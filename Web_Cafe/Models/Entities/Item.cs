@@ -21,6 +21,8 @@ namespace Web_Cafe.Models.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderID { get; set; }
 
+        public double? ItemPrice { get; set; }
+
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }

@@ -1,5 +1,8 @@
-﻿
-
+﻿@{
+    ViewBag.Title = "My Café";
+}
+@using PagedList.Mvc
+@model PagedList.IPagedList<Web_Cafe.Models.DTO.ProductExtend>
 <div class="nav-anchor"></div>
 <div class="slider-main hidden-xs">
     <div class="slider-wrapper theme-default">
@@ -26,110 +29,107 @@
         </div>
         <!-- Tab panes -->
         <div class="tab-content product-list__wrap">
-            <div role="tabpanel" class="tab-pane active" id="new">
-
-                @{
-                    foreach (var item in ViewBag.ListProductExtend)
+            <div role="tabpanel" class="tab-pane active" id="new" style="min-width: 1146px">
+                @{ foreach (var item in Model)
                     {
-                        <div class="product__item">
+                        <div class="product__item" style="width: 25%">
                             <div class="w">
                                 <div class="product__image">
-
-                                    <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
+                                    <a href="#" class="product__link">
+                                        <img src="~/Images/@item.img_path">
+                                    </a>
                                     <div class="product-item__actions">
                                         <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                        <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
                                     </div>
-                                    <div class="product__overlay"></div>
-                                    <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                    <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
+                                    @{ var status = "";
+                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
+                                        {
+                                            status = "Khuyến mãi";
+                                        }
+                                        else
+                                        {
+                                            status = "Mới";
+                                        }
+                                        <div class="product__sale">@status</div>
+                                    }
                                 </div>
-                                <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
+                                <h3 class="product__name">
+                                    <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                                </h3>
                                 <div class="product__price">
-                                    <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                    <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                    <div class="product__price__regular">
+                                        @item.Product.Price.ToString()
+                                        <span class="unit">đ</span>
+                                    </div>
+                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
+                                        {
+                                            <div class="product__price__old">
+                                                @item.Product.PromotionalPrice.ToString()
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="page__nav">
+                    <div class="col-md-12">
+                        @*<a href="#" class="nav"><span class="fa fa-angle-right"></span></a>*@
+                        @Html.PagedListPager(Model, PageNum => Url.Action("Index", new { PageNum }))
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="hot" style="min-width: 1146px">
+                @{ foreach (var item in ViewBag.ListProductHotExtend)
+                    {
+                        <div class="product__item" style="width: 25%">
+                            <div class="w">
+                                <div class="product__image">
+                                    <a href="#" class="product__link">
+                                        <img src="~/Images/@item.ImageLink">
+                                    </a>
+                                    <div class="product-item__actions">
+                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                    </div>
+                                    <a href="~/Product/Details/@item.ProductID" class="product__overlay" title="@item.ProName"></a>
+                                    @{ var status = "";
+                                        if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now)
+                                        {
+                                            status = "Khuyến mãi";
+                                        }
+                                        else
+                                        {
+                                            status = "Mới";
+                                        }
+                                        <div class="product__sale">@status</div>
+                                    }
+                                </div>
+                                <h3 class="product__name">
+                                    <a href="~/Product/Details/@item.ProductID" title="Chi tiết">@item.ProName</a>
+                                </h3>
+                                <div class="product__price">
+                                    <div class="product__price__regular">
+                                        @item.Price.ToString()
+                                        <span class="unit">đ</span>
+                                    </div>
+                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime >= DateTime.Now)
+                                        {
+                                            <div class="product__price__old">
+                                                @item.PromotionalPrice.ToString()
+                                                <span class="unit">đ</span>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
                     }
                 }
             </div>
-            <div role="tabpanel" class="tab-pane" id="hot">
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr4.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__sale">-20%</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr5.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                            <div class="product__status -hot">Hot!</div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr6.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip .. </a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="product__item">
-                    <div class="w">
-                        <div class="product__image">
-                            <a href="#" class="product__link"><img src="uploads/pr7.jpg" alt="name your product"></a>
-                            <div class="product-item__actions">
-                                <button class="btn btn-cart">Thêm vào giỏ</button>
-                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
-                            </div>
-                            <div class="product__overlay"></div>
-                        </div>
-                        <h3 class="product__name"><a href="#">Tinh chất dưỡng ẩm môi Za Total Hydration Lip ..</a></h3>
-                        <div class="product__price">
-                            <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                            <div class="product__price__old">690.000 <span class="unit">đ</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     </div>
@@ -137,7 +137,7 @@
 <!---->
 <section class="sec-adv sec">
     <div class="container">
-        <img src="~/Content/images/bg1.jpg" alt="">
+        <img src="~/Content/images/bg1.jpg">
     </div>
 </section>
 <!--/-->
@@ -145,99 +145,40 @@
     <div class="container">
         <div class="row">
             <div class="product-list__wrap product-list-catg__wrap">
-                <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
-                    <div class="list-news__home">
-                        <div class="product-list-catg__head">
-                            <h2 class="product-list__title">
-                                Tin Tức
-                            </h2>
-                        </div>
-                        <div class="list-news__home__wrap">
-                            <div class="top">
-                                <img src="uploads/adv.jpg" alt="">
-                                <a href="" class="btn btn-view__now">Xem ngay</a>
-                            </div>
-                            <div class="list">
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">Công thức chống lão hóa ưu việt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""> <img src="uploads/news-2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news-3.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href="">2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
-                                <div class="box">
-                                    <div class="avt">
-                                        <a href=""><img src="uploads/news-2.jpg" alt=""></a>
-                                    </div>
-                                    <div class="txt">
-                                        <a href=""> 2 Thỏi son bạn sẽ thích mê mệt</a>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12 ">
+                <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="product-list-catg__head">
                         <h2 class="product-list__title">
                             Sản phẩm đang giảm giá
                         </h2>
-                        <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#">Chanel</a></li>
-                            <li><a href="#">Loreal</a></li>
-                            <li><a href="#">Gucci</a></li>
-                            <li><a href="#">Dior</a></li>
-                            <li><a href="#">Vichy</a></li>
-                            <li><a href="#">Luxury</a></li>
-                        </ul>
                     </div>
                     <div class="product-list__wrap">
-                        @{
-                            foreach (var item in ViewBag.ListProductSales)
+                        @{ foreach (var item in ViewBag.ListProductSales)
                             {
-                                <div class="product__item">
+                                <div class="product__item" style="width: 25%">
                                     <div class="w">
                                         <div class="product__image">
-
-                                            <a href="#" class="product__link"><img src="~/Images/@item.img_path" alt="name your product"></a>
+                                            <a href="#" class="product__link">
+                                                <img src="~/Images/@item.img_path">
+                                            </a>
                                             <div class="product-item__actions">
                                                 <button class="btn btn-cart">Thêm vào giỏ</button>
-                                                <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
-                                                <a class="btn btn-quickview" data-toggle="modal" data-target="#QuickView" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
                                             </div>
-                                            <div class="product__overlay"></div>
-                                            <div class="product__sale">@item.Product.PromotionalPrice</div>
+                                            <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
+                                            <div class="product__sale">HOT</div>
                                         </div>
-                                        <h3 class="product__name"><a href="#">@item.Product.ProName</a></h3>
+                                        <h3 class="product__name">
+                                            <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
+                                        </h3>
                                         <div class="product__price">
-                                            <div class="product__price__regular">@(@item.Product.Price-@item.Product.PromotionalPrice) <span class="unit">đ</span></div>
-                                            <div class="product__price__old">@item.Product.Price <span class="unit">đ</span></div>
+                                            <div class="product__price__regular">
+                                                @item.Product.PromotionalPrice.ToString()
+                                                <span class="unit">đ</span>
+                                            </div>
+                                            <div class="product__price__old">
+                                                @item.Product.Price.ToString()
+                                                <span class="unit">đ</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -284,129 +225,7 @@
         </div>
     </div>
 </section>
-<!-- footer -->
-<footer class="footer">
-    <!-- End topfoter -->
-    <!-- footer -->
-    <div class="container">
-        <div class="footer__box">
-            <div class="">
-                <div class="col-md-3  col-sm-3 col-xs-12 contact-ft">
-                    <div class="ct">
-                        <div class="logo-ft">
-                            <img src="~/Content/images/logo.png" alt="logo">
-                        </div>
-                        <h3 class="footer__title ">HẠT CÀ PHÊ TỰ NHIÊN</h3>
-                        <div class="inf-contact">
-                            <div class="contact">
-                                <p class="info ">
-                                    <span class="icon -ap icon-location3"></span>
-                                    <span class="txt">
-                                        <span class="name-header texU disb fow">Địa chỉ: </span>
-                                        <span class="disb">236 Hoàng Quốc Việt - Cổ Nhuế - Bắc Từ Liêm - Hà Nội</span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="contact">
-                                <p class="info ">
-                                    <span class="icon -ap  icon-envelope2"></span>
-                                    <span class="txt">
-                                        <span class="name-header texU disb fow">Email:</span>
-                                        <span class="disb">mycafe@gmail.com</span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="contact">
 
-                                <p class="info ">
-                                    <span class="icon fa fa-phone"></span>
-                                    <span class="txt">
-                                        <span class="name-header texU disb fow"> Phone: </span>
-                                        <span class="disb">08.68.33.1111 - 08.68.99.1111</span>
-                                    </span>
-                                </p>
-                            </div>
-                            <ul class="list-social">
-                                <li class="item"><a href="" class="btn"><span class="fa fa-facebook"></span></a></li>
-                                <li class="item"><a href="" class="btn"><span class="fa fa-google"></span></a></li>
-                                <li class="item"> <a href="" class="btn"><span class="fa fa-youtube-play"></span></a></li>
-                                <li class="item"><a href="" class="btn"><span class="fa fa-twitter"></span></a></li>
-                            </ul>
-                            <div class="cer">
-                                <img src="uploads/dathongbao.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!---->
-                <div class="col-md-9 col-sm-9 col-xs-12">
-
-                    <div class="box-line">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <h3 class="footer__title ">Chăm sóc khách hàng</h3>
-                            <div class="list">
-                                <a href="#" class="url">Mua hàng online</a>
-                                <a href="#" class="url">Mua hàng tại siêu thị SMAX</a>
-                                <a href="#" class="url">Blog</a>
-                                <a href="#" class="url">Giới thiệu</a>
-                                <a href="#" class="url">FAQ</a>
-                            </div>
-                        </div>
-                        <!--/-->
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <h3 class="footer__title ">Chính sách</h3>
-                            <div class="list">
-                                <a href="#" class="url">Mua hàng online</a>
-                                <a href="#" class="url">Mua hàng tại siêu thị SMAX</a>
-                                <a href="#" class="url">Blog</a>
-                                <a href="#" class="url">Giới thiệu</a>
-                                <a href="#" class="url">FAQ</a>
-                            </div>
-                        </div>
-                        <!--/-->
-                    </div>
-                    <div class="regs-frm">
-                        <div class="sub">
-                            <input type="text" class="form-control" placeholder="Nhập email của bạn để đăng ký nhận tin khuyến mại">
-                            <button class="btn btn-regs__frm">Đăng ký</button>
-                        </div>
-                    </div>
-                    <!---->
-                    <div class="box-line box-line-2">
-                        <div class="col-md-7 col-sm-7 col-xs-12">
-                            <h3 class="footer__title ">Hình thức thanh toán</h3>
-                            <div class="list">
-                                <ul>
-                                    <li><a href=""><img src="img/pp.png" alt=""></a></li>
-                                    <li><a href=""><img src="img/msc.png" alt=""></a></li>
-                                    <li><a href=""><img src="img/visa.png" alt=""></a></li>
-                                    <li><a href=""><img src="img/american.png" alt=""></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-12">
-                            <h3 class="footer__title ">Hình thức thanh toán</h3>
-                            <div class="list">
-                                <ul>
-                                    <li><a href=""><img src="img/ship.jpg" alt=""></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!--/-->
-                    <!---->
-                </div>
-                <!---->
-            </div>
-
-            <div class="copyright">
-                Copyright ® 2017 <a href="#" class="url">MyCafé</a>
-            </div>
-        </div>
-    </div>
-    <!-- End footer -->
-</footer>
 <div id="QuickView" class="modal fade" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
@@ -441,7 +260,7 @@
                                 <a href="uploads/product.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
                                     <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
                                 </a>
-                                <a href="http://demo.templatetrip.com/Prestashop/PRS02/PRS032/340-large_default/printed-summer-dress.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
+                                <a href="" data-image="uploads/product.jpg" class="elevate__zoom">
                                     <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
                                 </a>
                             </div>
@@ -501,293 +320,3 @@
         </div>
     </div>
 </div>
-<div id="login" class="modal__account modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span class="-ap icon-close"></span></button>
-                <h4 class="modal-title">Đăng nhập</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 col-xs-12 col-sm-6 account__input">
-                        <div class="form-group has-error">
-                            <div class="label">Tên đăng nhập</div>
-                            <div class="input">
-                                <input type="text" class="form-control" placeholder="Tên đăng nhập">
-                            </div>
-                            <div class="help-block">Email không hợp lệ</div>
-                        </div>
-                        <div class="form-group">
-                            <div class="label">Mật khẩu</div>
-                            <input type="password" class="form-control" placeholder="Mật khẩu">
-                        </div>
-                        <div class="remember-login form-group">
-                            <div class="check__action -radio">
-                                <input type="checkbox" class="checkbox">
-                                <span class="icon"></span>
-                                Ghi nhớ tài khoản
-                            </div>
-                        </div>
-                        <div class="form-group login__action">
-                            <button class="btn btn-submit">Đăng nhập</button>
-                        </div>
-                        <div class="login__note">
-                            Bạn chưa có tài khoản? <a data-toggle="modal" data-target="#register">Đăng ký ngay</a>
-                        </div>
-                    </div>
-                    <div class="account_login__social col-md-6 col-xs-12 col-sm-6">
-                        <div class="title"><span>Đăng nhập với </span></div>
-                        <div class="list__buttons">
-                            <button class="btn btn-facebook">
-                                <span class="-ap icon-facebook icon"></span>
-                                Đăng nhập với Facebook
-                            </button>
-                            <button class="btn btn-google">
-                                <span class="-ap icon-google icon"></span>
-                                Đăng nhập với Google
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div id="register" class="modal__account modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span class="-ap icon-close"></span></button>
-                <h4 class="modal-title">Đăng ký tài khoản</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-7 col-xs-12 col-sm-7 account__input">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input__label">
-                                    <div class="label">Email</div>
-                                </div>
-                                <div class="input__wrap">
-                                    <input type="text" class="form-control" placeholder="Email...">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input__label">
-                                    <div class="label">Mật khẩu:</div>
-                                </div>
-                                <div class="input__wrap">
-                                    <input type="text" class="form-control" placeholder="Mật khẩu từ 6 đến 32 ký tự">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input__label">
-                                    <div class="label">Họ tên:</div>
-                                </div>
-                                <div class="input__wrap">
-                                    <input type="text" class="form-control" placeholder="Nhập họ tên">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input__label">
-                                    <div class="label">Giới tính:</div>
-                                </div>
-                                <div class="input__wrap">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="check__action -radio">
-                                                <input type="radio" class="checkbox" name="gender">
-                                                <span class="icon"></span>
-                                                Nam
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="check__action -radio">
-                                                <input type="radio" class="checkbox" name="gender">
-                                                <span class="icon"></span>
-                                                Nữ
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="input__label">
-                                    <div class="label">Ngày Sinh:</div>
-                                </div>
-                                <div class="input__wrap birthday-picker">
-                                    <select class="birth-day form-control" name="birth[day]">
-                                        <option value="0">Ngày</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select>
-                                    <select class="birth-month form-control" name="birth[month]">
-                                        <option value="0">Tháng</option>
-                                        <option value="1">01</option>
-                                        <option value="2">02</option>
-                                        <option value="3">03</option>
-                                        <option value="4">04</option>
-                                        <option value="5">05</option>
-                                        <option value="6">06</option>
-                                        <option value="7">07</option>
-                                        <option value="8">08</option>
-                                        <option value="9">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                    </select>
-                                    <select class="birth-year form-control" name="birth[year]">
-                                        <option value="0">Năm</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2009">2009</option>
-                                        <option value="2008">2008</option>
-                                        <option value="2007">2007</option>
-                                        <option value="2006">2006</option>
-                                        <option value="2005">2005</option>
-                                        <option value="2004">2004</option>
-                                        <option value="2003">2003</option>
-                                        <option value="2002">2002</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2000">2000</option>
-                                        <option value="1999">1999</option>
-                                        <option value="1998">1998</option>
-                                        <option value="1997">1997</option>
-                                        <option value="1996">1996</option>
-                                        <option value="1995">1995</option>
-                                        <option value="1994">1994</option>
-                                        <option value="1993">1993</option>
-                                        <option value="1992">1992</option>
-                                        <option value="1991">1991</option>
-                                        <option value="1990">1990</option>
-                                        <option value="1989">1989</option>
-                                        <option value="1988">1988</option>
-                                        <option value="1987">1987</option>
-                                        <option value="1986">1986</option>
-                                        <option value="1985">1985</option>
-                                        <option value="1984">1984</option>
-                                        <option value="1983">1983</option>
-                                        <option value="1982">1982</option>
-                                        <option value="1981">1981</option>
-                                        <option value="1980">1980</option>
-                                        <option value="1979">1979</option>
-                                        <option value="1978">1978</option>
-                                        <option value="1977">1977</option>
-                                        <option value="1976">1976</option>
-                                        <option value="1975">1975</option>
-                                        <option value="1974">1974</option>
-                                        <option value="1973">1973</option>
-                                        <option value="1972">1972</option>
-                                        <option value="1971">1971</option>
-                                        <option value="1970">1970</option>
-                                        <option value="1969">1969</option>
-                                        <option value="1968">1968</option>
-                                        <option value="1967">1967</option>
-                                        <option value="1966">1966</option>
-                                        <option value="1965">1965</option>
-                                        <option value="1964">1964</option>
-                                        <option value="1963">1963</option>
-                                        <option value="1962">1962</option>
-                                        <option value="1961">1961</option>
-                                        <option value="1960">1960</option>
-                                        <option value="1959">1959</option>
-                                        <option value="1958">1958</option>
-                                        <option value="1957">1957</option>
-                                        <option value="1956">1956</option>
-                                        <option value="1955">1955</option>
-                                        <option value="1954">1954</option>
-                                        <option value="1953">1953</option>
-                                        <option value="1952">1952</option>
-                                        <option value="1951">1951</option>
-                                        <option value="1950">1950</option>
-                                        <option value="1949">1949</option>
-                                        <option value="1948">1948</option>
-                                        <option value="1947">1947</option>
-                                        <option value="1946">1946</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="check__action">
-                                <input type="checkbox" class="checkbox">
-                                <span class="icon"></span>
-                                Tôi đồng ý mọi điều khoản của Website
-                            </div>
-                        </div>
-                        <div class="form-group login__action">
-                            <button class="btn btn-submit">Đăng Ký</button>
-                        </div>
-                        <div class="login__note">
-                            Bạn đã có tài khoản? <a data-toggle="modal" data-target="#register">Đăng ký ngay</a>
-                        </div>
-                    </div>
-                    <div class="account_login__social col-md-5 col-xs-12 col-sm-5">
-                        <div class="title"><span>Đăng nhập với </span></div>
-                        <div class="list__buttons">
-                            <button class="btn btn-facebook">
-                                <span class="-ap icon-facebook icon"></span>
-                                Đăng nhập với Facebook
-                            </button>
-                            <button class="btn btn-google">
-                                <span class="-ap icon-google icon"></span>
-                                Đăng nhập với Google
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<a class="scroll-top"><span class="fa fa-angle-up"></span></a>

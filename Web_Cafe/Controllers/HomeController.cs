@@ -12,16 +12,39 @@ namespace Web_Cafe.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int pageNum = 1, int pageSize = 8)
         {
+            ProductDAOExtent dao = new ProductDAOExtent();
+            ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
+            ViewBag.ListProductSales = dao.GetListProductSales();
 
-            ViewBag.ListProductExtend = new ProductDAOExtent().ListProductExtend;
-            ViewBag.ListProductSales = new ProductDAOExtent().ListProductSales;
-
-            return View();
+            return View(dao.GetListProductExtend(pageNum, pageSize));
         }
 
-        public ActionResult About()
+        public ActionResult SearchProduct(string keywordProduct = "", string id = "", int pageNum = 1, int pageSize = 6)
+        {
+            ViewBag.keywordProduct = keywordProduct;
+            ViewBag.id = id;
+            if (id != "")
+            {
+                ProductDAOExtent dao = new ProductDAOExtent();
+                CategoryDAO cdao = new CategoryDAO();
+                ViewBag.ListCategory = cdao.ListCate();
+                ViewBag.CName = cdao.ListCate().ToList().Where(i => i.CategoryID.ToString().Contains(id)).FirstOrDefault().CateName;
+                return View(dao.GetProductExtendByCateID(id, pageNum, pageSize));
+            }
+            else
+            {
+                ProductDAOExtent dao = new ProductDAOExtent();
+                CategoryDAO cdao = new CategoryDAO();
+                ViewBag.ListCategory = cdao.ListCate();
+                ViewBag.CName = "Tìm kiếm ";
+                return View(dao.GetProductExtendByName(keywordProduct,pageNum,pageSize));
+            }
+        }
+
+
+        public ActionResult News()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -33,6 +56,11 @@ namespace Web_Cafe.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult MenuChild()
+        {
+            return PartialView(new CategoryDAO().ListCate());
         }
     }
 }

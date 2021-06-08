@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Web_Cafe.Models.Entities.Category>
+
+@{
+    ViewBag.Title = "Danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh mục sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Trang chủ", "Index", "AdminHome")
+                    </li>
+                    <li class="breadcrumb-item active">Danh mục sản phẩm</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid card card-outline card-info">
+        <div>
+            <a class="create-new" onclick="funcCreate()" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fas fa-plus"></i>
+                Thêm mới
+            </a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        ID
+                    </th>
+                    <th>
+                        Tên danh mục
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+
+                    <th class="text-center">
+                        <i class="fas fa-cogs"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.CategoryID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CateStatus)
+                        </td>
+
+                        <td class="text-center">
+                            <a href="#" onclick="funcEdit(@item.CategoryID)" title="Sửa">
+                                <i class="fas fa-edit" aria-hidden="true"></i>
+                            </a>
+                            <a href="~/Admin/AdminCategory/Delete/@item.CategoryID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                <i class="fas fa-trash-alt" style="color:red;"></i>
+                            </a>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<div class="modal fade" id="modalCreate" role="dialog" aria-hidden="true">
+
+</div>
+
+<div class="modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+
+</div>
+
+@section script{
+    <script>
+        function funcCreate() {
+            var url = "/Admin/AdminCategory/Create";
+            $("#modalCreate").load(url, function (data) {
+                $("#modalCreate").html(data);
+                $("#modalCreate").modal("show");
+            });
+        }
+
+        function funcEdit(id) {
+            var url = "/Admin/AdminCategory/Edit?id=" + id;
+            $("#modalEdit").load(url, function (data) {
+                $("#modalEdit").html(data);
+                $("#modalEdit").modal("show");
+            });
+        }
+
+    </script>
+}

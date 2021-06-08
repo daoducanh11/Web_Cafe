@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>MyCafé</title>
+    <title>@ViewBag.Title</title>
     <meta charset="utf-8" />
     @*<meta name="keywords" content="It, it solution,solution, techonogy,internet" />
         <link href="https://plus.google.com/114644939574462223089" rel="author">*@
@@ -20,7 +20,11 @@
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/vendor/css/jquery.fancybox.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
-    @Styles.Render("~/Content/css")
+
+    <!-- css_custom -->
+    <link href="~/Content/css/css_custom.css" rel="stylesheet" />
+
+    @*@Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -31,15 +35,17 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="brand">
-                            <img src="~/Content/images/logo.png" alt="logo">
+                            <a href="~/Home/Index" title="Logo"><img src="~/Content/images/logo.png" alt="Logo"></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12 col-right-headtop">
                         <div class="pull-left">
                             <div class="box-search">
                                 <div class="form-input">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                                    <button class="btn btn__search"><span class="fa fa-search"></span></button>
+                                    <form action="~/Home/SearchProduct" method="post">
+                                        <input type="text" name="keywordProduct" class="form-control" placeholder="Tên sản phẩm ...">
+                                        <button class="btn btn__search"><span class="fa fa-search"></span></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +54,10 @@
                                 <!-- <div class="hotline"><span class="-ap icon-phone-handset"></span> Hotline: 0966.63.3696</div> -->
                                 <div class="header-top__login">
                                     <div class="">
-                                        <div class="title">Tài khoản</div>
+                                        <div class="title">
+                                            Tài khoản
+                                            <i class="fa fa-user-o" aria-hidden="true" style="font-size: 18px;"></i>
+                                        </div>
                                         <ul class="menu-icons__sub">
                                             <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#login" class="menu"><span class="icon icon-lock_outline -ap"></span> Đăng nhập</a></li>
                                             <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" data-toggle="modal" data-target="#register"><span class="icon icon-lock_open -ap"></span> Đăng ký</a></li>
@@ -56,10 +65,13 @@
                                     </div>
                                 </div>
                                 <div class="header-top__shopcart">
-                                    <div class="icon">
-                                        <span class="-ap icon-cart"></span>
+                                    <div class="headline">
+                                        Giỏ hàng 
+                                        <div class="icon">
+                                            <span class="-ap icon-cart" style="font-size: 19px;"></span>
+                                            <span class="number-cart">0</span>
+                                        </div>  
                                     </div>
-                                    <div class="headline">Giỏ hàng <span class="number-cart">0</span></div>
                                     <div class="dropdown__shop__cart">
                                         <div class="dropdown__head">
                                             <span class="number">0</span>
@@ -69,7 +81,7 @@
                                             <div class="product__list">
                                                 <div class="product__list__item">
                                                     <div class="product__img">
-                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                        <img src="" alt="Name your Product ">
                                                     </div>
                                                     <div class="product__name">
                                                         Son lì dạng kem L'oreal Color Riche .....
@@ -98,7 +110,7 @@
                                                 </div>
                                                 <div class="product__list__item">
                                                     <div class="product__img">
-                                                        <img src="uploads/product.jpg" alt="Name your Product ">
+                                                        <img src="" alt="Name your Product ">
                                                     </div>
                                                     <div class="product__name">
                                                         Son lì dạng kem L'oreal Color Riche .....
@@ -150,34 +162,27 @@
                     <div class="catalog__list">
                         <ul class="catalog__wrap">
                             <li class="catalog__item active">
-                                <a href="#" class="catalog__link">Trang chủ</a>
+                                <a href="~/Home/Index" class="catalog__link">Trang chủ</a>
                             </li>
                             <li class="catalog__item -sub">
-                                <a href="category.html" class="catalog__link">Cà phê và Trà</a>
+                                <a href="~/Home/Category/1" class="catalog__link">Cà phê</a>
+                            </li>
+                            <li class="catalog__item -sub">
+                                <a href="~/Home/Category/2" class="catalog__link">Trà</a>
+                            </li>
+                            <li class="catalog__item -sub">
+                                <a href="~/Home/Product" class="catalog__link">
+                                    Sản phẩm
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </a>
                                 <div class="catalog__sub">
                                     <ul class="list-cat__sub">
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Phindi</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Cà phê Espresso</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Phindi</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà hoa quả</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Trà sữa</li>
+                                        @Html.Action("MenuChild", "Home")
                                     </ul>
                                 </div>
                             </li>
-                            <li class="catalog__item -sub">
-                                <a href="category.html" class="catalog__link">Bánh ngọt</a>
-                                <div class="catalog__sub">
-                                    <ul class="list-cat__sub">
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban đêm</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng ban ngày</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng trắng</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Kem dưỡng chống lão hóa</a></li>
-                                        <li class="catalog-sub__item"><a href="" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span>Khác</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="catalog__item"><a href="news.html" class="catalog__link"> Hot và bán chạy</a></li>
-                            <li class="catalog__item"><a href="contact.html" class="catalog__link">Liên hệ</a></li>
+                            <li class="catalog__item"><a href="~/Home/News" class="catalog__link">Tin tức</a></li>
+                            <li class="catalog__item"><a href="~/Home/Contact" class="catalog__link">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -189,7 +194,419 @@
 
     @RenderBody()
 
+    <!-- footer -->
+    <footer class="footer">
+        <!-- End topfoter -->
+        <!-- footer -->
+        <div class="container">
+            <div class="footer__box">
+                <div class="">
+                    <div class="col-md-3  col-sm-3 col-xs-12 contact-ft">
+                        <div class="ct">
+                            <div class="logo-ft">
+                                <img src="~/Content/images/logo.png" alt="logo">
+                            </div>
+                            <h3 class="footer__title ">HẠT CÀ PHÊ TỰ NHIÊN</h3>
+                            <div class="inf-contact">
+                                <div class="contact">
+                                    <p class="info ">
+                                        <span class="icon -ap icon-location3"></span>
+                                        <span class="txt">
+                                            <span class="name-header texU disb fow">Địa chỉ: </span>
+                                            <span class="disb">236 Hoàng Quốc Việt - Cổ Nhuế - Bắc Từ Liêm - Hà Nội</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="contact">
+                                    <p class="info ">
+                                        <span class="icon -ap  icon-envelope2"></span>
+                                        <span class="txt">
+                                            <span class="name-header texU disb fow">Email:</span>
+                                            <span class="disb">mycafe@gmail.com</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="contact">
 
+                                    <p class="info ">
+                                        <span class="icon fa fa-phone"></span>
+                                        <span class="txt">
+                                            <span class="name-header texU disb fow"> Phone: </span>
+                                            <span class="disb">08.68.33.1111 - 08.68.99.1111</span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <ul class="list-social">
+                                    <li class="item"><a href="" class="btn"><span class="fa fa-facebook"></span></a></li>
+                                    <li class="item"><a href="" class="btn"><span class="fa fa-google"></span></a></li>
+                                    <li class="item"> <a href="" class="btn"><span class="fa fa-youtube-play"></span></a></li>
+                                    <li class="item"><a href="" class="btn"><span class="fa fa-twitter"></span></a></li>
+                                </ul>
+                                <div class="cer">
+                                    <img src="~/Content/images/dathongbao.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+
+                        <div class="box-line">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <h3 class="footer__title ">Chăm sóc khách hàng</h3>
+                                <div class="list">
+                                    <a href="#" class="url">Mua hàng online</a>
+                                    <a href="#" class="url">Mua hàng tại siêu thị SMAX</a>
+                                    <a href="#" class="url">Blog</a>
+                                    <a href="#" class="url">Giới thiệu</a>
+                                    <a href="#" class="url">FAQ</a>
+                                </div>
+                            </div>
+                            <!--/-->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <h3 class="footer__title ">Chính sách</h3>
+                                <div class="list">
+                                    <a href="#" class="url">Mua hàng online</a>
+                                    <a href="#" class="url">Mua hàng tại siêu thị SMAX</a>
+                                    <a href="#" class="url">Blog</a>
+                                    <a href="#" class="url">Giới thiệu</a>
+                                    <a href="#" class="url">FAQ</a>
+                                </div>
+                            </div>
+                            <!--/-->
+                        </div>
+                        <div class="regs-frm">
+                            <div class="sub">
+                                <input type="text" class="form-control" placeholder="Nhập email của bạn để đăng ký nhận tin khuyến mại">
+                                <button class="btn btn-regs__frm">Đăng ký</button>
+                            </div>
+                        </div>
+                        <!---->
+                        <div class="box-line box-line-2">
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <h3 class="footer__title ">Hình thức thanh toán</h3>
+                                <div class="list">
+                                    <ul>
+                                        <li><a href=""><img src="~/Content/images/pp.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/msc.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/visa.png" alt=""></a></li>
+                                        <li><a href=""><img src="~/Content/images/american.png" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <h3 class="footer__title ">Hình thức vận chuyển</h3>
+                                <div class="list">
+                                    <ul>
+                                        <li><a href=""><img src="~/Content/images/ship.jpg" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--/-->
+                        <!---->
+                    </div>
+                    <!---->
+                </div>
+
+                <div class="copyright">
+                    Copyright ® 2021 <a href="#" class="url">MyCafé</a>
+                </div>
+            </div>
+        </div>
+        <!-- End footer -->
+    </footer>
+    <div id="login" class="modal__account modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="-ap icon-close"></span></button>
+                    <h4 class="modal-title">Đăng nhập</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12 col-sm-6 account__input">
+                            <div class="form-group has-error">
+                                <div class="label">Tên đăng nhập</div>
+                                <div class="input">
+                                    <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                                </div>
+                                <div class="help-block">Email không hợp lệ</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="label">Mật khẩu</div>
+                                <input type="password" class="form-control" placeholder="Mật khẩu">
+                            </div>
+                            <div class="remember-login form-group">
+                                <div class="check__action -radio">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="icon"></span>
+                                    Ghi nhớ tài khoản
+                                </div>
+                            </div>
+                            <div class="form-group login__action">
+                                <button class="btn btn-submit">Đăng nhập</button>
+                            </div>
+                            <div class="login__note">
+                                Bạn chưa có tài khoản? <a data-toggle="modal" data-target="#register">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                        <div class="account_login__social col-md-6 col-xs-12 col-sm-6">
+                            <div class="title"><span>Đăng nhập với </span></div>
+                            <div class="list__buttons">
+                                <button class="btn btn-facebook">
+                                    <span class="-ap icon-facebook icon"></span>
+                                    Đăng nhập với Facebook
+                                </button>
+                                <button class="btn btn-google">
+                                    <span class="-ap icon-google icon"></span>
+                                    Đăng nhập với Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="register" class="modal__account modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="-ap icon-close"></span></button>
+                    <h4 class="modal-title">Đăng ký tài khoản</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-7 col-xs-12 col-sm-7 account__input">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Email</div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        <input type="text" class="form-control" placeholder="Email...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Mật khẩu:</div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        <input type="text" class="form-control" placeholder="Mật khẩu từ 6 đến 32 ký tự">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Họ tên:</div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        <input type="text" class="form-control" placeholder="Nhập họ tên">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Giới tính:</div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="check__action -radio">
+                                                    <input type="radio" class="checkbox" name="gender">
+                                                    <span class="icon"></span>
+                                                    Nam
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="check__action -radio">
+                                                    <input type="radio" class="checkbox" name="gender">
+                                                    <span class="icon"></span>
+                                                    Nữ
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Ngày Sinh:</div>
+                                    </div>
+                                    <div class="input__wrap birthday-picker">
+                                        <select class="birth-day form-control" name="birth[day]">
+                                            <option value="0">Ngày</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                        <select class="birth-month form-control" name="birth[month]">
+                                            <option value="0">Tháng</option>
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        <select class="birth-year form-control" name="birth[year]">
+                                            <option value="0">Năm</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2010">2010</option>
+                                            <option value="2009">2009</option>
+                                            <option value="2008">2008</option>
+                                            <option value="2007">2007</option>
+                                            <option value="2006">2006</option>
+                                            <option value="2005">2005</option>
+                                            <option value="2004">2004</option>
+                                            <option value="2003">2003</option>
+                                            <option value="2002">2002</option>
+                                            <option value="2001">2001</option>
+                                            <option value="2000">2000</option>
+                                            <option value="1999">1999</option>
+                                            <option value="1998">1998</option>
+                                            <option value="1997">1997</option>
+                                            <option value="1996">1996</option>
+                                            <option value="1995">1995</option>
+                                            <option value="1994">1994</option>
+                                            <option value="1993">1993</option>
+                                            <option value="1992">1992</option>
+                                            <option value="1991">1991</option>
+                                            <option value="1990">1990</option>
+                                            <option value="1989">1989</option>
+                                            <option value="1988">1988</option>
+                                            <option value="1987">1987</option>
+                                            <option value="1986">1986</option>
+                                            <option value="1985">1985</option>
+                                            <option value="1984">1984</option>
+                                            <option value="1983">1983</option>
+                                            <option value="1982">1982</option>
+                                            <option value="1981">1981</option>
+                                            <option value="1980">1980</option>
+                                            <option value="1979">1979</option>
+                                            <option value="1978">1978</option>
+                                            <option value="1977">1977</option>
+                                            <option value="1976">1976</option>
+                                            <option value="1975">1975</option>
+                                            <option value="1974">1974</option>
+                                            <option value="1973">1973</option>
+                                            <option value="1972">1972</option>
+                                            <option value="1971">1971</option>
+                                            <option value="1970">1970</option>
+                                            <option value="1969">1969</option>
+                                            <option value="1968">1968</option>
+                                            <option value="1967">1967</option>
+                                            <option value="1966">1966</option>
+                                            <option value="1965">1965</option>
+                                            <option value="1964">1964</option>
+                                            <option value="1963">1963</option>
+                                            <option value="1962">1962</option>
+                                            <option value="1961">1961</option>
+                                            <option value="1960">1960</option>
+                                            <option value="1959">1959</option>
+                                            <option value="1958">1958</option>
+                                            <option value="1957">1957</option>
+                                            <option value="1956">1956</option>
+                                            <option value="1955">1955</option>
+                                            <option value="1954">1954</option>
+                                            <option value="1953">1953</option>
+                                            <option value="1952">1952</option>
+                                            <option value="1951">1951</option>
+                                            <option value="1950">1950</option>
+                                            <option value="1949">1949</option>
+                                            <option value="1948">1948</option>
+                                            <option value="1947">1947</option>
+                                            <option value="1946">1946</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="check__action">
+                                    <input type="checkbox" class="checkbox">
+                                    <span class="icon"></span>
+                                    Tôi đồng ý mọi điều khoản của Website
+                                </div>
+                            </div>
+                            <div class="form-group login__action">
+                                <button class="btn btn-submit">Đăng Ký</button>
+                            </div>
+                            <div class="login__note">
+                                Bạn đã có tài khoản? <a data-toggle="modal" data-target="#register">Đăng ký ngay</a>
+                            </div>
+                        </div>
+                        <div class="account_login__social col-md-5 col-xs-12 col-sm-5">
+                            <div class="title"><span>Đăng nhập với </span></div>
+                            <div class="list__buttons">
+                                <button class="btn btn-facebook">
+                                    <span class="-ap icon-facebook icon"></span>
+                                    Đăng nhập với Facebook
+                                </button>
+                                <button class="btn btn-google">
+                                    <span class="-ap icon-google icon"></span>
+                                    Đăng nhập với Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <a class="scroll-top"><span class="fa fa-angle-up"></span></a>
     <!-- end footer -->
     <script type="text/javascript" src="~/Content/vendor/js/jquery.2.1.1.min.js"></script>
     <script type="text/javascript" src="~/Content/vendor/js/bootstrap.min.js"></script>

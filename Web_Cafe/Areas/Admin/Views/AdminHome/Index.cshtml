@@ -3,7 +3,7 @@
 @model PagedList.IPagedList<Web_Cafe.Areas.Admin.Models.DTO.ProductDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,7 +23,7 @@
 </section>
 
 <section class="content">
-    <div class="container-fluid">
+    <div class="container-fluid card card-outline card-info">
         <div class="form-search">
             @using (Html.BeginForm("Index", "AdminHome", FormMethod.Get, new { }))
             {
@@ -32,12 +32,13 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="">
-                                    <input type="text" class="form-control" name="keywords" placeholder="Từ khóa" value="@ViewBag.keywords">
+                                    <input type="text" class="form-control" name="keywords" placeholder="ID / Tên sản phẩm" value="@ViewBag.keywords">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="">
                                     <select class="form-control" name="categoryId">
+                                        <option value="0">Loại sản phẩm</option>
                                         @foreach (var item in ViewBag.cate)
                                         {
                                             var select = "";
@@ -77,94 +78,108 @@
             }
             @*<form action="Index" method="post" name="" id="">
 
-                </form>*@
+            </form>*@
         </div>
-        <div>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="~/Admin/AdminHome/Create" class="create-new">
-                        <i class="fas fa-plus"></i>
-                        Thêm mới
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    @Html.PagedListPager(Model, PageNum => Url.Action("Index", new { PageNum, @keywords = @ViewBag.keywords, @categoryId = @ViewBag.categoryId, @minPrice = @ViewBag.minPrice, @maxPrice = @ViewBag.maxPrice }))
+
+        @using (Html.BeginForm("Index", "AdminHome", FormMethod.Post, new { }))
+        {
+            <div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="~/Admin/AdminHome/Create" class="create-new">
+                            <i class="fas fa-plus"></i>
+                            Thêm mới
+                        </a>
+                        <button type="submit" class="btn-delete" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                            <i class="fa fa-trash-alt"></i>
+                            Xóa
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.PagedListPager(Model, PageNum => Url.Action("Index", new { PageNum, @keywords = @ViewBag.keywords, @categoryId = @ViewBag.categoryId, @minPrice = @ViewBag.minPrice, @maxPrice = @ViewBag.maxPrice }))
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--<p>-->
-        @*@Html.ActionLink("Thêm mới", "Create", new { @class = "create-new" })*@
-        <!--</p>-->
 
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        ID
-                    </th>
-                    <th>
-                        Tên sản phẩm
-                    </th>
-                    <th class="text-center">
-                        Hình ảnh
-                    </th>
-                    <th class="text-center">
-                        Giá
-                    </th>
-                    <th class="text-center">
-                        Giá khuyến mãi
-                    </th>
-                    <th>
-                        Danh mục
-                    </th>
-                    <th>
-                        Trạng thái
-                    </th>
-                    <th class="text-center">
-                        <i class="fas fa-cogs"></i>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProName)
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn-primary" onclick="myFunction(@item.ProductID)" data-toggle="modal" data-target="#exampleModalCenter">
-                                <i class="fas fa-images"></i>
-                            </button>
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.PromotionalPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CateName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProStatus)
-                        </td>
-                        <td class="text-center">
-                            <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
-                                <i class="fas fa-edit" aria-hidden="true"></i>
-                            </a>
-                            <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
-                                <i class="fas fa-trash-alt" style="color:red;"></i>
-                            </a>
-                        </td>
+                        <th class="text-center">
+                            <input type="checkbox" id="checkBoxAll" />
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Tên sản phẩm
+                        </th>
+                        <th class="text-center">
+                            Hình ảnh
+                        </th>
+                        <th class="text-center">
+                            Giá bán
+                        </th>
+                        <th class="text-center">
+                            Giá khuyến mãi
+                        </th>
+                        <th class="text-center">
+                            Danh mục
+                        </th>
+                        <th class="text-center">
+                            Trạng thái
+                        </th>
+                        <th class="text-center">
+                            <i class="fas fa-cogs"></i>
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <input type="checkbox" class="checkBoxId" value="@item.ProductID" name="checkBoxId" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProName)
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn-primary" onclick="myFunction(@item.ProductID)" data-toggle="modal" data-target="#exampleModalCenter">
+                                    <i class="fas fa-images"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                @*@Html.DisplayFor(modelItem => item.Price)*@
+                                @(item.Price.HasValue? item.Price.Value.ToString("N0") : "0")
+                            </td>
+                            <td class="text-right" style="padding-right:3%">
+                                @*@Html.DisplayFor(modelItem => item.PromotionalPrice)*@
+                                @(item.PromotionalPrice.HasValue? item.PromotionalPrice.Value.ToString("N0") : "0")
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.CateName)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ProStatus)
+                            </td>
+                            <td class="text-center">
+                                <a href="~/Admin/AdminHome/Edit/@item.ProductID" title="Sửa">
+                                    <i class="fas fa-edit" aria-hidden="true"></i>
+                                </a>
+                                <a href="~/Admin/AdminHome/Delete/@item.ProductID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                    <i class="fas fa-trash-alt" style="color:red;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        <p class="text-center" style="margin: 0; padding-bottom: 4px;">Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</p>
+
     </div>
 </section>
 
@@ -182,9 +197,15 @@
             });
 
         }
-        //$('#myModal').on('shown.bs.modal', function () {
-        //    $('#myInput').trigger('focus')
-        //})
+
+        $(document).ready(function () {
+            $('#checkBoxAll').click(function () {
+                if ($(this).is(":checked"))
+                    $('.checkBoxId').prop('checked', true);
+                else
+                    $('.checkBoxId').prop('checked', false);
+            });
+        });
 
     </script>
 }
