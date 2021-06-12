@@ -12,36 +12,31 @@ namespace Web_Cafe.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(int pageNum = 1, int pageSize = 8)
+        public ActionResult Index()
         {
             ProductDAOExtent dao = new ProductDAOExtent();
-
             ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
             ViewBag.ListProductSales = dao.GetListProductSales();
-
-            return View(dao.GetListProductExtend(pageNum, pageSize));
+            return View(dao.GetListProductExtend());
         }
 
         public ActionResult SearchProduct(string keywordProduct = "", string id = "", int pageNum = 1, int pageSize = 6)
         {
             ViewBag.keywordProduct = keywordProduct;
             ViewBag.id = id;
+            ProductDAOExtent dao = new ProductDAOExtent();
+            CategoryDAO cdao = new CategoryDAO();
+            ViewBag.ListCategory = cdao.ListCateInProduct();
             if (id != "")
             {
-                ProductDAOExtent dao = new ProductDAOExtent();
-                CategoryDAO cdao = new CategoryDAO();
-                ViewBag.ListCategory = cdao.ListCate();
-                ViewBag.CName = cdao.ListCate().ToList().Where(i => i.CategoryID.ToString().Contains(id)).FirstOrDefault().CateName;
-                return View(dao.GetProductExtendByCateID(id, pageNum, pageSize));
+                ViewBag.CName = cdao.ListCateInProduct().ToList().Where(i => i.CategoryID.ToString().Contains(id)).FirstOrDefault().CateName;
             }
             else
             {
-                ProductDAOExtent dao = new ProductDAOExtent();
-                CategoryDAO cdao = new CategoryDAO();
-                ViewBag.ListCategory = cdao.ListCate();
-                ViewBag.CName = "Tìm kiếm ";
-                return View(dao.GetProductExtendByName(keywordProduct,pageNum,pageSize));
+                id = "0";
+                ViewBag.CName = "Tìm kiếm";
             }
+            return View(dao.GetProductExtendByName(keywordProduct, Convert.ToInt32(id), pageNum, pageSize));
         }
 
 
@@ -61,7 +56,7 @@ namespace Web_Cafe.Controllers
 
         public ActionResult MenuChild()
         {
-            return PartialView(new CategoryDAO().ListCate());
+            return PartialView(new CategoryDAO().ListCateInProduct());
         }
     }
 }

@@ -3,7 +3,7 @@
 @foreach (var item in Model)
 {
     <li class="catalog-sub__item">
-        <a href="~/Home/Category/@item.CategoryID" class="catalog-sub__link">
+        <a href="~/Home/SearchProduct?id=@item.CategoryID" class="catalog-sub__link">
             <span class="fa fa-caret-right icon"></span>
             @item.CateName
         </a>

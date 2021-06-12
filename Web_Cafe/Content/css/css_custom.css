@@ -58,3 +58,22 @@ h2.product__view__name {
 .breadcrumb .li {
     color: #337ABA;
 }
+
+/*Trang tìm kiếm sản phẩm*/
+.sidebar__list .item {
+    padding-left: 10px;
+}
+
+.sidebar__list .item.active {
+    background-color: aliceblue;
+}
+
+.sidebar__list .item a {
+    display: block;
+}
+
+.btn-refresh-search {
+    background-color: #e34c4c;
+    color: white;
+    margin-left: 8px;
+}

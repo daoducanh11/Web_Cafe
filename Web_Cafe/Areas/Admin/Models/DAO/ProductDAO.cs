@@ -36,17 +36,17 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             return lst;
         }
 
-        public IEnumerable<ProductDTO> listSearchProById(int proId, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProById(int proId, int categoryId, string proStatus, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProById {0}, {1}, {2}, {3}",
-                proId, categoryId, minPrice, maxPrice)
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProById {0}, {1}, N'{2}', {3}, {4}",
+                proId, categoryId, proStatus, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
-        public IEnumerable<ProductDTO> listSearchProByName(string proName, int categoryId, double minPrice, double maxPrice, int pageNum, int pageSize)
+        public IEnumerable<ProductDTO> listSearchProByName(string proName, int categoryId, string proStatus, double minPrice, double maxPrice, int pageNum, int pageSize)
         {
-            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProByName N'{0}', {1}, {2}, {3}",
-                proName, categoryId, minPrice, maxPrice)
+            var lst = db.Database.SqlQuery<ProductDTO>(string.Format("listSearchProByName N'{0}', {1}, N'{2}', {3}, {4}",
+                proName, categoryId, proStatus, minPrice, maxPrice)
                 ).ToPagedList<ProductDTO>(pageNum, pageSize);
             return lst;
         }
@@ -58,7 +58,7 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             {
                 if(item.ProStatus == "Khuyến mãi")
                 {
-                    if (item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                    if (item.StartTime <= DateTime.Now)
                         item.Price = item.PromotionalPrice;
                 }
                 var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +

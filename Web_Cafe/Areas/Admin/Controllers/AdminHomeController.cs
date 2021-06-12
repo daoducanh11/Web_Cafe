@@ -14,16 +14,17 @@ namespace Web_Cafe.Areas.Admin.Controllers
     {
         static List<int> arrImgDelete = new List<int>();
         // GET: Admin/AdminHome
-        public ActionResult Index(string keywords, string categoryId, string minPrice, string maxPrice, int pageNum = 1, int pageSize = 9)
+        public ActionResult Index(string keywords, string categoryId, string proStatus, string minPrice, string maxPrice, int pageNum = 1, int pageSize = 9)
         {
-            //if(Session["username"] == null)
-            //return RedirectToAction("Index", "AdminLogin");
             int proId;
             int cateId = Convert.ToInt32(categoryId);
+            if (proStatus == null)
+                proStatus = "0";
             ProductDAO dao = new ProductDAO();
             CategoryDAO daoCate = new CategoryDAO();
             ViewBag.keywords = keywords;
             ViewBag.categoryId = cateId;
+            ViewBag.proStatus = proStatus;
             ViewBag.minPrice = minPrice;
             ViewBag.maxPrice = maxPrice;
             ViewBag.cate = daoCate.ListCate();
@@ -34,11 +35,9 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 max = 10000000;
             if (keywords == null)
                 keywords = "";
-            if (keywords == "" && cateId == 0 && min == 0 && max == 10000000)
-                return View(dao.lstJoin(pageNum, pageSize));
             if (int.TryParse(keywords, out proId))
-                return View(dao.listSearchProById(proId, cateId, min, max, pageNum, pageSize));
-            return View(dao.listSearchProByName(keywords, cateId, min, max, pageNum, pageSize));
+                return View(dao.listSearchProById(proId, cateId, proStatus, min, max, pageNum, pageSize));
+            return View(dao.listSearchProByName(keywords, cateId, proStatus, min, max, pageNum, pageSize));
         }
         [HttpPost]
         public ActionResult Index(FormCollection data, int pageNum = 1, int pageSize = 9)
@@ -68,7 +67,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
         public ActionResult Create()
         {
             CategoryDAO dao = new CategoryDAO();
-            ViewBag.cate = dao.ListCate();
+            ViewBag.cate = dao.ListCateInProduct();
             return View();
         }
         [HttpPost]
@@ -108,7 +107,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 return RedirectToAction("Index", "AdminHome");    
             }
             CategoryDAO daoCate = new CategoryDAO();
-            ViewBag.cate = daoCate.ListCate();
+            ViewBag.cate = daoCate.ListCateInProduct();
             return View(proTmp);
         }
         
@@ -123,7 +122,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
             if (pro.EndTime == null)
                 pro.EndTime = DateTime.Now;
             CategoryDAO daoCate = new CategoryDAO();
-            ViewBag.cate = daoCate.ListCate();
+            ViewBag.cate = daoCate.ListCateInProduct();
             return View(pro);
         }
         [HttpPost]
@@ -167,7 +166,7 @@ namespace Web_Cafe.Areas.Admin.Controllers
                 return RedirectToAction("Index", "AdminHome");
             }
             CategoryDAO daoCate = new CategoryDAO();
-            ViewBag.cate = daoCate.ListCate();
+            ViewBag.cate = daoCate.ListCateInProduct();
             return View(pro);
         }
 

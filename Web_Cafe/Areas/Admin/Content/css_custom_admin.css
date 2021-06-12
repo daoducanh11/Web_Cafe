@@ -1,4 +1,8 @@
-﻿/*Trang chủ Admin*/
+﻿/*Trang Login*/
+.nav-link-account:focus, .nav-link-account:hover {
+    color: #0056b3 !important;
+}
+/*Trang chủ Admin*/
 #return-to-top {
     position: fixed;
     z-index: 999;
@@ -108,7 +112,7 @@ i.fas fa-plus:hover {
 }
 
 .table tbody tr:hover td, .table tbody tr:hover th {
-    background-color: gainsboro;
+    background-color: aliceblue;
 }
 
 .btn-search{
@@ -270,4 +274,9 @@ ul#ui-id-1 {
     display: inline-block;
     width: 70%;
     margin-left: 5px;
+}
+
+/*Trang tin tức*/
+.news-description .note-editing-area {
+    min-height: 224px;
 }

@@ -68,23 +68,36 @@
                 <div class="product__price product__price__view">
                     <span class="product__price--txt">Giá bán</span>
                     @{
-                        if (Model.Product.ProStatus == "Khuyến mãi" && Model.Product.StartTime <= DateTime.Now && Model.Product.EndTime > DateTime.Now)
+                        if (Model.Product.ProStatus == "Khuyến mãi" && Model.Product.StartTime <= DateTime.Now)
                         {
                             <div class="product__price__regular">
-                                @Model.Product.PromotionalPrice<span class="unit">đ</span>
+                                @Model.Product.PromotionalPrice.Value.ToString("N0")<span class="unit">đ</span>
                             </div>
-                            <div class="product__price__old">@Model.Product.Price<span class="unit">đ</span></div>
+                            <div class="product__price__old">@Model.Product.Price.Value.ToString("N0")<span class="unit">đ</span></div>
                         }
                         else
                         {
-                            <div class="product__price__regular">@Model.Product.Price<span class="unit">đ</span></div>
+                            <div class="product__price__regular">@Model.Product.Price.Value.ToString("N0")<span class="unit">đ</span></div>
 
                         }
                     }
                 </div>
 
                 <div class="product__view__info">
-                    <p class="info">Tình trạng: <span class="name">@Model.Product.ProStatus</span></p>
+                    <p class="info">
+                        Tình trạng:
+                        @{ var status = "";
+                            if (Model.Product.ProStatus == "Khuyến mãi" && Model.Product.StartTime > DateTime.Now)
+                            {
+                                status = "Mới";
+                            }
+                            else
+                            {
+                                status = Model.Product.ProStatus;
+                            }
+                            <span class="name">@status</span>
+                        }
+                    </p>
                 </div>
 
                 <div class="product__view__desc">
@@ -154,7 +167,17 @@
                                         <button class="btn btn-cart">Thêm vào giỏ</button>
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
-                                    <div class="product__sale">@item.Product.ProStatus</div>
+                                    @{ var statusRelate = "";
+                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime > DateTime.Now)
+                                        {
+                                            statusRelate = "Mới";
+                                        }
+                                        else
+                                        {
+                                            statusRelate = item.Product.ProStatus;
+                                        }
+                                        <div class="product__sale">@statusRelate</div>
+                                    }
                                 </div>
                                 <h3 class="product__name">
                                     <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
@@ -164,7 +187,7 @@
                                         @item.Product.Price.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now && item.Product.EndTime > DateTime.Now)
+                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
                                                 @item.Product.PromotionalPrice.ToString("N0")

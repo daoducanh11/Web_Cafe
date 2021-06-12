@@ -2,8 +2,7 @@
     ViewBag.Title = "My Café";
 }
 
-@using PagedList.Mvc
-@model PagedList.IPagedList<Web_Cafe.Models.DTO.ProductExtend>
+@model List<Web_Cafe.Models.DTO.ProductExtend>
 
 <div class="nav-anchor"></div>
 <div class="slider-main hidden-xs">
@@ -47,13 +46,13 @@
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
                                     @{ var status = "";
-                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
+                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime > DateTime.Now)
                                         {
-                                            status = "Khuyến mãi";
+                                            status = "Mới";
                                         }
                                         else
                                         {
-                                            status = "Mới";
+                                            status = item.Product.ProStatus;
                                         }
                                         <div class="product__sale">@status</div>
                                     }
@@ -63,17 +62,13 @@
                                 </h3>
                                 <div class="product__price">
                                     <div class="product__price__regular">
-
-                                        @item.Product.Price.ToString()
-
+                                        @item.Product.Price.Value.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
                                     @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
-
-                                                @item.Product.PromotionalPrice.ToString()
-
+                                                @item.Product.PromotionalPrice.Value.ToString("N0")
                                                 <span class="unit">đ</span>
                                             </div>
                                         }
@@ -83,14 +78,6 @@
                         </div>
                     }
                 }
-
-                <div class="page__nav">
-                    <div class="col-md-12">
-                        @*<a href="#" class="nav"><span class="fa fa-angle-right"></span></a>*@
-                        @Html.PagedListPager(Model, PageNum => Url.Action("Index", new { PageNum }))
-                    </div>
-                </div>
-
             </div>
             <div role="tabpanel" class="tab-pane" id="hot" style="min-width: 1146px">
                 @{ foreach (var item in ViewBag.ListProductHotExtend)
@@ -106,13 +93,13 @@
                                     </div>
                                     <a href="~/Product/Details/@item.ProductID" class="product__overlay" title="@item.ProName"></a>
                                     @{ var status = "";
-                                        if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now)
+                                        if (item.ProStatus == "Khuyến mãi" && item.StartTime > DateTime.Now)
                                         {
-                                            status = "Khuyến mãi";
+                                            status = "Mới";
                                         }
                                         else
                                         {
-                                            status = "Mới";
+                                            status = item.ProStatus;
                                         }
                                         <div class="product__sale">@status</div>
                                     }
@@ -122,17 +109,13 @@
                                 </h3>
                                 <div class="product__price">
                                     <div class="product__price__regular">
-
-                                        @item.Price.ToString()
-
+                                        @item.Price.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime >= DateTime.Now)
+                                    @{ if (item.ProStatus == "Khuyến mãi" && item.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
-
-                                                @item.PromotionalPrice.ToString()
-
+                                                @item.PromotionalPrice.ToString("N0")
                                                 <span class="unit">đ</span>
                                             </div>
                                         }
@@ -186,13 +169,11 @@
                                         </h3>
                                         <div class="product__price">
                                             <div class="product__price__regular">
-
-                                                @item.Product.PromotionalPrice.ToString()
+                                                @item.Product.PromotionalPrice.ToString("N0")
                                                 <span class="unit">đ</span>
                                             </div>
                                             <div class="product__price__old">
-                                                @item.Product.Price.ToString()
-
+                                                @item.Product.Price.ToString("N0")
                                                 <span class="unit">đ</span>
                                             </div>
                                         </div>

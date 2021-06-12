@@ -34,5 +34,17 @@ namespace Web_Cafe.Areas.Admin.Controllers
             ViewBag.total = dao.GetTotal(Convert.ToInt32(year), Convert.ToInt32(month));
             return View();
         }
+        public ActionResult HotProduct(int? year, int? month)
+        {
+            if (year == null)
+                year = DateTime.Now.Year;
+            if (month == null)
+                month = DateTime.Now.Month;
+            OrderDAO dao = new OrderDAO();
+            ViewBag.year = dao.GetYearOrder();
+            ViewBag.yearSelected = year;
+            ViewBag.month = month;
+            return View(dao.lstSearchHotProduct(Convert.ToInt32(year), Convert.ToInt32(month)));
+        }
     }
 }

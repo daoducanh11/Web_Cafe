@@ -16,6 +16,8 @@ namespace Web_Cafe.Areas.Admin.Controllers
         public ActionResult Index()
         {
             Session["proName"] = "";
+            if(Session["username"] != null)
+                return RedirectToAction("Index", "AdminHome");
             return View();
         }
         [HttpPost]
@@ -29,15 +31,22 @@ namespace Web_Cafe.Areas.Admin.Controllers
             //    hasPass += item;
             //}
             LoginDAO lo = new LoginDAO();
-            if (lo.Login(model.Username, model.Password))
+            Session["idAdmin"] = lo.Login(model.Username, model.Password);
+            if (Convert.ToInt32(Session["idAdmin"]) > 0)
             {
                 Session["username"] = model.Username;
+                Session["isAdmin"] = lo.IsAdmin(model.Username, model.Password);
                 return RedirectToAction("Index", "AdminHome");
-                //return RedirectToAction("Index", "AdminHome", new { area = "Admin" });
+                //return RedirectToAction("Index", "AdminHome", new { Area = "Admin" });
                 //return Redirect("~/Admin/AdminHome/Index");
             }
             ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng!");
             return View(model);
+        }
+        public ActionResult Logout()
+        {
+            Session["username"] = null;
+            return RedirectToAction("Index", "AdminLogin");
         }
 
         public ActionResult CountOrder()

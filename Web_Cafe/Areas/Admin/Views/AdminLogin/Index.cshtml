@@ -35,7 +35,8 @@
                 <div class="login100-pic js-tilt" data-tilt>
                     <img src="~/Areas/Admin/Content/images/img-01.png" alt="IMG">
                 </div>
-                <form action="Index" method="post" class="login100-form validate-form">
+                @using (Html.BeginForm("Index", "AdminLogin", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                {
                     <span class="login100-form-title">
                         Admin Login
                     </span>
@@ -75,7 +76,7 @@
                             <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                         </a>
                     </div>
-                </form>
+                }
             </div>
         </div>
     </div>

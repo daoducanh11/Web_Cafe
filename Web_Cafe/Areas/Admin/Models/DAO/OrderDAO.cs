@@ -110,5 +110,22 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToList();
             return t[0];
         }
+        public List<ProductDTO> lstSearchHotProduct(int year, int month)
+        {
+            var lst = db.Database.SqlQuery<ProductDTO>(String.Format("lstSearchHotProduct {0}, {1}", year, month)
+                ).ToList();
+            foreach (var item in lst)
+            {
+                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
+                " FROM Images " +
+                " WHERE ProductID = " + item.ProductID
+                ).ToList<ImageDTO>();
+                if (res.Count() > 0)
+                    item.ImageLink = res[0].ImageLink;
+                else
+                    item.ImageLink = "noimage.jpg";
+            }
+            return lst;
+        }
     }
 }

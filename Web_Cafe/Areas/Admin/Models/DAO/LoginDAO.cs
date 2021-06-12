@@ -13,9 +13,16 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         {
             db = new Web_CafeModel();
         }
-        public bool Login(string username, string password)
+        public int Login(string username, string password)
         {
             var res = (from s in db.Admins where s.Username == username && s.Password == password select s);
+            if (res.Count() > 0)
+                return res.FirstOrDefault().AdminID;
+            return 0;
+        }
+        public bool IsAdmin(string username, string password)
+        {
+            var res = (from s in db.Admins where s.Username == username && s.Password == password && s.AdminType == "Admin" select s);
             if (res.Count() > 0)
                 return true;
             return false;

@@ -12,30 +12,24 @@ namespace Web_Cafe.Models.DAO
 {
     public class ProductDAOExtent : ProductDAO
     {
-
-
         Web_CafeModel db;
-
         public List<ProductExtend> ListProductExtend { get; private set; }
         public List<ProductExtend> ListProductSales { get; private set; }
 
         public ProductDAOExtent() : base()
         {
             db = new Web_CafeModel();
-           
-
         }
-       
 
-        public IEnumerable<ProductExtend> GetListProductExtend(int pageNum = 1, int pageSize = 8)
+        public List<ProductExtend> GetListProductExtend()
         {
             this.ListProductExtend = new List<ProductExtend>();
             var listproduct = (from s in db.Products where s.ProStatus != "Không hoạt động" select s);
-            foreach (var item in listproduct)
+            foreach (var item in listproduct.Take(8))
             {
                 ListProductExtend.Add(new ProductExtend(item));
             }
-            return ListProductExtend.ToPagedList<ProductExtend>(pageNum, pageSize);
+            return ListProductExtend;
         }
 
         public List<ProductExtend> GetListProductSales()
@@ -49,7 +43,7 @@ namespace Web_Cafe.Models.DAO
                 {
                     if (ListProductSales.Count < 4 && item.ProStatus == "Khuyến mãi")
                     {
-                        if (item.StartTime <= DateTime.Now && item.EndTime > DateTime.Now)
+                        if (item.StartTime <= DateTime.Now)
                             ListProductSales.Add(new ProductExtend(item));
                     }
                 }
@@ -60,32 +54,17 @@ namespace Web_Cafe.Models.DAO
             }
             return ListProductSales;
         }
-        public ProductExtend GetProductExtendById(int id)
-        {
-            foreach (var item in ListProductExtend)
-            {
-                if (item.Product.ProductID == id)
-                {
-                    return item;
-                }
-            }
-            foreach (var item in ListProductSales)
-            {
-                if (item.Product.ProductID == id)
-                {
-                    return item;
-                }
-
 
         public ProductExtend GetProductExtendById(int id)
         {
             return new ProductExtend((from s in db.Products where s.ProStatus != "Không hoạt động" select s).Where(i => i.ProductID == id).FirstOrDefault());
         }
 
-        public IEnumerable<ProductExtend> GetProductExtendByName(string name, int pageNum = 1, int pageSize = 6)
+        public IEnumerable<ProductExtend> GetProductExtendByName(string name, int cateId, int pageNum = 1, int pageSize = 6)
         {
 
-            var listproduct = db.Database.SqlQuery<Product>("exec lstSearchProductByName  '" + name + "'");
+            var listproduct = db.Database.SqlQuery<Product>(string.Format("lstSearchProductByName N'{0}', {1}",
+                name, cateId));
             var result = new List<ProductExtend>();
             foreach (var item in listproduct)
             {
@@ -118,38 +97,13 @@ namespace Web_Cafe.Models.DAO
                         if (listResult.Count < 8)
                         {
                             listResult.Add(new ProductExtend(item));
-
                             if (listResult.Count == 8)
-
                                 break;
                         }
                     }
             }
             return listResult;
         }
-
-
-        public List<ProductDTO> ListProductHotExtend()
-        {
-            var lst = db.Database.SqlQuery<ProductDTO>(" SELECT TOP 8 I.ProductID, P.ProName, P.Price, " +
-                " P.PromotionalPrice, P.ProStatus, P.StartTime, P.EndTime, COUNT(I.ProductID) [Count] " +
-                " FROM Item I, Product P " +
-                " WHERE I.ProductID = P.ProductID AND P.ProStatus != N'Không hoạt động' " +
-                " GROUP BY I.ProductID, P.ProName, P.Price, P.PromotionalPrice, P.ProStatus, P.StartTime, P.EndTime " +
-                " ORDER BY COUNT(I.ProductID) DESC "
-                ).ToList<ProductDTO>();
-            foreach (var item in lst)
-            {
-                var res = db.Database.SqlQuery<ImageDTO>(" SELECT TOP 1 ImageLink " +
-                    " FROM Images " +
-                    " WHERE ProductID = " + item.ProductID
-                    ).ToList<ImageDTO>();
-                if (res.Count() > 0)
-                    item.ImageLink = res[0].ImageLink;
-            }
-            return lst;
-        }
-
 
         public List<ProductDTO> ListProductHotExtend()
         {

@@ -13,18 +13,13 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
         {
             db = new Web_CafeModel();
         }
-        //public IQueryable<Category> Categories
-        //{
-        //    get { return db.Categories; }
-        //}
-        //public IQueryable<Category> ListCategory()
-        //{
-        //    var res = (from s in db.Categories select s);
-        //    return res;
-        //}
         public List<Category> ListCate()
         {
             return db.Categories.ToList();
+        }
+        public List<Category> ListCateInProduct()
+        {
+            return (from s in db.Categories where s.CateStatus != "Không hoạt động" select s).ToList();
         }
         public Category GetById(int id)
         {

@@ -1,0 +1,220 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<Web_Cafe.Models.Entities.Admin>
+
+@{
+    ViewBag.Title = "Tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Danh sách tài khoản</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        @Html.ActionLink("Trang chủ", "Index", "AdminHome")
+                    </li>
+                    <li class="breadcrumb-item active">Cài đặt</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    <div class="form-search">
+                        @using (Html.BeginForm("Index", "AdminAccount", FormMethod.Get, new { }))
+                        {
+                            <div class="row">  
+                                <div class="col-7">
+                                    <div class="">
+                                        <input type="text" class="form-control" name="keywords" placeholder="Tên đăng nhập" value="@ViewBag.keywords">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="">
+                                        <select class="form-control" name="adminType">
+                                            <option value="">Loại tài khoản</option>
+                                            @{ var ad = "";
+                                                var st = "";
+                                                if (ViewBag.adminType == "Admin")
+                                                {
+                                                    ad = "selected";
+                                                }
+                                                else if (ViewBag.adminType == "Nhân viên")
+                                                {
+                                                    st = "selected";
+                                                }
+                                            }
+                                            <option @st value="Nhân viên">Nhân viên</option>
+                                            <option @ad value="Admin">Admin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="btn-search">
+                                        <button type="submit" class="btn btn-default btn-pro" title="Tìm kiếm" style="background-color: #2ea1f8; flex: auto; ">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <a href="~/Admin/AdminAccount" class="btn btn-default btn-pro" title="Tải lại" style="background-color: #34a544; flex: auto; ">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    Tên đăng nhập
+                                </th>
+                                <th class="text-center">
+                                    Loại tài khoản
+                                </th>
+                                <th class="text-center">
+                                    <i class="fas fa-cogs"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Username)
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.DisplayFor(modelItem => item.AdminType)
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" onclick="funcEdit(@item.AdminID)" title="Sửa">
+                                            <i class="fas fa-edit" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="~/Admin/AdminAccount/Delete/@item.AdminID" title="Xóa" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                            <i class="fas fa-trash-alt" style="color:red;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, PageNum => Url.Action("Index", new { PageNum, @keywords = @ViewBag.keywords, @adminType = @ViewBag.adminType }))
+                </div>
+            </div>
+        </div>
+        <!-- /.col-->
+        <div class="col-md-4">
+            <div class="card card-outline card-info">
+                <div class="card-header">
+                    <h4 class="">
+                        Thêm mới
+                    </h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Create", "AdminAccount", FormMethod.Post, new { @onsubmit = "return validateForm()", @name = "myForm" }))
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" id="Submit" class="btn btn-block btn-success btn-lg">
+                                        <i class="ace-icon fa fa-check"></i>
+                                        Thêm mới
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-block btn-info btn-lg">
+                                        <i class="fas fa-sync"></i>
+                                        Nhập lại
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Loại tài khoản:</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="adminType" value="Nhân viên" checked>
+                                        <label class="form-check-label">Nhân viên</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="adminType" value="Admin">
+                                        <label class="form-check-label">Admin</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Tên đăng nhập
+                                <i class="fas fa-asterisk"></i>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control float-right" name="username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Mật khẩu
+                                <i class="fas fa-asterisk"></i>
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="form-control float-right" name="password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nhập lại mật khẩu
+                                <i class="fas fa-asterisk"></i>
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="form-control float-right" name="repassword" required>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./row -->
+</section>
+
+<div class="modal fade" id="modalEdit" role="dialog" aria-hidden="true">
+
+</div>
+
+@section script{
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["password"].value;
+            var y = document.forms["myForm"]["repassword"].value;
+            if (x == "" || x != y) {
+                alert("Xác nhận mật khẩu chưa chính xác!");
+                return false;
+            }
+        }
+
+        function funcEdit(id) {
+            var url = "/Admin/AdminAccount/Edit?id=" + id;
+            $("#modalEdit").load(url, function (data) {
+                $("#modalEdit").html(data);
+                $("#modalEdit").modal("show");
+            });
+        }
+    </script>
+}

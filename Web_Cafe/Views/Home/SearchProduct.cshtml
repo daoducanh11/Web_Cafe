@@ -1,12 +1,12 @@
 ﻿@using PagedList.Mvc
 @{
-    ViewBag.Title = "SearchProduct";
+    ViewBag.Title = "Sản phẩm";
 }
 
 @model PagedList.IPagedList<Web_Cafe.Models.DTO.ProductExtend>
 <div class="breadcrumb">
     <div class="container">
-        <a href="#" class="li">Trang chủ </a>
+        <a href="~/Home/Index" class="li">Trang chủ </a>
         <span class="li active">@ViewBag.CName</span>
     </div>
 </div>
@@ -18,15 +18,22 @@
                     <div class="category__sidebar__box">
                         <h2 class="sidebar__cat__title"> DANH MỤC SẢN PHẨM</h2>
                         <div class="sidebar__list">
+                            <div class="item">
+                                <a id="all" href="~/Home/SearchProduct?keywordProduct=@ViewBag.keywordProduct">Tất cả</a>
+                            </div>
                             @{
                                 foreach (var item in ViewBag.ListCategory)
                                 {
                                     <div class="item">
-                                        <a href="~/Home/SearchProduct?id=@item.CategoryID">@item.CateName</a>
+                                        <a href="~/Home/SearchProduct?id=@item.CategoryID&keywordProduct=@ViewBag.keywordProduct">@item.CateName</a>
                                     </div>
                                 }
                             }
                         </div>
+                        <a href="~/Home/SearchProduct" class="btn btn-refresh-search">
+                            <i class="fa fa-refresh"></i>
+                            Chọn lại
+                        </a>
                     </div>
                     <div class="category__sidebar__box">
                         <img src="~/Images/bg8.jpg" alt="">
@@ -49,20 +56,30 @@
                                                 <button class="btn btn-cart">Thêm vào giỏ</button>
                                             </div>
                                             <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
-                                            <div class="product__sale">@item.Product.ProStatus</div>
+                                            @{ var status = "";
+                                                if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime > DateTime.Now)
+                                                {
+                                                    status = "Mới";
+                                                }
+                                                else
+                                                {
+                                                    status = item.Product.ProStatus;
+                                                }
+                                                <div class="product__sale">@status</div>
+                                            }
                                         </div>
                                         <h3 class="product__name">
                                             <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
                                         </h3>
                                         <div class="product__price">
                                             <div class="product__price__regular">
-                                                @item.Product.Price.ToString()
+                                                @item.Product.Price.Value.ToString("N0")
                                                 <span class="unit">đ</span>
                                             </div>
-                                            @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now && item.Product.EndTime > DateTime.Now)
+                                            @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                                 {
                                                     <div class="product__price__old">
-                                                        @item.Product.PromotionalPrice.ToString()
+                                                        @item.Product.PromotionalPrice.Value.ToString("N0")
                                                         <span class="unit">đ</span>
                                                     </div>
                                                 }
@@ -77,9 +94,9 @@
                     <div class="page__nav">
                         <div class="col-md-6">
                             @Html.PagedListPager(Model, PageNum => Url.Action("SearchProduct", new { PageNum, @keywordProduct = ViewBag.keywordProduct, @id = ViewBag.id }))
-                            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -118,3 +135,17 @@
         </div>
     </div>
 </section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var url = window.location.href;
+            var arr = url.split('/');
+            var urlParent = "/" + arr[3] + "/" + arr[4];
+            if (urlParent == "/Home/SearchProduct")
+                $('#all')[0].parentElement.classList.add('active');
+            $('.sidebar__list').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('active');
+            
+        });
+    </script>
+}

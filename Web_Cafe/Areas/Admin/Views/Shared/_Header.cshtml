@@ -7,8 +7,6 @@
             </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            @*<a href="~/Areas/Admin/Views/AdminHome/Index.cshtml" class="nav-link">Trang chủ</a>*@
-            @*@Html.ActionLink("Trang chủ", "Index", "AdminHome", new { area = "Admin" }, new { @class = "nav-link" })*@
             <a href="/Home" class="nav-link" title="My Café" target="_blank">
                 <img src="~/Content/images/logo.png" alt="My Café" class="" style="width: 50px; margin-top: -10px; margin-right: 5px;">
                 <span class="">My Café</span>
@@ -19,60 +17,21 @@
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown">
+            <a href="#" class="nav-link nav-link-account" data-toggle="dropdown">
                 <p style="display: inline-table; margin-right: 11px;">@Session["username"]</p>
                 <i class="far fa-user"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        <img src="~/Areas/Admin/Content/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Brad Diesel
-                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Call me whenever you can...</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="min-width: 200px;">
+                <a href="~/Admin/AdminAccount/Profile" class="dropdown-item">
+                    <i class="fas fa-address-card"></i>
+                    <p class="text-sm" style="display: inline-block;">Thông tin tài khoản</p>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        <img src="~/Areas/Admin/Content/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                John Pierce
-                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">I got your message bro</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
+                <a href="~/Admin/AdminLogin/Logout" class="dropdown-item" onclick="return confirm('Bạn chắc chắn muốn đăng xuất?')">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p class="text-sm" style="display: inline-block;">Đăng xuất</p>
                 </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        @*<img src="~/Areas/Admin/Contentdist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">*@
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Nora Silvester
-                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">The subject goes here</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item dropdown-footer">See All Messages</a>
+                
             </div>
         </li>
         <!-- Notifications Dropdown Menu -->

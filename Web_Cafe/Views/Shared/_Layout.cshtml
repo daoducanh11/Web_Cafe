@@ -43,7 +43,13 @@
                             <div class="box-search">
                                 <div class="form-input">
                                     <form action="~/Home/SearchProduct" method="post">
-                                        <input type="text" name="keywordProduct" class="form-control" placeholder="Tên sản phẩm ...">
+                                        @{var keywordPro = "";
+                                            if(ViewBag.keywordProduct != null)
+                                            {
+                                                keywordPro = ViewBag.keywordProduct;
+                                            }
+                                        }
+                                        <input type="text" name="keywordProduct" value="@keywordPro" class="form-control" placeholder="Tên sản phẩm ...">
                                         <button class="btn btn__search"><span class="fa fa-search"></span></button>
                                     </form>
                                 </div>
@@ -165,13 +171,7 @@
                                 <a href="~/Home/Index" class="catalog__link">Trang chủ</a>
                             </li>
                             <li class="catalog__item -sub">
-                                <a href="~/Home/Category/1" class="catalog__link">Cà phê</a>
-                            </li>
-                            <li class="catalog__item -sub">
-                                <a href="~/Home/Category/2" class="catalog__link">Trà</a>
-                            </li>
-                            <li class="catalog__item -sub">
-                                <a href="~/Home/Product" class="catalog__link">
+                                <a href="~/Home/SearchProduct" class="catalog__link">
                                     Sản phẩm
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>

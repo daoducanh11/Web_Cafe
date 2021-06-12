@@ -139,16 +139,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminAccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminNewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticsController.cs" />
+    <Compile Include="Areas\Admin\Models\DAO\AccountDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\CategoryDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ImageDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ItemDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\LoginDAO.cs" />
+    <Compile Include="Areas\Admin\Models\DAO\NewsDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\OrderDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\ProductDAO.cs" />
     <Compile Include="Areas\Admin\Models\DAO\UserDAO.cs" />
@@ -159,6 +163,8 @@
     <Compile Include="Areas\Admin\Models\DTO\ProductDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\StatisticsDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\UserDTO.cs" />
+    <Compile Include="Common\AuthorizationAdminAttribute.cs" />
+    <Compile Include="Common\IsLoginAttribute.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1081,6 +1087,13 @@
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Areas\Admin\Views\AdminOrder\Invoice.cshtml" />
     <Content Include="Areas\Admin\Views\Statistics\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistics\HotProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAccount\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAccount\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAccount\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNews\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNews\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminNews\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
@@ -1119,9 +1132,7 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Home\MenuChild.cshtml" />
-
     <Content Include="Views\Home\SearchProduct.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

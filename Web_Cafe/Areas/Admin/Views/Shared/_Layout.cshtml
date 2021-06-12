@@ -83,7 +83,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a href="/Admin/AdminNews" class="nav-link">
                                 <i class="nav-icon fas fa-newspaper"></i>
                                 <p>Tin tức</p>
                             </a>
@@ -94,12 +94,12 @@
                                 <p>Khách hàng</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>Thư viện ảnh</p>
                             </a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a href="/Admin/AdminCategory" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
@@ -122,7 +122,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link">
+                                    <a href="/Admin/Statistics/HotProduct" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Sản phẩm bán chạy</p>
                                     </a>
@@ -130,10 +130,31 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">
+                            <a href="/Admin/AdminAccount" class="nav-link">
                                 <i class="nav-icon fas fa-cogs"></i>
-                                <p>Cài đặt</p>
+                                <p>
+                                    Cài đặt
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Admin/AdminAccount/Profile" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tài khoản</p>
+                                    </a>
+                                </li>
+                                @{if (Session["isAdmin"] != null && (bool)Session["isAdmin"])
+                                    {
+                                        <li class="nav-item">
+                                            <a href="/Admin/AdminAccount/Index" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Nâng cao</p>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -163,6 +184,10 @@
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
+    </div>
+
+    <div class="modal fade" id="modalProfile" role="dialog" aria-hidden="true">
+
     </div>
 
     <!-- jQuery -->
@@ -205,20 +230,22 @@
         });
 
         $(document).ready(function () {
-            var url = window.location.pathname;
-            var arr = url.split('/');
-            var urlParent = "/" + arr[1] + "/" + arr[2];
-            $('.sidebar').find('[href="' + urlParent + '"]').addClass('active');
-            if (arr.length == 4) {
-                $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-is-opening');
-                $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-open');
-                var urlChild = "/" + arr[1] + "/" + arr[2] + "/" + arr[3];
-                try {
-                    $('.sidebar').find('[href="' + urlChild + '"]')[0].parentElement.parentElement.style.display = "block";
-                    $('.sidebar').find('[href="' + urlChild + '"]').addClass('active');
+            try {
+                var url = window.location.pathname;
+                var arr = url.split('/');
+                var urlParent = "/" + arr[1] + "/" + arr[2];
+                $('.sidebar').find('[href="' + urlParent + '"]').addClass('active');
+                if (arr.length == 4) {
+                    $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-is-opening');
+                    $('.sidebar').find('[href="' + urlParent + '"]')[0].parentElement.classList.add('menu-open');
+                    var urlChild = "/" + arr[1] + "/" + arr[2] + "/" + arr[3];
+                    try {
+                        $('.sidebar').find('[href="' + urlChild + '"]')[0].parentElement.parentElement.style.display = "block";
+                        $('.sidebar').find('[href="' + urlChild + '"]').addClass('active');
+                    }
+                    catch { }
                 }
-                catch {}
-            }
+            } catch { }
         });
 
     </script>

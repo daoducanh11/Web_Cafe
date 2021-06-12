@@ -243,7 +243,9 @@
                 })
                 .autocomplete("instance")._renderItem = function (ul, item) {
                     return $("<li>")
-                        .append("<div id = \"" + item.ProductID + "\" class = \"add-product\">" + item.ProName + " - " + item.Price + "đ</div>")
+                        .append("<div id = \"" + item.ProductID + "\" class = \"add-product\">" +
+                                    item.ProName + " - " + String(item.Price).replace(/(.)(?=(\d{3})+$)/g, '$1,') +
+                                "đ</div>")
                         .appendTo(ul);
                 };
             }
