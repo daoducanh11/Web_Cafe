@@ -168,6 +168,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1133,6 +1134,10 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Home\MenuChild.cshtml" />
     <Content Include="Views\Home\SearchProduct.cshtml" />
+    <Content Include="Views\Home\ShoppingCart.cshtml" />
+    <Content Include="Views\Home\ShoppingCart_ImportInfo.cshtml" />
+    <Content Include="Views\Home\ShoppingCart_Confirmed.cshtml" />
+    <Content Include="Views\Home\ShoppingCart_Completed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1140,6 +1145,7 @@
     <Folder Include="Images\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Category\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

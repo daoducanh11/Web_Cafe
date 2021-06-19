@@ -44,7 +44,7 @@
                                 <div class="form-input">
                                     <form action="~/Home/SearchProduct" method="post">
                                         @{var keywordPro = "";
-                                            if(ViewBag.keywordProduct != null)
+                                            if (ViewBag.keywordProduct != null)
                                             {
                                                 keywordPro = ViewBag.keywordProduct;
                                             }
@@ -70,87 +70,79 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="header-top__shopcart">
-                                    <div class="headline">
-                                        Giỏ hàng 
-                                        <div class="icon">
-                                            <span class="-ap icon-cart" style="font-size: 19px;"></span>
-                                            <span class="number-cart">0</span>
-                                        </div>  
-                                    </div>
-                                    <div class="dropdown__shop__cart">
-                                        <div class="dropdown__head">
-                                            <span class="number">0</span>
-                                            <span class="txt">Sản phẩm trong giỏ hàng</span>
-                                        </div>
-                                        <div class="product__shopcart">
-                                            <div class="product__list">
-                                                <div class="product__list__item">
-                                                    <div class="product__img">
-                                                        <img src="" alt="Name your Product ">
-                                                    </div>
-                                                    <div class="product__name">
-                                                        Son lì dạng kem L'oreal Color Riche .....
-                                                        <a class="product__delete">
-                                                            <span class="icon -ap icon-trash2"></span>
-                                                        </a>
-                                                    </div>
+                                @{
+                                    ViewBag.sumShoppingCart = 0;
+                                    ViewBag.number_cart = 0;
+                                    ViewBag.shoppingcart = new List<Web_Cafe.Models.DTO.ProductExtend>();
 
-                                                    <div class="product__price">
-                                                        <div class="product__price__old">790.000 <span class="unit">đ</span></div>
-                                                        <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                                        <div class="product__quantity">
-                                                            <button class="btn-minus btn">
-                                                                -
-                                                            </button>
-                                                            <input type="text" class="input-number" value="1">
-                                                            <button class="btn-plus btn">
-                                                                +
-                                                            </button>
-                                                            <div class="clearfix"></div>
-                                                        </div>
+                                    if (Session["shopping_cart"] != null)
+                                    {
+                                        ViewBag.shoppingcart = (List<Web_Cafe.Models.DTO.ProductExtend>
+                                                                               )Session["shopping_cart"];
+                                        ViewBag.number_cart = ViewBag.shoppingcart.Count;
 
-                                                    </div>
-
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="product__list__item">
-                                                    <div class="product__img">
-                                                        <img src="" alt="Name your Product ">
-                                                    </div>
-                                                    <div class="product__name">
-                                                        Son lì dạng kem L'oreal Color Riche .....
-                                                        <a class="product__delete">
-                                                            <span class="icon -ap icon-trash2"></span>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="product__price">
-                                                        <div class="product__price__old">90.000 <span class="unit">đ</span></div>
-                                                        <div class="product__price__regular">790.000 <span class="unit">đ</span></div>
-                                                        <div class="product__quantity">
-                                                            <button class="btn-minus btn">
-                                                                -
-                                                            </button>
-                                                            <input type="text" class="input-number" value="1">
-                                                            <button class="btn-plus btn">
-                                                                +
-                                                            </button>
-                                                            <div class="clearfix"></div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="clearfix"></div>
+                                    }
+                                    <div class="header-top__shopcart">
+                                        <a href="~/Home/ShoppingCart">
+                                            <div class="headline">
+                                                Giỏ hàng
+                                                <div class="icon">
+                                                    <span class="-ap icon-cart" style="font-size: 19px;"></span>
+                                                    <span class="number-cart">@(ViewBag.number_cart)</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="dropdown__bottom">
-                                            <div class="total">Tổng cộng: <span class="product__price number">9.990.000 <span class="unit"></span>đ</span></div>
-                                            <button href="#" class="btn__checkout">Tiến hành đặt hàng</button>
+                                        </a>
+                                        <div class="dropdown__shop__cart">
+
+                                            <div class="dropdown__head">
+                                                <span class="number">@(ViewBag.number_cart)</span>
+                                                <span class="txt">Sản phẩm trong giỏ hàng</span>
+                                            </div>
+                                            <div class="product__shopcart">
+                                                <div class="product__list">
+                                                    @foreach (var item in ViewBag.shoppingcart)
+                                                    {
+                                                       <h1 hidden> @(ViewBag.sumShoppingCart+=(item.Product.Price - item.Product.PromotionalPrice))</h1>
+                                                        <div class="product__list__item">
+                                                            <div class="product__img">
+                                                                <img src="~/Images/@item.img_path" alt="@item.Product">
+                                                            </div>
+                                                            <div class="product__name">
+                                                                @item.Product.ProName
+                                                                <a class="product__delete">
+                                                                    <span class="icon -ap icon-trash2"></span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="product__price">
+                                                                <div class="product__price__old">@item.Product.Price<span class="unit">đ</span></div>
+                                                                <div class="product__price__regular">@(item.Product.Price - item.Product.PromotionalPrice)<span class="unit">đ</span></div>
+                                                                <div class="product__quantity">
+                                                                    <button class="btn-minus btn">
+                                                                        -
+                                                                    </button>
+                                                                    <input type="text" class="input-number" value="1">
+                                                                    <button class="btn-plus btn">
+                                                                        +
+                                                                    </button>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="dropdown__bottom">
+                                                <div class="total">Tổng cộng: <span class="product__price number">@( ViewBag.sumShoppingCart)<span class="unit"></span>đ</span></div>
+                                                <form action="~/Home/ShoppingCart" method="post">
+                                                    <button href="#" class="btn__checkout">Tiến hành đặt hàng</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                }
+
+
                             </div>
                             <!---->
                         </div>

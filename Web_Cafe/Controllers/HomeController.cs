@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Web_Cafe.Areas.Admin.Models.DAO;
 
 using Web_Cafe.Models.DAO;
-
+using Web_Cafe.Models.DTO;
 
 namespace Web_Cafe.Controllers
 {
@@ -17,11 +17,25 @@ namespace Web_Cafe.Controllers
             ProductDAOExtent dao = new ProductDAOExtent();
             ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
             ViewBag.ListProductSales = dao.GetListProductSales();
+            if (Session["shopping_cart"] == null)
+                Session["shopping_cart"] = dao.GetListProductSales();
             return View(dao.GetListProductExtend());
         }
-
+        //[HttpPost]
+        //public JavaScriptResult AddProductToShoppingCart(int ProductID)
+        //{
+        //    if (Session["shopping_cart"] == null)
+        //        Session["shopping_cart"] = new List<ProductExtend>();
+        //    var product = new ProductDAOExtent().GetProductExtendById(ProductID);
+        //    var ListShoppingCart = (List<ProductExtend>)Session["shopping_cart"];
+        //    ListShoppingCart.Add(product);
+        //    Session["shopping_cart"] = ListShoppingCart;
+        //    return JavaScript(alert("Hello this is an alert"));
+        //}
         public ActionResult SearchProduct(string keywordProduct = "", string id = "", int pageNum = 1, int pageSize = 6)
         {
+            if (Session["shopping_cart"] == null)
+                Session["shopping_cart"] = new List<ProductExtend>();
             ViewBag.keywordProduct = keywordProduct;
             ViewBag.id = id;
             ProductDAOExtent dao = new ProductDAOExtent();
@@ -37,6 +51,28 @@ namespace Web_Cafe.Controllers
                 ViewBag.CName = "Tìm kiếm";
             }
             return View(dao.GetProductExtendByName(keywordProduct, Convert.ToInt32(id), pageNum, pageSize));
+        }
+
+        public ActionResult ShoppingCart()
+        {
+            if (Session["shopping_cart"] == null)
+                Session["shopping_cart"] = new List<ProductExtend>();
+            return View();
+        }
+
+        public ActionResult ShoppingCart_ImportInfo()
+        {
+            return View();
+        }
+
+        public ActionResult ShoppingCart_Confirmed()
+        {
+            return View();
+        }
+
+        public ActionResult ShoppingCart_Completed()
+        {
+            return View();
         }
 
 

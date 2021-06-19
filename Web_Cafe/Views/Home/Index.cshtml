@@ -31,7 +31,6 @@
         <!-- Tab panes -->
         <div class="tab-content product-list__wrap">
             <div role="tabpanel" class="tab-pane active" id="new" style="min-width: 1146px">
-
                 @{ foreach (var item in Model)
 
                     {
@@ -42,10 +41,14 @@
                                         <img src="~/Images/@item.img_path">
                                     </a>
                                     <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                        <form action="~/Home/AddProductToShoppingCart" method="post">
+                                            <input type="text" id="ProductID" name="ProductID"value="@item.Product.ProductID"hidden >
+                                            <button class="btn btn-cart">Thêm vào giỏ</button>
+                                        </form>
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
-                                    @{ var status = "";
+                                    @{ 
+                                        var status = "";
                                         if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime > DateTime.Now)
                                         {
                                             status = "Mới";
@@ -61,11 +64,12 @@
                                     <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
                                 </h3>
                                 <div class="product__price">
-                                    <div class="product__price__regular">
+                                    <div class="product__price__reFular">
                                         @item.Product.Price.Value.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
+                                    @{ 
+                                        if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
                                                 @item.Product.PromotionalPrice.Value.ToString("N0")
