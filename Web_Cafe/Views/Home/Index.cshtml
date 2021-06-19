@@ -41,13 +41,10 @@
                                         <img src="~/Images/@item.img_path">
                                     </a>
                                     <div class="product-item__actions">
-                                        <form action="~/Home/AddProductToShoppingCart" method="post">
-                                            <input type="text" id="ProductID" name="ProductID"value="@item.Product.ProductID"hidden >
-                                            <button class="btn btn-cart">Thêm vào giỏ</button>
-                                        </form>
+                                        <a href="/Order/AddItem/@item.Product.ProductID" class="btn btn-cart add-to-cart">Thêm vào giỏ</a>
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
-                                    @{ 
+                                    @{
                                         var status = "";
                                         if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime > DateTime.Now)
                                         {
@@ -64,11 +61,11 @@
                                     <a href="~/Product/Details/@item.Product.ProductID" title="Chi tiết">@item.Product.ProName</a>
                                 </h3>
                                 <div class="product__price">
-                                    <div class="product__price__reFular">
+                                    <div class="product__price__regular">
                                         @item.Product.Price.Value.ToString("N0")
                                         <span class="unit">đ</span>
                                     </div>
-                                    @{ 
+                                    @{
                                         if (item.Product.ProStatus == "Khuyến mãi" && item.Product.StartTime <= DateTime.Now)
                                         {
                                             <div class="product__price__old">
@@ -93,7 +90,7 @@
                                         <img src="~/Images/@item.ImageLink">
                                     </a>
                                     <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                        <a href="/Order/AddItem/@item.ProductID" class="btn btn-cart add-to-cart">Thêm vào giỏ</a>
                                     </div>
                                     <a href="~/Product/Details/@item.ProductID" class="product__overlay" title="@item.ProName"></a>
                                     @{ var status = "";
@@ -163,7 +160,7 @@
                                                 <img src="~/Images/@item.img_path">
                                             </a>
                                             <div class="product-item__actions">
-                                                <button class="btn btn-cart">Thêm vào giỏ</button>
+                                                <a href="/Order/AddItem/@item.Product.ProductID" class="btn btn-cart add-to-cart">Thêm vào giỏ</a>
                                             </div>
                                             <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
                                             <div class="product__sale">HOT</div>
@@ -227,97 +224,10 @@
     </div>
 </section>
 
-<div id="QuickView" class="modal fade" role="dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog">
-        <button type="button" class="modal__close" data-dismiss="modal"><span class="icon -ap icon-ion-android-close"></span></button>
-        <div class="row">
-            <div class="product__view__image col-md-5 col-sm-6 col-xs-12">
-                <div class="row">
-                    <div class="col-sm-9 col-xs-12">
-                        <div class="product__view__image--list">
-                            <a href="uploads/product.jpg" data-fancybox="gallery" class="fancybox">
-                                <img src="uploads/product.jpg" class="elevate__zoom" data-zoom-image="uploads/product.jpg" id="elevate__zoom" title="product-2">
-                            </a>
-                            <div class="hidden">
-                                <a href="uploads/product.jpg" data-fancybox="gallery" class="fancybox">
-                                    <img src="uploads/product.jpg" alt="">
-                                </a>
-                                <a href="uploads/product.jpg" data-fancybox="gallery" class="fancybox">
-                                    <img src="uploads/product.jpg" alt="">
-                                </a>
-                                <a href="uploads/product.jpg" data-fancybox="gallery" class="fancybox">
-                                    <img src="uploads/product.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <div class="product__view__image--thumb" id="image-additional-carousel">
-                            <div class="item">
-                                <a href="uploads/product.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" title="product-2" alt="">
-                                </a>
-                                <a href="uploads/product.jpg" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
-                                </a>
-                                <a href="" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="uploads/product.gif" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" title="product-2" alt="">
-                                </a>
-                                <a href="uploads/product.gif" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
-                                </a>
-                                <a href="uploads/product.gif" data-image="uploads/product.jpg" class="elevate__zoom">
-                                    <img src="uploads/product.jpg" data-zoom-image="uploads/product.jpg" alt="" title="product-2">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="product__view__content col-md-7 col-sm-6 col-xs-12">
-                <h2 class="product__view__name">Dưa chuột Nhật Bản</h2>
-                <div class="product__price product__price__view">
-                    <span class="product__price--txt">Giá bán</span> <div class="product__price__regular">11.990.00 <span class="unit">đ</span></div>  <div class="product__price__old">13.990.00<span class="unit">đ</span></div>
-                </div>
-                <div class="product__view__info">
-                    <p class="info">Thương hiệu : <a href="#">Japan</a></p>
-                    <p class="info">Tình trạng: <span class="name">Còn hàng</span></p>
-                </div>
-                <div class="product__view__desc">
-                    <div class="product__desc__title bold">Mô tả:</div>
-                    <div class="product__shortdesc__txt">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores eaque, eveniet harum illum laborum nostrum quibusdam! A at, beatae blanditiis cupiditate, dolorum expedita fugiat harum molestiae non possimus quam voluptatem?
-                    </div>
-                </div>
-                <div class="product__view__color">
-                    <span class="name">Màu sắc</span>
-                    <div class="item " style="background: #faebc7;">
-
-                    </div>
-                    <div class="item active" style="background: #ffffff;">
-
-                    </div>
-                </div>
-                <div class="product__quantity product__view__quantity">
-                    <div class="name">Số lượng:</div>
-                    <button class="btn-minus btn">
-                        -
-                    </button>
-                    <input type="text" class="input-number" value="1">
-                    <button class="btn-plus btn">
-                        +
-                    </button>
-                    <div class="clearfix"></div>
-                </div>
-                <a class="product__view__button__cart"><span class="icon fa fa-shopping-bag"></span>Mua ngay</a>
-            </div>
-        </div>
-    </div>
-</div>
+@section scripts{
+    <script>
+        $(document).on('click', '.add-to-cart', function () {
+            alert("Bạn vừa thêm 1 sản phẩm vào giỏ hàng.");
+        });
+    </script>
+}

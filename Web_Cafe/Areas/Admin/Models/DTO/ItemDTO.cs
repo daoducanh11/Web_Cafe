@@ -23,10 +23,13 @@ namespace Web_Cafe.Areas.Admin.Models.DTO
             this.ProductID = id;
             this.Quantity = quantity;
             Product pro = new ProductDAO().FindProductByID(id);
+            this.ImageLink = new ItemDAO().GetImageItem(id);
+            this.ProName = pro.ProName;
             if (pro.ProStatus == "Khuyến mãi" && pro.StartTime < DateTime.Now && pro.EndTime < DateTime.Now)
                 this.Price = Convert.ToDouble(pro.PromotionalPrice);
             else
                 this.Price = Convert.ToInt32(pro.Price);
         }
     }
+    
 }

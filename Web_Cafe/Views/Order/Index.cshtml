@@ -1,0 +1,106 @@
+﻿@model Web_Cafe.Areas.Admin.Models.DTO.OrderDTO
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<div class="sec sec__shopcart">
+    <div class="container">
+        <div class="nav-steps">
+            <div class="nav-step__item waiting">
+                <span class="number">1</span>
+                <span class="txt">Giỏ hàng</span>
+            </div>
+            <div class="nav-step__item">
+                <span class="number">2</span>
+                <span class="txt">Nhập thông tin</span>
+            </div>
+            <div class="nav-step__item">
+                <span class="number">3</span>
+                <span class="txt">Xác nhận thông tin</span>
+            </div>
+            <div class="nav-step__item">
+                <span class="number">4</span>
+                <span class="txt">Hoàn thành</span>
+            </div>
+        </div>
+        <div class="sub-name-step">Giỏ hàng của tôi</div>
+        <div class="row">
+            <div class="sec__shopcart__info col-md-8 col-sm-12 col-xs-12">
+                <div class="box-user__info panel">
+                    <div class="content-info-check">
+                        <div class="table-product">
+                            <div class="thead title">
+                                <div class="td col-md-6 col-sm-6 col-xs-6">
+                                    <span class="">@Model.getNumberCart() Sản phẩm</span>
+                                </div>
+                                <div class="td col-md-2 col-sm-3 col-xs-3">
+                                    <span class="textr">Đơn giá</span>
+                                </div>
+                                <div class="td col-md-3 col-sm-3 col-xs-3">
+                                    <span class="">Số lượng</span>
+                                </div>
+                            </div>
+                            <div class="tbody content ">
+                                @foreach (var item in Model.listItem)
+                                {
+                                    <div id="@item.ProductID" class="tr">
+                                        <div class="td col-md-6 col-sm-6 col-xs-6">
+                                            <div class="img-product">
+                                                <img src="~/Images/@item.ImageLink">
+                                            </div>
+                                            <div class="sub__product">
+                                                <a href="Product/Details/@item.ProductID" class="product__name">@item.ProName</a>
+                                                <p class="dongia hidden-pc"> @item.Price.Value.ToString("N0") VND</p>
+                                            </div>
+                                        </div>
+                                        <div class="td col-md-2 col-sm-3 col-xs-3 hidden-mb">
+                                            <p id="sum-@item.ProductID" class="dongia"> @((item.Price*item.Quantity).Value.ToString("N0")) VND</p>
+                                        </div>
+                                        <div class="td col-md-3 col-sm-2 col-xs-2">
+                                            <div class="product__quantity">
+                                                <a href="/Order/UpdateItem?id=@item.ProductID&quantity=@(item.Quantity-1)" class="btn-minus btn">
+                                                    -
+                                                </a>
+                                                <input class="input-number" type="number" value="@item.Quantity" min="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onchange="myFunction(@item.ProductID, this.value)">
+                                                <a href="/Order/UpdateItem?id=@item.ProductID&quantity=@(item.Quantity+1)" class="btn-plus btn">
+                                                    +
+                                                </a>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="td col-md-1 col-sm-1 col-xs-1">
+                                            <a href="/Order/DeleteItem/@item.ProductID" class="btn-delete"><i class="icon -ap icon-trash2"></i></a>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 col-price-total">
+                <div class="name-top__step">Thông tin đơn hàng</div>
+                <div class="">
+                    <div class="price-total">
+                        <div class="pull-left">Thành tiền :</div>
+                        <div id="total-money" class="pull-right">@Model.getTotalMoney().ToString("N0") VND</div>
+                    </div>
+                </div>
+                <div class="list-button">
+                    <a class="btn btn__next" href="~/Order/ShoppingCart_ImportInfo">Tiến hành thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function myFunction(id, quantity) {
+            window.location = "/Order/UpdateItem?id=" + id + "&quantity=" + quantity;
+        }
+
+    </script>
+}

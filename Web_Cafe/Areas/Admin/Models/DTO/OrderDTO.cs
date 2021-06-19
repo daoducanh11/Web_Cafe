@@ -89,5 +89,15 @@ namespace Web_Cafe.Areas.Admin.Models.DTO
             oRes.listItem = new ItemDAO().GetListItem(oRes.OrderID, "");
             return oRes;
         }
+
+        #region UserCode
+        public int getNumberCart()
+        {
+            int n = 0;
+            foreach (ItemDTO i in listItem)
+                n += Convert.ToInt32(i.Quantity);
+            return n;
+        }
+        #endregion
     }
 }

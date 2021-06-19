@@ -77,3 +77,14 @@ h2.product__view__name {
     color: white;
     margin-left: 8px;
 }
+
+/*Giỏ hàng*/
+.header-top__shopcart .product__shopcart {
+    overflow-y: scroll;
+    max-height: 380px;
+}
+
+.sec__shopcart__info .table-product .td .img-product {
+    width: 100px;
+    margin-right: 15px;
+}

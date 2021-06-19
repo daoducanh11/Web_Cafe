@@ -52,5 +52,14 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
                 ).ToList();
             return lst;
         }
+
+        //userCode
+        public string GetImageItem(int id)
+        {
+            var lst = db.Database.SqlQuery<Image>(string.Format("SELECT TOP 1 * FROM Images WHERE ProductID = {0}", id)
+                ).ToList();
+            return lst[0].ImageLink;
+        }
     }
+
 }

@@ -165,7 +165,7 @@
                                 Địa chỉ:
                                 <i class="fas fa-asterisk"></i>
                             </label>
-                            @Html.EditorFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.DeliveryAddress, new { htmlAttributes = new { @class = "form-control", required = true } })
                             @Html.ValidationMessageFor(model => model.DeliveryAddress, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">

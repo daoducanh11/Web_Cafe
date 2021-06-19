@@ -1,0 +1,104 @@
+﻿@model Web_Cafe.Areas.Admin.Models.DTO.OrderDTO
+
+@{
+    ViewBag.Title = "Xác nhận đặt hàng";
+}
+
+<div class="sec sec__shopcart">
+    <div class="container">
+        <div class="nav-steps">
+            <a href="~/Order/Index">
+                <div class="nav-step__item active">
+                    <span class="number">1</span>
+                    <span class="txt">Giỏ hàng</span>
+                </div>
+            </a>
+            <a href="~/Order/ShoppingCart_ImportInfo" class="nav-step__item waiting">
+                <div class="nav-step__item active">
+                    <span class="number">2</span>
+                    <span class="txt">Nhập thông tin</span>
+                </div>
+            </a>
+            <div class="nav-step__item waiting">
+                <span class="number">3</span>
+                <span class="txt">Xác nhận thông tin</span>
+            </div>
+            <div class="nav-step__item">
+                <span class="number">4</span>
+                <span class="txt">Hoàn thành</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sec__shopcart__info col-md-7 col-sm-7 col-xs-7">
+                <div class="box-user__info panel">
+                    <div class="title">Thông tin thanh toán và nhận hàng</div>
+                    <div class="content">
+                        <div class="form-group">
+                            <div class="label">
+                                Họ và tên
+                            </div>
+                            <div class="name">@Model.FullName</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">
+                                Số điện thoại
+                            </div>
+                            <div class="name">@Model.Phone</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">Email</div>
+                            <div class="name">@Model.Email</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">
+                                Địa chỉ
+                            </div>
+                            <div class="name">@Model.DeliveryAddress</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label">Ghi chú:</div>
+                            <div class="name">@Model.OrderDescription</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="title">Giỏ hàng</div>
+                <div class="content">
+                    <div class="product__shopcart">
+                        <div class="product__list">
+                            @foreach (var item in Model.listItem)
+                            {
+                                <div class="product__list__item">
+                                    <div class="product__img">
+                                        <img src="/Images/@item.ImageLink" alt="Name your Product ">
+                                    </div>
+                                    <div class="product__name">
+                                        @item.ProName
+                                    </div>
+                                    <div class="product__price">
+                                        <div class="product__price__regular">@item.Quantity x @item.Price.Value.ToString("N0") <span class="unit">đ</span></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-price-total">
+                    <div class="">
+                        <div class="price-total">
+                            <div class="pull-left">Thành tiền :</div>
+                            <div class="pull-right">@Model.getTotalMoney().ToString("N0") VND</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-button">
+                    <a class="btn btn__next">Hoàn thành</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

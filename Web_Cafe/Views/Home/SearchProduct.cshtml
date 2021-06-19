@@ -4,12 +4,14 @@
 }
 
 @model PagedList.IPagedList<Web_Cafe.Models.DTO.ProductExtend>
+
 <div class="breadcrumb">
     <div class="container">
         <a href="~/Home/Index" class="li">Trang chủ </a>
         <span class="li active">@ViewBag.CName</span>
     </div>
 </div>
+
 <section class="sec sec__category">
     <div class="container">
         <div class="row">
@@ -53,7 +55,7 @@
                                                 <img src="~/Images/@item.img_path">
                                             </a>
                                             <div class="product-item__actions">
-                                                <button class="btn btn-cart">Thêm vào giỏ</button>
+                                                <a href="/Order/AddItem/@item.Product.ProductID" class="btn btn-cart add-to-cart">Thêm vào giỏ</a>
                                             </div>
                                             <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
                                             @{ var status = "";

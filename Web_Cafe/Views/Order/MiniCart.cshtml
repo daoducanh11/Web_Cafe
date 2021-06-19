@@ -1,0 +1,51 @@
+﻿@model Web_Cafe.Areas.Admin.Models.DTO.OrderDTO
+
+<div class="header-top__shopcart">
+    <a href="#">
+        <div class="headline">
+            Giỏ hàng
+            <div class="icon">
+                <span class="-ap icon-cart" style="font-size: 19px;"></span>
+                <span class="number-cart">@Model.getNumberCart()</span>
+            </div>
+        </div>
+    </a>
+    <div class="dropdown__shop__cart">
+
+        <div class="dropdown__head">
+            <span class="number">@Model.getNumberCart()</span>
+            <span class="txt">Sản phẩm trong giỏ hàng</span>
+        </div>
+        @{ if (@Model.getNumberCart() > 0)
+            {
+                <div class="product__shopcart">
+                    <div class="product__list">
+                        @foreach (var item in Model.listItem)
+                        {
+                            <div class="product__list__item">
+                                <div class="product__img">
+                                    <img src="~/Images/@item.ImageLink" style="width: 70px;">
+                                </div>
+                                <div class="product__name">
+                                    @item.ProName
+                                    <a class="product__delete">
+                                        <span class="icon -ap icon-trash2"></span>
+                                    </a>
+                                </div>
+                                <div class="product__price">
+                                    <div class="product__price__regular">@item.Quantity x @item.Price.Value.ToString("N0")<span class="unit">đ</span></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="dropdown__bottom">
+                    <div class="total">Tổng cộng: <span class="product__price number">@Model.getTotalMoney().ToString("N0")<span class="unit"></span>đ</span></div>
+                    <a href="/Order" class="btn__checkout" style="color:white;">Xem chi tiết</a>
+                </div>
+            }
+        }
+    </div>
+</div>
+

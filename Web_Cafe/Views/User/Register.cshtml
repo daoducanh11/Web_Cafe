@@ -1,0 +1,79 @@
+﻿@model Web_Cafe.Models.Entities.User
+
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+
+<div class="">
+    <div class="">
+        <h4 class="modal-title">Đăng ký tài khoản</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-7 col-xs-12 col-sm-7 account__input">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Họ và tên</div>
+                        </div>
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Số điện thoại</div>
+                        </div>
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", required = true } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Email</div>
+                        </div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = true } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Địa chỉ</div>
+                        </div>
+                        @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control", required = true } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Mật khẩu</div>
+                        </div>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password", @placeholder = "PassWord" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="input__label">
+                            <div class="label">Nhập lại mật khẩu</div>
+                        </div>
+                        <input type="password" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="check__action">
+                        <input type="checkbox" class="checkbox">
+                        <span class="icon"></span>
+                        Tôi đồng ý mọi điều khoản của Website
+                    </div>
+                </div>
+                <div class="form-group login__action">
+                    <button type="submit" class="btn btn-submit">Đăng Ký</button>
+                </div>
+                <div class="login__note">
+                    Bạn đã có tài khoản? <a href="/User/Login">Đăng nhập ngay</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

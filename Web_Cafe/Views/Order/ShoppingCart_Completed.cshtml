@@ -1,29 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "ShoppingCart_Completed";
+    ViewBag.Title = "Đặt hàng thành công";
 }
 
 <div class="sec sec__shopcart">
     <div class="container">
         <div class="nav-steps">
-            <a href="~/Home/ShoppingCart">
+            <a href="~/Order/Index">
                 <div class="nav-step__item active">
                     <span class="number">1</span>
                     <span class="txt">Giỏ hàng</span>
                 </div>
             </a>
-            <a href="~/Home/ShoppingCart_ImportInfo">
+            <a href="~/Order/ShoppingCart_ImportInfo" class="nav-step__item waiting">
                 <div class="nav-step__item active">
                     <span class="number">2</span>
                     <span class="txt">Nhập thông tin</span>
                 </div>
             </a>
-            <a href="~/Home/ShoppingCart_Confirmed">
+            <a href="~/Order/ShoppingCart_Confirmed" class="nav-step__item waiting">
                 <div class="nav-step__item waiting">
                     <span class="number">3</span>
                     <span class="txt">Xác nhận</span>
                 </div>
             </a>
+            <div class="nav-step__item">
+                <span class="number">4</span>
+                <span class="txt">Hoàn thành</span>
+            </div>
         </div>
         <div class="alert alert-success">
             <span class="-ap icon-info-with-circle"></span>
@@ -32,4 +36,3 @@
         </div>
     </div>
 </div>
-<a class="scroll-top"><span class="fa fa-angle-up"></span></a>

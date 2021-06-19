@@ -1,0 +1,47 @@
+﻿@model Web_Cafe.Models.Entities.User
+
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="">
+    <div class="">
+        <h4 class="modal-title">Đăng nhập</h4>
+    </div>
+    @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+        <div class="">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 account__input">
+                    <div class="form-group has-error">
+                        <div class="label">Tên đăng nhập</div>
+                        @Html.TextBoxFor(model => model.Username, new { @class = "input100", @type = "text", @placeholder = "UserName" })
+                    </div>
+                    <div class="form-group">
+                        <div class="label">Mật khẩu</div>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password", @placeholder = "PassWord" })
+                    </div>
+                    <div class="remember-login form-group">
+                        <div class="check__action -radio">
+                            <input type="checkbox" class="checkbox">
+                            <span class="icon"></span>
+                            Ghi nhớ tài khoản
+                        </div>
+                    </div>
+                    <div class="form-group login__action">
+                        <button type="submit" class="btn btn-submit">Đăng nhập</button>
+                    </div>
+                    <div class="login__note">
+                        Bạn chưa có tài khoản? <a href="/User/Register">Đăng ký ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+

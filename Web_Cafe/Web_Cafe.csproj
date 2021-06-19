@@ -170,10 +170,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DAO\ProductDAOExtent.cs" />
+    <Compile Include="Models\DAO\UserDAOExtend.cs" />
     <Compile Include="Models\DTO\ProductExtend.cs" />
     <Compile Include="Models\Entities\Admin.cs" />
     <Compile Include="Models\Entities\Category.cs" />
@@ -1134,10 +1136,13 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Home\MenuChild.cshtml" />
     <Content Include="Views\Home\SearchProduct.cshtml" />
-    <Content Include="Views\Home\ShoppingCart.cshtml" />
-    <Content Include="Views\Home\ShoppingCart_ImportInfo.cshtml" />
-    <Content Include="Views\Home\ShoppingCart_Confirmed.cshtml" />
-    <Content Include="Views\Home\ShoppingCart_Completed.cshtml" />
+    <Content Include="Views\Order\MiniCart.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\ShoppingCart_ImportInfo.cshtml" />
+    <Content Include="Views\Order\ShoppingCart_Confirmed.cshtml" />
+    <Content Include="Views\Order\ShoppingCart_Completed.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1145,7 +1150,6 @@
     <Folder Include="Images\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Category\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
