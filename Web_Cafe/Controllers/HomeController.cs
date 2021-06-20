@@ -14,25 +14,14 @@ namespace Web_Cafe.Controllers
     {
         public ActionResult Index()
         {
+            Session["url"] = Request.Url;
             ProductDAOExtent dao = new ProductDAOExtent();
             ViewBag.ListProductHotExtend = dao.ListProductHotExtend();
             ViewBag.ListProductSales = dao.GetListProductSales();
             Session["url"] = Request.Url;
-            //if (Session["shopping_cart"] == null)
-            //    Session["shopping_cart"] = dao.GetListProductSales();
             return View(dao.GetListProductExtend());
         }
-        //[HttpPost]
-        //public JavaScriptResult AddProductToShoppingCart(int ProductID)
-        //{
-        //    if (Session["shopping_cart"] == null)
-        //        Session["shopping_cart"] = new List<ProductExtend>();
-        //    var product = new ProductDAOExtent().GetProductExtendById(ProductID);
-        //    var ListShoppingCart = (List<ProductExtend>)Session["shopping_cart"];
-        //    ListShoppingCart.Add(product);
-        //    Session["shopping_cart"] = ListShoppingCart;
-        //    return JavaScript(alert("Hello this is an alert"));
-        //}
+
         public ActionResult SearchProduct(string keywordProduct = "", string id = "", int pageNum = 1, int pageSize = 6)
         {
             Session["url"] = Request.Url;
@@ -53,14 +42,9 @@ namespace Web_Cafe.Controllers
             return View(dao.GetProductExtendByName(keywordProduct, Convert.ToInt32(id), pageNum, pageSize));
         }
 
-        public ActionResult ShoppingCart_Completed()
-        {
-            return View();
-        }
-
-
         public ActionResult News()
         {
+            Session["url"] = Request.Url;
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -68,6 +52,7 @@ namespace Web_Cafe.Controllers
 
         public ActionResult Contact()
         {
+            Session["url"] = Request.Url;
             ViewBag.Message = "Your contact page.";
 
             return View();

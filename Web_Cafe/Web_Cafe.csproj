@@ -164,7 +164,9 @@
     <Compile Include="Areas\Admin\Models\DTO\StatisticsDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\UserDTO.cs" />
     <Compile Include="Common\AuthorizationAdminAttribute.cs" />
+    <Compile Include="Common\IsCartAttribute.cs" />
     <Compile Include="Common\IsLoginAttribute.cs" />
+    <Compile Include="Common\IsUserLoginAttribute.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1143,6 +1145,9 @@
     <Content Include="Views\Order\ShoppingCart_Completed.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\EditPassword.cshtml" />
+    <Content Include="Views\User\OrderHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

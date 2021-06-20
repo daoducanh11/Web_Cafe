@@ -40,11 +40,11 @@ namespace Web_Cafe.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Order o, string idUs, string fullName, string phone, string email)
+        public ActionResult Create(Order o, string idUs, string phoneUs, string fullName, string phone, string email)
         {
             o.Daytime = DateTime.Now;
             o.OrderStatus = "Mới";
-            if (idUs == "")
+            if (idUs == "" || (idUs != "" && phoneUs != phone))
             {
                 //add User
                 User u = new User();

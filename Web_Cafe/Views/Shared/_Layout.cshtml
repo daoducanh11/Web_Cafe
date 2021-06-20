@@ -65,8 +65,39 @@
                                             <i class="fa fa-user-o" aria-hidden="true" style="font-size: 18px;"></i>
                                         </div>
                                         <ul class="menu-icons__sub">
-                                            <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" href="/User/Login"><span class="icon icon-lock_outline -ap"></span> Đăng nhập</a></li>
-                                            <li class="menu-icons__sub__item"><a class="menu-icon__sub-link" href="/User/Register"><span class="icon icon-lock_open -ap"></span> Đăng ký</a></li>
+                                            @{
+                                                if (Session["user"] == null)
+                                                {
+                                                    <li class="menu-icons__sub__item">
+                                                        <a class="menu-icon__sub-link" href="/User/Login">
+                                                            <span class="icon icon-lock_outline -ap"></span>
+                                                            Đăng nhập
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-icons__sub__item">
+                                                        <a class="menu-icon__sub-link" href="/User/Register">
+                                                            <span class="icon icon-lock_open -ap"></span>
+                                                            Đăng ký
+                                                        </a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="menu-icons__sub__item">
+                                                        <a class="menu-icon__sub-link" href="/User/Index">
+                                                            <span class="icon fa fa-user-o"></span>
+                                                            @Session["fullName"]
+                                                        </a>
+                                                    </li>
+                                                    <li class="menu-icons__sub__item">
+                                                        <a class="menu-icon__sub-link" href="/User/Logout" onclick="return confirm('Bạn chắc chắn muốn đăng xuất?')">
+                                                            <span class="icon fa fa-sign-out"></span>
+                                                            Đăng xuất
+                                                        </a>
+                                                    </li>
+                                                                }
+                                            }
+
                                         </ul>
                                     </div>
                                 </div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web_Cafe.Areas.Admin.Models.DAO;
+using Web_Cafe.Common;
 using Web_Cafe.Models.DAO;
 using Web_Cafe.Models.Entities;
 
@@ -12,9 +13,49 @@ namespace Web_Cafe.Controllers
     public class UserController : Controller
     {
         // GET: User
-        public ActionResult Index()
+        [IsUserLoginAttribute]//kiểm tra đăng nhập: nếu chưa đăng nhập thì ko vào được
+        public ActionResult Index()//thông tin khách hàng
         {
-            return View();
+            return View((User)Session["user"]);
+        }
+        [HttpPost]
+        public ActionResult Index(User u)
+        {
+            if(new UserDAOExtend().CheckPassword(u.UserID, u.Password))
+            {
+                UserDAO dao = new UserDAO();
+                dao.UpdatetUser(u);
+                return View(u);
+            }
+            ModelState.AddModelError("", "Mật khẩu không đúng!");
+            return View(u);
+        }
+        [IsUserLoginAttribute]
+        public ActionResult EditPassword()
+        {
+            return View((User)Session["user"]);
+        }
+        [HttpPost]
+        public ActionResult EditPassword(string passwordOld, string passwordNew)
+        {
+            User u = (User)Session["user"];
+            if (new UserDAOExtend().CheckPassword(u.UserID, passwordOld))
+            {
+                UserDAO dao = new UserDAO();
+                dao.ChangePassword(u.UserID, passwordOld);
+                return RedirectToAction("Index", "User");
+            }
+            ModelState.AddModelError("", "Mật khẩu không đúng!");
+            ViewBag.passwordOld = passwordOld;
+            ViewBag.passwordNew = passwordNew;
+            return View((User)Session["user"]);
+        }
+        [IsUserLoginAttribute]
+        public ActionResult OrderHistory()
+        {
+            User u = (User)Session["user"];
+            ViewBag.fullName = u.FullName;
+            return View(new OrderDAO().lstOrderHistoryById(u.UserID, 1, 6));
         }
         public ActionResult Login()
         {
@@ -26,10 +67,12 @@ namespace Web_Cafe.Controllers
         public ActionResult Login(User u)
         {
             UserDAOExtend dao = new UserDAOExtend();
-            Session["user"] = dao.Login(u.Username, u.Password);
-            if (Session["user"] != null)
+            User us = dao.Login(u.Username, u.Password);
+            if (us != null)
             {
-                return RedirectToAction("Index", "Home");
+                Session["user"] = us;
+                Session["fullName"] = us.FullName;
+                return RedirectToAction("Index", "User");
             }
             ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng!");
             return View(u);
@@ -51,7 +94,7 @@ namespace Web_Cafe.Controllers
         {
             UserDAO dao = new UserDAO();
             dao.InsertUser(u);
-            return View();
+            return RedirectToAction("Login", "User");
         }
     }
 }

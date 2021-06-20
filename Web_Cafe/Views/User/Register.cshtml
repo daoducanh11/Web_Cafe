@@ -4,76 +4,88 @@
     ViewBag.Title = "Đăng ký tài khoản";
 }
 
-<div class="">
-    <div class="modal-title" style="font-size: 38px; text-align: center"><strong>Đăng ký tài khoản</strong></div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-md-3 col-xs-12 col-sm-3"></div>
-            <div class="col-md-6 col-xs-12 col-sm-6 account__input">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Họ và tên</div>
+@using (Html.BeginForm("Register", "User", FormMethod.Post, new { @onsubmit = "return validateForm()", @name = "myForm" }))
+{
+    <div class="">
+        <div class="modal-title" style="font-size: 32px; text-align: center"><strong>Đăng ký tài khoản</strong></div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-sm-12 account__input">
+                    <div class="form-group">
+                        <div class="label">
+                            Họ và tên
+                            <i class="fa fa-asterisk"></i>
                         </div>
                         @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", required = true } })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Số điện thoại</div>
+                    <div class="form-group">
+                        <div class="label">
+                            Số điện thoại
+                            <i class="fa fa-asterisk"></i>
                         </div>
-                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", required = true } })
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", required = true } })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Email</div>
-                        </div>
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = true } })
+                    <div class="form-group">
+                        <div class="label">Email</div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Địa chỉ</div>
+                    <div class="form-group">
+                        <div class="label">
+                            Địa chỉ
+                            <i class="fa fa-asterisk"></i>
                         </div>
                         @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control", required = true } })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Mật khẩu</div>
+                    <div class="form-group">
+                        <div class="label">
+                            Tên đăng nhập
+                            <i class="fa fa-asterisk"></i>
                         </div>
-                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password", @placeholder = "PassWord" })
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = true } })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="input__label">
-                            <div class="label">Nhập lại mật khẩu</div>
+                    <div class="form-group">
+                        <div class="label">
+                            Mật khẩu
+                            <i class="fa fa-asterisk"></i>
                         </div>
-                        <input type="password" style="height: 42px; width: 100%"/>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password", required = true })
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="check__action">
-                        <input type="checkbox" class="checkbox">
-                        <span class="icon"></span>
-                        Tôi đồng ý mọi điều khoản của Website
+                    <div class="form-group">
+                        <div class="label">
+                            Nhập lại mật khẩu
+                            <i class="fa fa-asterisk"></i>
+                        </div>
+                        <input type="password" name="repassword" style="height: 42px; width: 100%" required />
                     </div>
-                </div>
-                <div class="form-group login__action" style="width: 25%; margin : 0 auto ">
-                    <button type="submit" class="btn btn-submit" style="font-size: 18px">Đăng Ký</button>
-                </div>
-                <div class="login__note" style="text-align: center; margin: 15px 0; font-size: 13px">
-                    Bạn đã có tài khoản? 
-                    <a href="/User/Login" style="font-size: 14px"><strong>Đăng nhập ngay</strong></a>
+                    <div class="form-group">
+                        <div class="check__action">
+                            <input type="checkbox" class="checkbox" required>
+                            <span class="icon"></span>
+                            Tôi đồng ý mọi điều khoản của Website
+                        </div>
+                    </div>
+                    <div class="form-group login__action">
+                        <button type="submit" class="btn btn-submit" style="font-size: 18px">Đăng Ký</button>
+                    </div>
+                    <div class="login__note" style="text-align: center; margin: 15px 0; font-size: 13px">
+                        Bạn đã có tài khoản?
+                        <a href="/User/Login" style="font-size: 14px"><strong>Đăng nhập ngay</strong></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-xs-12 col-sm-6"></div>
         </div>
-        </div>
-</div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["Password"].value;
+            var y = document.forms["myForm"]["repassword"].value;
+            if (x == "" || x != y) {
+                alert("Xác nhận mật khẩu chưa chính xác!");
+                return false;
+            }
+        }
+    </script>
+}

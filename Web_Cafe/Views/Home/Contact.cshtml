@@ -1,17 +1,94 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Liên hệ";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/Home/Index" class="li">Trang chủ </a>
+        <span class="li active">Liên hệ</span>
+    </div>
+</div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="sec sec__contact">
+    <div class="container">
+        <div class="contact-list__head">
+            <h2 class="title__main"><span>Địa chỉ</span></h2>
+        </div>
+
+        <!-- Google Map -->
+        <div class="intro-map" style="justify-content: center; display:flex">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d232.72866924326985!2d105.78626136780301!3d21.046337716510163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab2d88bb4195%3A0x3006e474cce20274!2zSOG7jWMgdmnhu4duIEvhu7kgdGh14bqtdCBRdcOibiBz4bux!5e0!3m2!1svi!2s!4v1617767430454!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+
+        <div class="about-list-wrap">
+            <div class="about-wrap__title">
+                Hạt cà phê tự nhiên
+            </div>
+            <div class="infor-about">
+                <div class="contact">
+                    <p class="info ">
+                        <span class="icon -ap icon-old-phone"></span>
+                        <span class="name-header">Điện thoại: </span>
+                        <span class="disb">08.68.33.1111 - 08.68.99.1111</span>
+                    </p>
+                </div>
+                <div class="contact">
+                    <p class="info ">
+                        <span class="icon -ap icon-location3"></span>
+                        <span class="name-header texU disb fow">Địa chỉ: </span>
+                        <span class="disb">236 Hoàng Quốc Việt - Cổ Nhuế - Bắc Từ Liêm - Hà Nội</span>
+                    </p>
+                </div>
+                <div class="contact">
+                    <p class="info ">
+                        <span class="icon -ap  icon-envelope2"></span>
+                        <span class="name-header texU disb fow">Email:</span>
+                        <span class="disb">mycafe@gmail.com</span>
+                    </p>
+                </div>
+                <div class="contact">
+                    <p class="info ">
+                        <span class="icon -ap icon-access_time"></span>
+                        <span class="name-header texU disb fow">Thời gian mở cửa: </span>
+                        <span class="disb">Mon - Sun : 7:00 am - 23:00 pm</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="sec">
+    <div class="sec-nt__support hidden-xs">
+        <div class="container">
+            <div class="col-md-4 col-sm-4">
+                <div class="avt">
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                </div>
+                <div class="txt">
+                    <div class="name">Giao hàng tại nhà</div>
+                    <div class="sub">Chúng tôi sẽ giao hàng tới địa chỉ của bạn</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="avt">
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                </div>
+                <div class="txt">
+                    <div class="name">Miễn phí giao hàng</div>
+                    <div class="sub">Free ship cho đơn hàng trên 1000000đ</div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="avt">
+                    <i class="fa fa-life-ring" aria-hidden="true"></i>
+                </div>
+                <div class="txt">
+                    <div class="name">Hỗ trợ khách hàng 24/7</div>
+                    <div class="sub">Hỗ trợ khách hàng mọi lúc, mọi nơi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

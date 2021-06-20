@@ -20,5 +20,12 @@ namespace Web_Cafe.Models.DAO
                 return res.FirstOrDefault();
             return null;
         }
+        public bool CheckPassword(int id, string pass)
+        {
+            var res = (from s in db.Users where s.UserID == id && s.Password == pass select s);
+            if (res.Count() > 0)
+                return true;
+            return false;
+        }
     }
 }

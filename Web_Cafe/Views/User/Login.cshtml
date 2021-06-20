@@ -5,22 +5,21 @@
 }
 
 <div class="">
-    <div class="modal-title" style="font-size: 38px; text-align: center"><strong>Đăng nhập</strong></div>
+    <div class="modal-title" style="font-size: 32px; text-align: center"><strong>Đăng nhập</strong></div>
     @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "" }))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
-        <div class="">
+        <div class="container">
             <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-4 col-lg-5"></div>
-                <div class="col-xs-8 col-sm-8 col-md-4 col-lg-2 account__input" style="margin-top: 15px">
-                    <div class="form-group has-error">
-                        <div class="label" >Tên đăng nhập</div>
-                        @Html.TextBoxFor(model => model.Username, new { @class = "input100", @type = "text", @placeholder = "UserName" })
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 account__input" style="margin-top: 15px">
+                    @Html.ValidationSummary(true, null, new { @class = "form-group alert alert-danger" })
+                    <div class="form-group">
+                        <div class="label">Tên đăng nhập</div>
+                        @Html.TextBoxFor(model => model.Username, new { @class = "input100", @type = "text" })
                     </div>
                     <div class="form-group">
-                        <div class="label" >Mật khẩu</div>
-                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password", @placeholder = "PassWord" })
+                        <div class="label">Mật khẩu</div>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "input100", @type = "password" })
                     </div>
                     <div class="remember-login form-group">
                         <div class="check__action -radio">
@@ -29,7 +28,7 @@
                             Ghi nhớ tài khoản
                         </div>
                     </div>
-                    <div class="form-group login__action" style="width: 75%; margin : 0 auto ">
+                    <div class="form-group login__action">
                         <button type="submit" class="btn btn-submit" style="font-size: 18px">Đăng nhập</button>
                     </div>
                     <div class="login__note" style="text-align: center; margin: 15px 0; font-size: 13px">
@@ -37,7 +36,6 @@
                         <a href="/User/Register" style="font-size: 14px"><strong>Đăng ký ngay</strong></a>
                     </div>
                 </div>
-                <div class="col-xs-2 col-sm-2 col-md-4 col-lg-5"></div>
             </div>
         </div>
 

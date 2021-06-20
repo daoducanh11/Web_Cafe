@@ -127,5 +127,13 @@ namespace Web_Cafe.Areas.Admin.Models.DAO
             }
             return lst;
         }
+
+        #region UserCode
+        public IEnumerable<Order> lstOrderHistoryById(int id, int pageNum, int pageSize)
+        {
+            var res = (from s in db.Orders where s.UserID == id orderby s.OrderID descending select s).ToPagedList<Order>(pageNum, pageSize); ;
+            return res;
+        }
+        #endregion
     }
 }

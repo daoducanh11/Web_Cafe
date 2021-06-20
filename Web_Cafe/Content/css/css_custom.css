@@ -32,6 +32,10 @@ a.catalog-sub__link:hover i {
     right: -11px;
 }
 
+.sec-nt__support {
+    padding: 20px 0;
+}
+
 /*Trang chi tiết sản phẩm*/
 section.sec.sec__product__detail {
     margin-top: 19px;
@@ -88,7 +92,38 @@ h2.product__view__name {
     width: 100px;
     margin-right: 15px;
 }
+
+/*Đăng nhập*/
 .input100{
     width: 100%;
     height: 42px;
+}
+
+.account__input .form-group {
+    width: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.account__input .label{
+    font-size: 13px;
+}
+
+.fa-asterisk {
+    color: red;
+    font-size: 9px;
+}
+
+/*Tài khoản*/
+.sidebar-profile .profiles {
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.user-profile__wrap .wrap__profile__info .label {
+    font-size: 13px;
+}
+
+.user-profile__wrap .wrap__profile__info .input__wrap {
+    width: 80%;
 }

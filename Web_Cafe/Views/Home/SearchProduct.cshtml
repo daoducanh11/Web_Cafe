@@ -140,6 +140,10 @@
 
 @section scripts{
     <script>
+        $(document).on('click', '.add-to-cart', function () {
+            alert("Bạn vừa thêm 1 sản phẩm vào giỏ hàng.");
+        });
+
         $(document).ready(function () {
             var url = window.location.href;
             var arr = url.split('/');

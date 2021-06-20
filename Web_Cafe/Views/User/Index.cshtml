@@ -1,0 +1,134 @@
+﻿@model Web_Cafe.Models.Entities.User
+
+@{
+    ViewBag.Title = "Thông tin tài khoản";
+}
+
+<div class="breadcrumb">
+    <div class="container">
+        <a href="/Home/Index" class="li">Trang chủ </a>
+        <span class="li active">Tài khoản</span>
+    </div>
+</div>
+@using (Html.BeginForm("Index", "User", FormMethod.Post))
+{
+    <div class="user-profile__wrap sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="sidebar-profile">
+                        <div class="profiles">
+                            <h3 class="headline" style="font-size: 18px;">Tài khoản của</h3>
+                            <h3 class="username" style="font-size: 21px;">@Model.FullName</h3>
+                        </div>
+                        <div class="user-profile__menu">
+                            <ul class="user-profile__menu__wrap">
+                                <li class="user-profile__item active">
+                                    <a href="#" class="user-profile__link"><span class="-ap icon-user6 icon"></span> <span class="txt">Thông tin tài khoản</span></a>
+                                </li>
+                                <li class="user-profile__item">
+                                    <a href="/User/EditPassword" class="user-profile__link"><i class="icon fa fa-key" aria-hidden="true"></i><span class="txt">Đổi mật khẩu</span></a>
+                                </li>
+                                <li class="user-profile__item">
+                                    <a href="/User/OrderHistory" class="user-profile__link"><span class="-ap icon-file-text icon"></span> <span class="txt">Quản lý đơn hàng</span></a>
+                                </li>
+                                <li class="user-profile__item">
+                                    <a href="/User/Logout" class="user-profile__link" onclick="return confirm('Bạn chắc chắn muốn đăng xuất?')"><i class="icon fa fa-sign-out" aria-hidden="true"></i><span class="txt">Đăng xuất</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="wrap__profile__info">
+                        <h2 class="title-profile">Thông tin tài khoản</h2>
+                        <div class="profile-content">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">
+                                            Tên đăng nhập
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", required = true } })
+                                        @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control", @style = "display: none;", required = true } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">
+                                            Họ Tên
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">
+                                            Số điện thoại
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", required = true } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">Email</div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">
+                                            Địa chỉ
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        @Html.EditorFor(model => model.UserAddress, new { htmlAttributes = new { @class = "form-control", required = true } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="input__label">
+                                        <div class="label">
+                                            Mật khẩu
+                                            <i class="fa fa-asterisk"></i>
+                                        </div>
+                                    </div>
+                                    <div class="input__wrap">
+                                        <input class="form-control" name="password" type="password" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group login__action" style="text-align: center;">
+                                <button type="submit" class="btn btn-submit">Cập nhật</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

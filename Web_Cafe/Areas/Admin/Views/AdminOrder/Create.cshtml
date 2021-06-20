@@ -147,6 +147,7 @@
                                     </span>
                                 </div>
                                 <input id="phone" name="phone" type="tel" class="form-control" maxlength = "10", onkeypress = "return event.charCode >= 48 && event.charCode <= 57" required>
+                                <input id="phoneUs" name="phoneUs" style="display:none">
                             </div>  
                         </div>
                         <div class="form-group">
@@ -311,6 +312,7 @@
                     },
                     select: function (event, ui) {
                         $("#idUs").val(ui.item.UserID);
+                        $("#phoneUs").val(ui.item.Phone);
                         $("#fullName").val(ui.item.FullName);
                         $("#phone").val(ui.item.Phone);
                         $("#email").val(ui.item.Email);

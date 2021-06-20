@@ -18,6 +18,7 @@ namespace Web_Cafe.Controllers
 
         public ActionResult Details(int id)
         {
+            Session["url"] = Request.Url;
             var proExtend = new ProductDAOExtent();
             var item = proExtend.GetProductExtendById(id);
             ViewBag.ListProducExtendCategory = proExtend.GetListProductByIDCategory(item.Product.CategoryID.HasValue ? item.Product.CategoryID.Value : 1, id);
