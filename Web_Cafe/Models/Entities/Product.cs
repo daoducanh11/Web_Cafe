@@ -20,7 +20,8 @@ namespace Web_Cafe.Models.Entities
         public int ProductID { get; set; }
 
         [StringLength(50)]
-        [Required(ErrorMessage = "B?n ch?a nh?p tên s?n ph?m!")]
+        //[Required(ErrorMessage = "B?n ch?a nh?p tên s?n ph?m!")]
+        [Required]
         public string ProName { get; set; }
 
         [AllowHtml]

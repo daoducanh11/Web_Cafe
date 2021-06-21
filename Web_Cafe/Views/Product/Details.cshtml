@@ -107,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="product__quantity product__view__quantity">
+                @*<div class="product__quantity product__view__quantity">
                     <div class="name">Số lượng:</div>
                     <button class="btn-minus btn">
                         -
@@ -117,9 +117,12 @@
                         +
                     </button>
                     <div class="clearfix"></div>
-                </div>
+                </div>*@
 
-                <a class="product__view__button__cart"><span class="icon fa fa-shopping-bag"></span>Mua ngay</a>
+                <a href="/Order/AddItem/@Model.Product.ProductID" class="product__view__button__cart add-to-cart">
+                    <span class="icon fa fa-shopping-bag"></span>
+                    Mua ngay
+                </a>
             </div>
         </div>
 
@@ -164,7 +167,7 @@
                                         <img src="~/Images/@item.img_path">
                                     </a>
                                     <div class="product-item__actions">
-                                        <button class="btn btn-cart">Thêm vào giỏ</button>
+                                        <a href="/Order/AddItem/@item.Product.ProductID" class="btn btn-cart add-to-cart">Thêm vào giỏ</a>
                                     </div>
                                     <a href="~/Product/Details/@item.Product.ProductID" class="product__overlay" title="@item.Product.ProName"></a>
                                     @{ var statusRelate = "";
@@ -206,6 +209,8 @@
 
 @section scripts{
     <script>
-        
+        $(document).on('click', '.add-to-cart', function () {
+            alert("Bạn vừa thêm 1 sản phẩm vào giỏ hàng.");
+        });
     </script>    
 }
